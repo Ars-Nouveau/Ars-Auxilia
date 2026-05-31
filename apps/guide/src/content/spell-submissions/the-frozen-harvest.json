@@ -1,0 +1,23 @@
+{
+  "name": "The Frozen Harvest",
+  "category": "automation",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:freeze",
+        "ars_nouveau:aoe",
+        "ars_nouveau:break",
+        "ars_nouveau:extract",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Conjure water in front of you or a turret to quickly freeze it for a harvest of blue ice."
+    }
+  ]
+}

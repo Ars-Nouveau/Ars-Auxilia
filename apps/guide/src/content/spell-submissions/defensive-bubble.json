@@ -1,0 +1,22 @@
+{
+  "name": "Defensive Bubble",
+  "category": "defensive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:burst",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_trinkets:filter_not_self",
+        "ars_nouveau:bubble",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Encase all enemies near you in bubbles.",
+      "style": {}
+    }
+  ]
+}

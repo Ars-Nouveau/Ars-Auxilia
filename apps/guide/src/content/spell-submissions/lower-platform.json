@@ -1,0 +1,24 @@
+{
+  "name": "Lower Platform",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:gravity",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_controle:precise_delay",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:snare"
+      ],
+      "description": "Lowers a 5x5 area of blocks one space.  Replace Gravity with Launch to raise the platform instead.  Requires Ars Controle and a Block Shaping Focus.",
+      "style": {}
+    }
+  ]
+}

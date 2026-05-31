@@ -1,0 +1,14 @@
+{
+  "name": "@ars/root",
+  "license": "LGPL-3.0-only",
+  "packageManager": "pnpm@10.17.0",
+  "scripts": {
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "check": "pnpm format:check && pnpm --filter @ars/guide check",
+    "build": "pnpm --filter @ars/guide build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.16"
+  }
+}

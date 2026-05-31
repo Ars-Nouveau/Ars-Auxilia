@@ -1,0 +1,41 @@
+---
+import BookRecipeIngredient from "../BookRecipeIngredient.astro";
+import {
+  asRecipeRecord,
+  asRecipeRecordArray,
+  type BookRecipeRecord,
+} from "../../../utils/book-recipes";
+
+interface Props {
+  recipe: BookRecipeRecord;
+}
+
+const { recipe } = Astro.props;
+const reagent = asRecipeRecord(recipe.reagent);
+const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
+const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
+const apparatusCells = [
+  pedestalItems[0],
+  pedestalItems[1],
+  pedestalItems[2],
+  pedestalItems[3],
+  reagent,
+  pedestalItems[4],
+  pedestalItems[5],
+  pedestalItems[6],
+  pedestalItems[7],
+];
+---
+
+<div class="book-recipe__flow">
+  <div class="book-recipe-grid book-recipe-grid--apparatus" aria-label="Enchanting apparatus grid">
+    {apparatusCells.map((ingredient, index) => (
+      <BookRecipeIngredient
+        ingredient={ingredient}
+        label={index === 4 ? 'Reagent' : `Pedestal ${index < 4 ? index + 1 : index}`}
+      />
+    ))}
+  </div>
+  <span class="book-recipe__arrow" aria-hidden="true">→</span>
+  <BookRecipeIngredient ingredient={result} label="Result" />
+</div>

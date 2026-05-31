@@ -1,0 +1,23 @@
+{
+  "name": "Block Missile Launcher",
+  "category": "aggressive",
+  "author": "Darkfira",
+  "versions": ["1.16.5", "1.18.2", "1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:place_block",
+        "ars_nouveau:leap",
+        "ars_nouveau:amplify",
+        "ars_nouveau:delay",
+        "ars_nouveau:snare",
+        "ars_nouveau:break",
+        "ars_nouveau:amplify",
+        "ars_nouveau:pickup"
+      ],
+      "description": "*REQUIRES FOCUS OF BLOCK SHAPING* \nLaunches a single block in the direction you are facing dealing damage based on block hardness. You can replace \"Place Block\" with \"Conjure Mageblock\" and remove everything from delay onwards if you do not wish to use a specific block."
+    }
+  ]
+}

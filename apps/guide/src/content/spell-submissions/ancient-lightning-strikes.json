@@ -1,0 +1,48 @@
+{
+  "name": "Ancient Lightning Strikes",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:underfoot",
+        "not_enough_glyphs:propagate_plane",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:dampen",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:lightning",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:reset",
+        "ars_nouveau:delay",
+        "not_enough_glyphs:propagate_plane",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:dampen",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:lightning",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:reset",
+        "ars_nouveau:delay",
+        "not_enough_glyphs:propagate_plane",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:dampen",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:lightning",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Heya this spells is a (more or less) accurate reconstruction of the Elden Ring spell &quot;Ancient Dragon&apos;s Lightning Strikes&quot;.\r\n\r\nThough the DPS is quite awful, it&apos;s really flashy which is one of the reason as to why i like to run it :^)\r\n\r\nPS : the augment spam is unfortunately necessary to make the visual effect really stand out ;-;\r\nPPS : you could use &quot;Nullifying Aura&quot; utility spell (coming soon) to have more lightning strikes hit"
+    }
+  ]
+}

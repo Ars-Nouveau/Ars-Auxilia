@@ -1,0 +1,22 @@
+---
+import Submission from "./Submission.astro";
+import type { Category } from "../../utils/spell-data/categories";
+import { getSubmissionsFromCategory } from "../../utils/spell-data/category";
+import { isVersion } from "../../utils/versions";
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+const versionSegment = Astro.url.pathname.split("/").filter(Boolean)[0];
+const version = (await isVersion(versionSegment)) ? versionSegment : undefined;
+
+const submissions = await getSubmissionsFromCategory(category, version);
+---
+
+<Fragment>
+    {submissions.map(submission =>
+        <Submission standalone={false} {...submission} />
+    )}
+</Fragment>

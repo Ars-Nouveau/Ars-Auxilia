@@ -1,0 +1,23 @@
+{
+  "name": "Meteorite Wall",
+  "category": "defensive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "arsomega:propagate_overhead",
+        "not_enough_glyphs:propagate_plane",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:delay",
+        "ars_nouveau:randomize",
+        "ars_nouveau:leap"
+      ],
+      "description": "Summons a wall of block that will be launched at random intervals.\r\nMixes defense and offense in one spell"
+    }
+  ]
+}

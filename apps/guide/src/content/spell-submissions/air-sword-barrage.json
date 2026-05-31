@@ -1,0 +1,23 @@
+{
+  "name": "Air Sword Barrage",
+  "category": "aggressive",
+  "author": "Yinyangi",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_trinkets:aura",
+        "ars_nouveau:amplify",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:accelerate",
+        "toomanyglyphs:filter_monster",
+        "ars_trinkets:air_sword",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "A bit similar to Malevolent Shrine, but a bit more Mana Efficient and doesn&apos;t deal as much damage (more balanced), doesn&apos;t require any Monocle or Arcane Rune to boost Mana, just throw in some Mana Boost enchantments and some regular amulets and you good to go. (Take away filter: monster if want to attack players)."
+    }
+  ]
+}

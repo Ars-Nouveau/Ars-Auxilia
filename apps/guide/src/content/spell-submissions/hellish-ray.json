@@ -1,0 +1,23 @@
+{
+  "name": "Hellish Ray",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:wall",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:sensitive",
+        "arsomega:propagate_self",
+        "arsomega:propagate_missile",
+        "ars_nouveau:ignite",
+        "ars_nouveau:flare",
+        "ars_nouveau:heal"
+      ],
+      "description": "Creates a beam of missiles going from yourself, dealing great AOE damage.\nIn certain Ars Elemental Versions, Ignite can be removed if you have the Kindling Thread at level three.\nPropagate Missile can be replaced with Propagate Projectile to have better range."
+    }
+  ]
+}

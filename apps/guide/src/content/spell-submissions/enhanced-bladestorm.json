@@ -1,0 +1,23 @@
+{
+  "name": "Enhanced Bladestorm",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_trinkets:aura",
+        "ars_nouveau:amplify",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_trinkets:filter_not_self",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:burst",
+        "ars_trinkets:air_sword",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Creates an area of effect around you that will attack enemies with powerful air swords."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Classical Chained Lightning",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "toomanyglyphs:ray",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:amplify",
+        "ars_nouveau:burst",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:lightning",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Creates explosions of lightning strikes at targets (also affects blocks) Chaining can be removed, but it will loose it's large AOE."
+    }
+  ]
+}

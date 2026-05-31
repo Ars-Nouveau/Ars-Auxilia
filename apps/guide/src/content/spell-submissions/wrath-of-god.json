@@ -1,0 +1,23 @@
+{
+  "name": "Wrath of God",
+  "category": "aggressive",
+  "author": "Eggovolt",
+  "versions": ["1.18.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:pierce",
+        "ars_nouveau:linger",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_elemental:propagator_arc",
+        "ars_nouveau:split",
+        "ars_nouveau:explosion",
+        "ars_nouveau:aoe",
+        "ars_nouveau:lightning"
+      ],
+      "description": "The People's Nuke; a low-addon spell that creates a centralized explosion from which many, many projectiles rain down over the course of about 6 seconds. All of these spawn lightning. Very flashy and good if you don't mind terrain destruction."
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import { getCollectionVersions } from "../../utils/versions";
+import { getPublicSlug } from "../../utils/sidebar";
+
+export async function getStaticPaths() {
+  const availableVersions = await getCollectionVersions("kubejs");
+  const latestVersion = availableVersions.at(-1) ?? "1.21.1";
+  const entries = await getCollection("kubejs", (entry) =>
+    entry.filePath?.includes(`/kubejs/${latestVersion}/`),
+  );
+
+  return entries
+    .map((entry) => getPublicSlug(entry))
+    .filter((slug) => slug)
+    .map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const availableVersions = await getCollectionVersions("kubejs");
+const latestVersion = availableVersions.at(-1) ?? "1.21.1";
+const target = `/${latestVersion}/kubejs/${slug}/`;
+---
+
+<meta http-equiv="refresh" content={`0;url=${target}`} />
+<a href={target}>Continue</a>

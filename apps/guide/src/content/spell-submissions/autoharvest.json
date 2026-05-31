@@ -1,0 +1,23 @@
+{
+  "name": "Autoharvest",
+  "category": "automation",
+  "author": "Multiple",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:linger",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:harvest",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Used to grow and harvest entire fields of crops in a single spell.  Target a slab or fence post in the center of the area you wish to harvest.  May be placed on a turret for easy automated harvesting and collection. "
+    }
+  ]
+}

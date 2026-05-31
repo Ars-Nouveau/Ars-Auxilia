@@ -1,0 +1,22 @@
+{
+  "name": "Yeet",
+  "category": "aggressive",
+  "author": "Turkraken the Obtuse",
+  "versions": ["1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:delay",
+        "ars_nouveau:delay",
+        "ars_nouveau:wind_shear",
+        "ars_nouveau:gravity"
+      ],
+      "description": "Sends target into high earth orbit, hurts them, and returns them back to earth with gusto."
+    }
+  ]
+}

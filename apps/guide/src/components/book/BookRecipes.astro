@@ -1,0 +1,16 @@
+---
+import BookRecipe from "./BookRecipe.astro";
+import type { BookPageRecipeData } from "../../utils/book-pages";
+
+interface Props {
+  recipes: BookPageRecipeData[];
+}
+
+const { recipes } = Astro.props;
+---
+
+{recipes.length > 0 && (
+    <div class="book-recipes">
+      {recipes.map(recipe => <BookRecipe recipe={recipe} />)}
+    </div>
+)}

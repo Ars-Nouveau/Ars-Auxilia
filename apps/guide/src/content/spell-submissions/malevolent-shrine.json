@@ -1,0 +1,23 @@
+{
+  "name": "Malevolent Shrine",
+  "category": "aggressive",
+  "author": "Th3S3nate",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_plus:domain",
+        "ars_nouveau:sensitive",
+        "ars_trinkets:accelerate_3",
+        "ars_trinkets:accelerate_3",
+        "ars_nouveau:burst",
+        "ars_trinkets:aoe_3",
+        "ars_trinkets:aoe_3",
+        "ars_trinkets:filter_not_self",
+        "ars_trinkets:air_sword"
+      ],
+      "description": "Creates a massive AoE of layered I-frame negating damage repeating almost every tick. Sure to kill even the most durable of targets"
+    }
+  ]
+}

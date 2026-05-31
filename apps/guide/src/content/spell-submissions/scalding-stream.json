@@ -1,0 +1,24 @@
+{
+  "name": "Scalding Stream",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:pierce",
+        "ars_nouveau:ignite",
+        "ars_elemental:conflagrate",
+        "ars_nouveau:amplify",
+        "ars_nouveau:bubble",
+        "ars_nouveau:delay",
+        "ars_nouveau:delay",
+        "ars_nouveau:cold_snap"
+      ],
+      "description": "Fire a projectile that will hit a chain of enemies with frost and fire damage.",
+      "style": {}
+    }
+  ]
+}

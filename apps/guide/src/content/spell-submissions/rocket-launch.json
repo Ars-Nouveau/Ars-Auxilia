@@ -1,0 +1,23 @@
+{
+  "name": "Rocket Launch",
+  "category": "fun",
+  "author": "Arin",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:launch",
+        "ars_nouveau:bounce",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Ever wanted to go to space and live the fall back down? Well now you can, for the simple price of your entire mana bar! (Mana cost exaggerated)<br/><br/><b>Note:</b> If you want to launch someone else out of the stratosphere use the touch form or projectile form<br/><b>Note:</b> This also works on blocks would not recommend shooting your storage system"
+    }
+  ]
+}

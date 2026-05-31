@@ -1,0 +1,78 @@
+---
+import Seo from "../components/layout/Seo.astro";
+import { NavItems } from "../utils/nav-links";
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+
+const getNavLink = (collection: string) =>
+  NavItems.find((item) => item.collection === collection)?.link ?? "/";
+const features = [
+  {
+    title: "Book",
+    description: "Browse the in-game documentation as fast, searchable pages.",
+    href: getNavLink("book"),
+    cta: "Open the book",
+  },
+  {
+    title: "Docs",
+    description:
+      "Learn mechanics, automation patterns, mobs, tags, and technical details.",
+    href: getNavLink("docs"),
+    cta: "Read the docs",
+  },
+  {
+    title: "Spells",
+    description:
+      "Explore community spell recipes, glyph chains, and clipboard exports.",
+    href: getNavLink("spells"),
+    cta: "Browse spells",
+  },
+  {
+    title: "KubeJS",
+    description:
+      "Find scripting examples for recipes, tweaks, and modpack customization.",
+    href: getNavLink("kubejs"),
+    cta: "View scripts",
+  },
+];
+---
+
+<BaseLayout title={frontmatter.title} layout="home">
+    <Fragment slot="head">
+        <Seo />
+    </Fragment>
+    <div class="wrap container-lg" role="document">
+        <div class="content">
+            <section class="section container-fluid mt-n3 pb-3">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 text-center">
+                        <h1>{frontmatter.title}</h1>
+                    </div>
+                    <div class="col-lg-9 col-xl-8 text-center">
+                        <p class="lead">
+                            Your <s>un-official</s> written guide for the technical side of Ars Nouveau
+                        </p>
+                        <a href={getNavLink('docs')} class="btn btn-primary btn-cta rounded-pill btn-lg my-3" role="button">
+                        Start Learning</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="d-flex justify-content-start">
+        <div class="bg-dots"></div>
+    </div>
+    <section class="section section-md section-features">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                {features.map(feature => (
+                    <div class="col-lg-6">
+                        <h2 class="h4">{feature.title}</h2>
+                        <p>{feature.description} <a href={feature.href}>{feature.cta}</a>.</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </section>
+</BaseLayout>

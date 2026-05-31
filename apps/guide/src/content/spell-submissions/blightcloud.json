@@ -1,0 +1,24 @@
+{
+  "name": "Blightcloud",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "arsomega:overhead",
+        "ars_nouveau:linger",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_trinkets:filter_not_self",
+        "ars_elemental:envenom",
+        "ars_elemental:poison_spores",
+        "ars_elemental:watery_grave",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Create a lingering cloud centered on the player that deals poison and drowning damage in a wide radius.",
+      "style": {}
+    }
+  ]
+}

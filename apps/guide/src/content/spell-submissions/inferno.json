@@ -1,0 +1,23 @@
+{
+  "name": "Inferno",
+  "category": "defensive",
+  "author": "Lava",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:wall",
+        "ars_nouveau:aoe",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:orbit",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:ignite",
+        "ars_nouveau:flare",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Creates an inferno/fire tornado on the player."
+    }
+  ]
+}

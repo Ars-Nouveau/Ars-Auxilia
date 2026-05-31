@@ -1,0 +1,21 @@
+{
+  "name": "Conjure Glass",
+  "category": "automation",
+  "author": "WayofTime",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_elemental:conjure_terrain",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:crush",
+        "ars_nouveau:break",
+        "ars_nouveau:smelt",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Put this spell on a manipulation turret or use a shapers focus to conjure a 3x3 area of sand that is smelted and picked up.\nPut a chest or a storage lectern next to the turret to store the glass."
+    }
+  ]
+}

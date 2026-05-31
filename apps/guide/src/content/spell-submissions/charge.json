@@ -1,0 +1,17 @@
+{
+  "name": "Charge",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:lightning",
+        "ars_nouveau:dampen",
+        "ars_nouveau:dampen"
+      ],
+      "description": "Can be used to turn a creeper into a charged creeper without doing significant damage to them."
+    }
+  ]
+}

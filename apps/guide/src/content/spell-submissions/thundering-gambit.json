@@ -1,0 +1,23 @@
+{
+  "name": "Thundering Gambit",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "toomanyglyphs:ray",
+        "ars_nouveau:aoe",
+        "ars_nouveau:sensitive",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:reset",
+        "ars_nouveau:blink"
+      ],
+      "description": "You create a ball of thunder ahead of you, before teleporting in the middle of the thunderstorm."
+    }
+  ]
+}

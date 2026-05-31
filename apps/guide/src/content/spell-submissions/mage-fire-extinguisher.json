@@ -1,0 +1,19 @@
+{
+  "name": "Mage Fire Extinguisher",
+  "category": "utility",
+  "author": "Clement446",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:evaporate"
+      ],
+      "description": "Will turn fire to air and lava to obsidian.\r\nRequires block shapers focus, or slight spell variations (Delay usage)"
+    }
+  ]
+}

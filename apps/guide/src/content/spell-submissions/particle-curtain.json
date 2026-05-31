@@ -1,0 +1,22 @@
+{
+  "name": "Particle Curtain",
+  "category": "fun",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:wall",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:prestidigitation",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Creates a permanent wall of customized particles to create ambient effects. Use the spell customization options to set the specifics of the particles generated.",
+      "style": {}
+    }
+  ]
+}

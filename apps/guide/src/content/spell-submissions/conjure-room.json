@@ -1,0 +1,24 @@
+{
+  "name": "Conjure Room",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "arsomega:overhead",
+        "not_enough_glyphs:propagate_plane",
+        "ars_nouveau:dampen",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_elemental:conjure_terrain"
+      ],
+      "description": "Creates a 5x5 walled in space around the caster out of dirt.  With Infinite Glyphs enabled you can add additional AOEs to make the area larger, Pierces to make the walls taller, or modifiers at the end to change the wall materials.\r\n\r\nUseful for mid to late game structure building.",
+      "style": {}
+    }
+  ]
+}

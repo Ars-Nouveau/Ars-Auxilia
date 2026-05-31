@@ -1,0 +1,59 @@
+---
+import { getCollection, render } from "astro:content";
+import { getVersionedPath } from "../../../utils/path";
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+import {
+  getPublicSlug,
+  getSidebar,
+  getHeadings,
+  getVersionFromEntry,
+  type GenericCollectionEntry,
+} from "../../../utils/sidebar";
+import { isVersion, versionedCollections } from "../../../utils/versions";
+import { getOgPath } from "../../../utils/og";
+
+interface Props {
+  entry: GenericCollectionEntry;
+}
+
+export async function getStaticPaths() {
+  const paths = [];
+
+  for (const collection of versionedCollections) {
+    const entries = await getCollection(collection);
+    for (const entry of entries) {
+      if (getPublicSlug(entry) === "") {
+        paths.push(getVersionedPath({ collection, entry }));
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { entry } = Astro.props;
+const version = getVersionFromEntry(entry);
+
+if (!(await isVersion(version))) {
+  return Astro.redirect("/");
+}
+
+const slug = getPublicSlug(entry);
+const { Content, headings } = await render(entry);
+const sidebar = await getSidebar(entry.collection, version, slug);
+const formattedHeadings = getHeadings(headings);
+---
+
+<DocsLayout
+  editPath={`/content/${entry.collection}/${entry.id}`}
+  collection={entry.collection}
+  version={version}
+  slug={slug}
+  headings={formattedHeadings}
+  sidebar={sidebar}
+  title={entry.data.title}
+  description={entry.data.description}
+  path={getOgPath(version, entry.collection, slug)}
+>
+  <Content />
+</DocsLayout>

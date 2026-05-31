@@ -1,0 +1,23 @@
+{
+  "name": "Rainbow Road",
+  "category": "exploration",
+  "author": "Xacris",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "not_enough_glyphs:trail",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:decelerate",
+        "ars_nouveau:delay",
+        "arsomega:propagate_underfoot",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "This spell will conjure a series of floating platforms that form a solid walkway as it flies! Set the spell color to rainbow for even more fun"
+    }
+  ]
+}

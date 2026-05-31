@@ -1,0 +1,25 @@
+{
+  "name": "Piercing Earth",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "toomanyglyphs:ray",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:linger",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:dampen",
+        "ars_nouveau:aoe",
+        "ars_elemental:spike",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:pierce"
+      ],
+      "description": "Create a field of damaging spikes, or target the air above an enemy&apos;s head to rain falling spikes on them.",
+      "style": {}
+    }
+  ]
+}

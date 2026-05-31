@@ -1,0 +1,132 @@
+---
+import { getCollection } from "astro:content";
+import { getMapText } from "../../utils/spell-form";
+import { getAddonMap } from "../../utils/spell-data/addon-collection";
+import type { Submission } from "../../utils/spell-data/spells";
+import Glyphs from "./Glyphs.astro";
+import { slug } from "github-slugger";
+import { toTitleCase } from "../../utils/text";
+import {
+  exportCompressedSpell,
+  type GlyphRegistryNames,
+} from "../../utils/spell-data/spell-parser";
+
+type Props = Submission & {
+  standalone: boolean;
+};
+
+const { author, addons, versions, spells, name, category, standalone } =
+  Astro.props;
+const getAddonText = getMapText(await getAddonMap());
+const glyphRegistryNames: GlyphRegistryNames = Object.fromEntries(
+  (await getCollection("glyphs")).map((entry) => [
+    entry.id,
+    entry.data.registryName,
+  ]),
+);
+---
+
+{!standalone &&
+<h2 id={name.toLowerCase()}>
+    <Fragment set:html={name}/>
+    <a class="anchor" aria-hidden="true" data-pagefind-ignore="all" aria-label={`${name.toLowerCase()} permalink`}
+       href={`${Astro.url}/${slug(name)}`}>#</a>
+</h2>}
+<h6 class="card-subtitle mb-2 text-body-secondary">By {author}</h6>
+{spells.map(spell => {
+    const exportResult = (() => {
+        try {
+            return {
+                encoded: exportCompressedSpell(name, spell.glyphs, glyphRegistryNames, spell.spell_color, spell.spell_sound, spell.style),
+                error: undefined,
+            };
+        } catch (error) {
+            return {
+                encoded: undefined,
+                error: error instanceof Error ? error.message : 'Unable to export this spell.',
+            };
+        }
+    })();
+
+    return <div class="mb-4">
+        <h5 class="card-title mb-2">
+            <Glyphs glyphs={spell.glyphs}/>
+            {spell.glyphs.length > 10 && <span class="badge text-bg-dark">Requires infinite spell demo</span>}
+        </h5>
+        <p class="card-text" style="white-space: pre-line;">
+            <Fragment set:html={spell.description}/>
+        </p>
+        {exportResult.encoded ?
+            <button
+                    class="btn btn-sm btn-outline-primary mb-2 me-4 spell-copy-button"
+                    style="background-color: #dcb701;color: black"
+                    type="button"
+                    data-encoded={exportResult.encoded}
+            >
+                Copy Spell to Clipboard
+            </button> :
+            <p class="alert alert-warning py-2 mb-2">Spell export unavailable: {exportResult.error}</p>
+        }
+    </div>;
+    })}
+<div>
+    {standalone &&
+            <div><span class="badge text-bg-info me-1">{toTitleCase(category)}</span></div>}
+    <div>{addons.map(addon => <span class="badge text-bg-info me-1">{getAddonText(addon)}</span>)}</div>
+    <div>{versions.map(version => <span class="badge text-bg-primary me-1">{version}</span>)}</div>
+</div>
+
+<script>
+    const TOAST_ID = 'spell-copy-toast';
+
+    const getToast = () => {
+        let toast = document.getElementById(TOAST_ID);
+
+        if (toast == null) {
+            toast = document.createElement('div');
+            toast.id = TOAST_ID;
+            toast.className = 'toast align-items-center text-bg-dark border-0 position-fixed bottom-0 end-0 m-3';
+            toast.setAttribute('role', 'alert');
+            toast.setAttribute('aria-live', 'assertive');
+            toast.setAttribute('aria-atomic', 'true');
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">Copied to clipboard!</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            `;
+            document.body.appendChild(toast);
+        }
+
+        return toast;
+    };
+
+    const showToast = (message: string) => {
+        const toast = getToast();
+        const body = toast.querySelector('.toast-body');
+        if (body) body.textContent = message;
+
+        toast.classList.remove('hidden');
+        void toast.offsetWidth;
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+            toast.classList.add('hidden');
+        }, 2500);
+    };
+
+    document.addEventListener('click', async event => {
+        const button = (event.target as HTMLElement).closest<HTMLButtonElement>('.spell-copy-button');
+        const encoded = button?.dataset.encoded;
+        if (!encoded) return;
+
+        try {
+            await navigator.clipboard.writeText(encoded);
+            showToast('Spell copied to clipboard!');
+        } catch (error) {
+            console.error('Clipboard write failed:', error);
+            showToast('Failed to copy spell');
+        }
+    });
+</script>

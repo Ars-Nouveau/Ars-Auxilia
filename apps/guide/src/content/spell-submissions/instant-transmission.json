@@ -1,0 +1,22 @@
+{
+  "name": "Instant Transmission",
+  "category": "exploration",
+  "author": "Xacris",
+  "versions": ["1.16.5", "1.18.2", "1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "toomanyglyphs:ray",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:blink"
+      ],
+      "description": "Instantly teleport up to where you are looking, up to 128 blocks away"
+    }
+  ]
+}

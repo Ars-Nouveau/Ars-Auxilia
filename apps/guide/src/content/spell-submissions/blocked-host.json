@@ -1,0 +1,19 @@
+{
+  "name": "Blocked Host",
+  "category": "support",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:animate_block"
+      ],
+      "description": "With Focus of Block Shaping, summon a host of loyal blocks, an environment-friendly spell."
+    }
+  ]
+}

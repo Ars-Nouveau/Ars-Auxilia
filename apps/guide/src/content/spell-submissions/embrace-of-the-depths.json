@@ -1,0 +1,23 @@
+{
+  "name": "Embrace of the Depths",
+  "category": "aggressive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:aoe",
+        "ars_nouveau:reset",
+        "ars_elemental:watery_grave",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "The target of this spell is submerged in the water, suffocating until succumbing."
+    }
+  ]
+}

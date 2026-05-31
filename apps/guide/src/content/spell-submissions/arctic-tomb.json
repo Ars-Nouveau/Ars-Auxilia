@@ -1,0 +1,18 @@
+{
+  "name": "Arctic Tomb",
+  "category": "defensive",
+  "author": "ArborSolis",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_plus:domain",
+        "ars_trinkets:aoe_3",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:freeze"
+      ],
+      "description": "Instantly cast a protective dome of water, that then instantly freezes several times until you&apos;re left with a perfect frozen sphere of pure blue ice."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Cold Thunder",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:cold_snap",
+        "ars_nouveau:burst",
+        "ars_nouveau:lightning",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:heal"
+      ],
+      "description": "Summons blocks of ice that detonate into lightning bolts.\r\nBest used with both shapers focus and T3 kindling thread"
+    }
+  ]
+}

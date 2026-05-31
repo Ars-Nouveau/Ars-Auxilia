@@ -1,0 +1,23 @@
+{
+  "name": "The Architects Overload",
+  "category": "aggressive",
+  "author": "The Architect",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:wall",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:extend_time",
+        "ars_elemental:propagator_homing",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:split",
+        "ars_nouveau:freeze",
+        "ars_elemental:discharge",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Meant for combat against MekaSuits from Mekanism, but effective against just about anything, this provides a barrage of discharges that drain the energy from the target. Requires the Water Focus (or the Fire focus, swapping the Freeze glyph for Ignite) to circumvent I-frames through either Frozen or Hellfire."
+    }
+  ]
+}

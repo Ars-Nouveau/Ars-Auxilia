@@ -1,0 +1,23 @@
+{
+  "name": "Wards of Distance",
+  "category": "defensive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:orbit",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:gust",
+        "ars_nouveau:amplify",
+        "ars_nouveau:delay",
+        "ars_nouveau:snare",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "You conjure a cohort of magical orbs that will repel and contain those who dare approach you."
+    }
+  ]
+}

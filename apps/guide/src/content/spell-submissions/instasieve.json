@@ -1,0 +1,22 @@
+{
+  "name": "Instasieve",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:pantomime",
+        "ars_elemental:conjure_terrain",
+        "ars_nouveau:amplify",
+        "ars_nouveau:smelt",
+        "ars_nouveau:crush",
+        "ars_nouveau:crush",
+        "ars_nouveau:break",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Used in modpacks like skyblocks to create stone, then crush it twice for resources.",
+      "style": {}
+    }
+  ]
+}

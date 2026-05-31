@@ -1,0 +1,23 @@
+{
+  "name": "Berry Picker",
+  "category": "automation",
+  "author": "Xacris",
+  "versions": ["1.16.5", "1.18.2", "1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:aoe",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:interact",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:interact",
+        "ars_nouveau:pickup"
+      ],
+      "description": "This spell is intended to be used by a turret to grow and harvest a field of up to 32 Source Berry plants at rapid speed"
+    }
+  ]
+}

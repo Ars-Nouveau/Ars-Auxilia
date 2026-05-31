@@ -1,0 +1,38 @@
+---
+import { getItemRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
+import { toTitleCase } from "../../utils/text";
+
+interface Props {
+  icon: string;
+  iconUrl?: string;
+}
+
+const { icon, iconUrl } = Astro.props;
+const namespace = getNamespace(icon, "minecraft");
+const path = getPath(icon);
+const src = iconUrl ?? getItemRenderUrl(icon);
+const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
+---
+
+<span class="book-icon d-inline-flex align-items-center gap-2">
+  <img
+    data-bs-toggle="tooltip"
+    data-bs-title={tooltipTitle}
+    data-bs-placement="bottom"
+    class:list={["book-icon__image", 'glyph']}
+    src={src}
+    alt={`${icon} icon`}
+    title={tooltipTitle}
+    width={128}
+    height={128}
+    loading="lazy"
+  />
+</span>
+
+<script>
+  import { Tooltip } from 'bootstrap';
+
+  document
+    .querySelectorAll('[data-bs-toggle="tooltip"]')
+    .forEach(tooltipTriggerEl => Tooltip.getOrCreateInstance(tooltipTriggerEl));
+</script>

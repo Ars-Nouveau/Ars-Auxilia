@@ -1,0 +1,23 @@
+{
+  "name": "Coffin of the Iron Mountain",
+  "category": "aggressive",
+  "author": "painfularcane",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_plus:domain",
+        "ars_trinkets:extend_time_3",
+        "ars_trinkets:aoe_3",
+        "ars_nouveau:extract",
+        "ars_plus:eruption",
+        "ars_trinkets:extend_time_3",
+        "ars_nouveau:ignite",
+        "ars_trinkets:extend_time_3",
+        "ars_trinkets:aoe_3"
+      ],
+      "description": "Based on Jogo&apos;s Domain Expansion from JJK. Applies Eruption to amplify the damage of Ignite, and can kill almost every vanilla mob (that isn&apos;t immune to ignite, of course)."
+    }
+  ]
+}

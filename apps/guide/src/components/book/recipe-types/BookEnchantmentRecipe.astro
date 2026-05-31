@@ -1,0 +1,29 @@
+---
+import BookRecipeIngredient from "../BookRecipeIngredient.astro";
+import {
+  asRecipeRecordArray,
+  type BookRecipeRecord,
+} from "../../../utils/book-recipes";
+
+interface Props {
+  recipe: BookRecipeRecord;
+  recipeId: string;
+}
+
+const { recipe, recipeId } = Astro.props;
+const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
+const enchantment =
+  typeof recipe.enchantment === "string" ? recipe.enchantment : undefined;
+const level = typeof recipe.level === "number" ? recipe.level : undefined;
+const resultLabel = enchantment
+  ? `${enchantment}${level ? ` ${level}` : ""}`
+  : recipeId;
+---
+
+<div class="book-recipe__flow book-recipe__flow--stacked">
+  <div class="book-recipe-ingredients" aria-label="Pedestal items">
+    {pedestalItems.map(ingredient => <BookRecipeIngredient ingredient={ingredient} />)}
+  </div>
+  <span class="book-recipe__arrow" aria-hidden="true">→</span>
+  <code>{resultLabel}</code>
+</div>

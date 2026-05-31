@@ -1,0 +1,34 @@
+---
+import BookIndexList from "../../components/book/BookIndexList.astro";
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import { getBookSidebar } from "../../utils/book";
+
+const title = "Book";
+const description = "Generated Ars Nouveau book entries from ArsAddonBuilder.";
+const sidebar = await getBookSidebar();
+---
+
+<DocsLayout
+  collection="book"
+  slug=""
+  sidebar={sidebar}
+  title={title}
+  description={description}
+  path="book"
+>
+  <p>{description}</p>
+  <div class="book-index">
+    {sidebar.map(category => (
+      <section id={category.id} class="book-index__category">
+        <h2>{category.title}</h2>
+        <BookIndexList entries={category.children} />
+      </section>
+    ))}
+  </div>
+</DocsLayout>
+
+<style>
+  .book-index__category {
+    margin-top: 2rem;
+  }
+</style>

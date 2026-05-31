@@ -1,0 +1,32 @@
+{
+  "name": "Meteor Shower",
+  "category": "aggressive",
+  "author": "woodpeckercity",
+  "versions": ["1.20.1", "1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_elemental:arc_projectile",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:launch",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:delay",
+        "ars_nouveau:explosion",
+        "ars_nouveau:amplify",
+        "ars_nouveau:delay",
+        "ars_nouveau:snare",
+        "ars_nouveau:delay",
+        "ars_nouveau:randomize",
+        "ars_elemental:conjure_terrain",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_nouveau:leap",
+        "ars_nouveau:burst",
+        "ars_nouveau:explosion",
+        "ars_nouveau:aoe"
+      ],
+      "description": "[REQUIRES FOCUS OF BLOCK SHAPING, AS WELL AS INFINITE SPELL DEMO/ALLTHEARCANIST GEAR] Aim at floor to summon a rain of meteors that fly down from above, decimating the area you are looking at. Great at obliterating crowds, and sending a message."
+    }
+  ]
+}

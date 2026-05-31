@@ -1,0 +1,23 @@
+{
+  "name": "Archers",
+  "category": "support",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:summon_undead",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:pierce",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Summon a squad of skeletons armed with enchanted bows to assist you in combat. Alternatively, replace the Pierce with an additional Amplify to get a squad of melee skeletons instead."
+    }
+  ]
+}

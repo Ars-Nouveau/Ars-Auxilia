@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ars-guide",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "BETTER_AUTH_URL": "https://ars.guide",
+    "GITHUB_OWNER": "Jarva",
+    "GITHUB_REPO": "Ars.Guide",
+    "GITHUB_BASE_BRANCH": "main"
+  },
+  "routes": [
+    {
+      "pattern": "beta.ars.guide",
+      "custom_domain": true
+    }
+  ]
+}

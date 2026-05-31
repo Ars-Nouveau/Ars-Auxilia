@@ -1,0 +1,22 @@
+{
+  "name": "Transient Barrier",
+  "category": "defensive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:dampen",
+        "ars_nouveau:aoe",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:duration_down"
+      ],
+      "description": "Create a short-lived shell of blocks around yourself to block projectiles.  Can also replace Self-&gt;Burst with Pantomime-&gt;Wall and remove the Dampen to block in one direction only.",
+      "style": {}
+    }
+  ]
+}

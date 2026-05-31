@@ -1,0 +1,20 @@
+{
+  "name": "Wall of Force",
+  "category": "defensive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:wall",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:pierce",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Create a permanent wall of mageblocks at the point of impact."
+    }
+  ]
+}

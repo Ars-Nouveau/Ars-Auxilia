@@ -1,0 +1,12 @@
+{
+  "name": "Runic Return",
+  "category": "utility",
+  "author": "Zieg777",
+  "versions": ["1.16.5", "1.18.2", "1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": ["ars_nouveau:rune", "ars_nouveau:exchange"],
+      "description": "A simple tier 2 spell that acts as an ender pearl stasis chamber. If any mob or item triggers the rune, it will warp the player who placed it back to that spot"
+    }
+  ]
+}

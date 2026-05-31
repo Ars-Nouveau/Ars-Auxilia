@@ -1,0 +1,17 @@
+{
+  "name": "Fisher of Friends",
+  "category": "utility",
+  "author": "WaveClaw",
+  "versions": ["1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:exchange",
+        "ars_nouveau:blink"
+      ],
+      "description": "Pull a creature to you, even from deep in the void.  Size is not a limitation, make new friends today."
+    }
+  ]
+}

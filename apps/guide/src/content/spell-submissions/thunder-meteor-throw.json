@@ -1,0 +1,29 @@
+{
+  "name": "Thunder Meteor Throw",
+  "category": "aggressive",
+  "author": "drastickler",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:launch",
+        "ars_trinkets:amplify_3",
+        "ars_nouveau:delay",
+        "ars_nouveau:burst",
+        "ars_nouveau:dampen",
+        "ars_nouveau:sensitive",
+        "ars_trinkets:aoe_2",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:leap",
+        "ars_trinkets:amplify_3",
+        "ars_nouveau:delay",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:explosion",
+        "ars_nouveau:aoe",
+        "ars_nouveau:lightning"
+      ],
+      "description": "*REQUIRES FOCUS OF BLOCK SHAPING*\r\nLeap into the air before launching an explosive lightning meteor wherever you aim.\r\nWon&apos;t deal ridiculous damage but it&apos;s very flashy."
+    }
+  ]
+}

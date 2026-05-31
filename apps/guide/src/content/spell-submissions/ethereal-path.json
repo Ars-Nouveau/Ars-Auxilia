@@ -1,0 +1,23 @@
+{
+  "name": "Ethereal Path",
+  "category": "exploration",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:intangible",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "A spell that will allow you to easily pass through walls and floors."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "Raise Platform",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:break",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pickup",
+        "ars_nouveau:reset",
+        "arsomega:propagate_overhead",
+        "arsomega:propagate_underfoot",
+        "ars_nouveau:place_block",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "Raises a 3x3 area of blocks one space.  Requires your first X hotbar slots to be empty, where X is the number of different block types in the affected area.  To lower the platform by one space, swap the Propagate Overhead for a second Propagate Underfoot.",
+      "style": {}
+    }
+  ]
+}

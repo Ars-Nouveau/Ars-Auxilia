@@ -1,0 +1,9 @@
+---
+import { getLatestVersion } from "../../utils/versions";
+
+const latestVersion = await getLatestVersion();
+const target = `/${latestVersion}/docs/introduction/who-is-this-for/`;
+---
+
+<meta http-equiv="refresh" content={`0;url=${target}`} />
+<a href={target}>Continue</a>

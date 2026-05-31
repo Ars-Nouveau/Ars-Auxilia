@@ -1,0 +1,22 @@
+{
+  "name": "Chain Lightning",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:wall",
+        "ars_nouveau:sensitive",
+        "ars_elemental:propagator_homing",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:lightning",
+        "ars_nouveau:heal",
+        "ars_nouveau:dampen"
+      ],
+      "description": "Cause multiple volleys of lightning to strike a target and surrounding entities for MASSIVE damage. Pair with a Kindling and/or Shocking thread for best results."
+    }
+  ]
+}

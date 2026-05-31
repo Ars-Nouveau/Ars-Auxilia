@@ -1,0 +1,23 @@
+{
+  "name": "Terrible Web",
+  "category": "support",
+  "author": "ence",
+  "versions": ["1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:rune",
+        "ars_nouveau:snare",
+        "ars_nouveau:gravity",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Any hostile caught in the center of the web will not be moving for a while. Do mind the cleanup, though."
+    }
+  ]
+}

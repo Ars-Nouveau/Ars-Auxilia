@@ -1,0 +1,22 @@
+{
+  "name": "Bury",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:intangible",
+        "ars_nouveau:amplify",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:duration_down"
+      ],
+      "description": "Fire at the ground beneath an enemy's feet to cause them to fall into the terrain and rapidly be encased in it causing suffocation."
+    }
+  ]
+}

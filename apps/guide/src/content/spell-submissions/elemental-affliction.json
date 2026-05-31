@@ -1,0 +1,24 @@
+{
+  "name": "Elemental Affliction",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:hex",
+        "ars_elemental:envenom",
+        "ars_nouveau:ignite",
+        "ars_nouveau:freeze",
+        "ars_elemental:spark",
+        "ars_nouveau:wither",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Afflicts a group of enemies with effects of all 4 elements and deals heavy damage to them.",
+      "style": {}
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "Noisy Detailing",
+  "category": "utility",
+  "author": "Xacris",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:exchange",
+        "ars_nouveau:randomize",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pickup"
+      ],
+      "description": "This deceptively simple spell will replace a 2x2 of blocks with a random selection from your hotbar, to add variation. To get the most out of this spell, get used to aiming between blocks rather than at blocks"
+    }
+  ]
+}

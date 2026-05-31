@@ -1,0 +1,23 @@
+{
+  "name": "Eviscerate",
+  "category": "aggressive",
+  "author": "SirDragonBlaster",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:blink",
+        "ars_nouveau:ignite",
+        "ars_nouveau:wind_shear",
+        "ars_nouveau:heal",
+        "ars_nouveau:wind_shear",
+        "ars_nouveau:heal",
+        "ars_nouveau:wind_shear",
+        "ars_nouveau:heal",
+        "ars_nouveau:wind_shear"
+      ],
+      "description": "Use with a warp scroll bound to around y 300,000 in your offhand. Can one tap just about anything, but it is kinda pointless for PvE, as you don't get drops. Works best if you first use hex. Requires thread of kindling 3 or a fire focus."
+    }
+  ]
+}

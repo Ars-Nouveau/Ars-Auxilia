@@ -1,0 +1,24 @@
+{
+  "name": "Deforestation",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:orbit",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:fell"
+      ],
+      "description": "Removes trees in a large area around the caster as they move.  Note: particularly large trees may not be fully removed",
+      "style": {}
+    }
+  ]
+}

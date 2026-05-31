@@ -1,0 +1,23 @@
+{
+  "name": "Eldritch Beam",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:burst",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:sensitive",
+        "arsomega:propagate_self",
+        "arsomega:propagate_missile",
+        "ars_nouveau:harm",
+        "ars_nouveau:amplify",
+        "ars_nouveau:heal"
+      ],
+      "description": "Creates a Beam of, harmful traveling from the caster's eyes to the position they are looking at.\nUsing an Ignition Thread at level three will enable it to skip I-frames."
+    }
+  ]
+}

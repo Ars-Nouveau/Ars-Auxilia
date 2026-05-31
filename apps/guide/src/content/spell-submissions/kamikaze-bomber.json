@@ -1,0 +1,23 @@
+{
+  "name": "Kamikaze Bomber",
+  "category": "aggressive",
+  "author": "72Mansion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:orbit",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:explosion",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "Any entity that touches one of your orbiting projectiles triggers an explosion with a decent AoE. You can remove splits from the orbit to add AoE for the explosion."
+    }
+  ]
+}

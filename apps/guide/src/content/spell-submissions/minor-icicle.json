@@ -1,0 +1,23 @@
+{
+  "name": "Minor Icicle",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:freeze",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:launch",
+        "ars_nouveau:leap",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Launch a block of ice at the target.\nRequires the Blockshaper Focus."
+    }
+  ]
+}

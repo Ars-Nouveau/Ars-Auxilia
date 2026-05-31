@@ -1,0 +1,17 @@
+{
+  "name": "Restoration of One",
+  "category": "defensive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:dispel",
+        "ars_nouveau:heal",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Restorative spell, intended to be inscribed in reactive armor, restores the wearer's condition, stitching wounds and purging effects."
+    }
+  ]
+}

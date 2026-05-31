@@ -1,0 +1,188 @@
+---
+import { IconPencil, IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
+import BaseLayout from "./BaseLayout.astro";
+import { editLink } from "../utils/constants";
+import Sidebar from "../components/navigation/Sidebar.astro";
+import {
+  getPreviousEntry,
+  getNextEntry,
+  type Sidebar as TSidebar,
+  type ParentHeading,
+} from "../utils/sidebar";
+import Heading from "../components/navigation/Heading.astro";
+import Seo from "../components/layout/Seo.astro";
+import VersionSelect from "../components/navigation/VersionSelect.astro";
+import {
+  getLatestVersion,
+  isVersionedCollection,
+  type Version,
+} from "../utils/versions";
+
+interface Props {
+  sidebar: TSidebar;
+  headings?: ParentHeading[];
+  title: string;
+  description: string;
+  path: string;
+  collection: string;
+  slug: string;
+  editPath?: string;
+  version?: Version;
+}
+
+const {
+  collection,
+  slug,
+  headings: formattedHeadings = [],
+  sidebar,
+  title,
+  description,
+  path,
+  editPath,
+  version,
+} = Astro.props;
+
+const latestVersion = await getLatestVersion();
+const prev = getPreviousEntry(slug, sidebar);
+const next = getNextEntry(slug, sidebar);
+const showVersionSelect = version && isVersionedCollection(collection);
+const showOlderVersionBanner = showVersionSelect && version !== latestVersion;
+---
+
+<BaseLayout layout="section docs" sidebar={sidebar} collection={collection}>
+  <Fragment slot="head">
+    <Seo title={title} description={description} path={path} />
+  </Fragment>
+    <div class="wrap container-lg" role="document">
+        <div class="content">
+            <div class="row flex-xl-nowrap">
+                <div class="col-lg-5 col-xl-4 docs-sidebar d-none d-lg-block">
+                    <nav class="docs-links" aria-label="Main navigation">
+                        <Sidebar sidebar={sidebar}>
+                    </nav>
+                </div>
+                <nav class="docs-toc d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+                  <div class="page-links">
+                    {formattedHeadings.length > 0 && <>
+                      <h3>On this page</h3>
+                      <nav id="toc">
+                        <ul>
+                          {formattedHeadings.map(heading => <Heading heading={heading} />)}
+                        </ul>
+                      </nav>
+                    </>}
+                  </div>
+                </nav>
+                <main class="docs-content col-lg-11 col-xl-9" data-pagefind-body>
+                    <div class="docs-title-bar">
+                      <h1 data-pagefind-meta="title">{title}</h1>
+                      {showVersionSelect && <VersionSelect version={version} collection={collection} slug={slug} />}
+                    </div>
+                    {showOlderVersionBanner && (
+                      <aside class="alert alert-warning older-version-banner" role="note" data-pagefind-ignore="all">
+                        <strong>Older version.</strong> This content is for {version}. Current content is for {latestVersion}.
+                      </aside>
+                    )}
+                    {formattedHeadings.length > 0 && <nav class="toc-mobile d-xl-none" aria-label="Quaternary navigation">
+                      <details>
+                        <summary>
+                          On this page
+                        </summary>
+                        <div class="page-links">
+                          <nav id="TableOfContents">
+                            <ul>
+                              {formattedHeadings.map(heading => <Heading heading={heading} />)}
+                            </ul>
+                          </nav>
+                        </div>
+                      </details>
+                    </nav>}
+                    <slot />
+                    {editPath && <div data-pagefind-ignore="all" class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
+                        <div class="edit-page">
+                            <a href={`${editLink}/${editPath}`}>
+                                <IconPencil size={16} />
+                                Edit this page on GitHub
+                            </a>
+                        </div>
+                    </div>}
+                    <div data-pagefind-ignore="all" class="page-nav d-flex flex-column flex-sm-row">
+                      {prev != null && <div class="card w-100">
+                        <div class="card-body d-flex">
+                          <div class="d-flex flex-column justify-content-center">
+                            <IconArrowLeft size={20} />
+                          </div>
+                          <div class="d-flex flex-column">
+                            <div class="text-body-secondary">Prev</div>
+                            <a href={prev.href} class="stretched-link text-reset text-decoration-none">{prev.title}</a>
+                          </div>
+                        </div>
+                      </div>}
+                      {prev != null && next != null && <div class="m-2"></div>}
+                      {next != null && <div class="card text-end w-100">
+                        <div class="card-body d-flex justify-content-end">
+                          <div class="d-flex flex-column">
+                            <div class="text-body-secondary">Next</div>
+                            <a href={next.href} class="stretched-link text-reset text-decoration-none">{next.title}</a>
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <IconArrowRight size={20} />
+                          </div>
+                        </div>
+                      </div>}
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</BaseLayout>
+
+<style is:global>
+  .docs-title-bar {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .version-select {
+    flex: 0 0 auto;
+    margin-top: 0.75rem;
+    max-width: 9rem;
+  }
+
+  .older-version-banner {
+    margin: 0 0 1.5rem;
+  }
+
+  @media (max-width: 575.98px) {
+    .docs-title-bar {
+      display: block;
+    }
+
+    .version-select {
+      margin-bottom: 1rem;
+      margin-top: 0;
+    }
+  }
+
+  .startup-scripts {
+    color: #26b36c !important;
+  }
+
+  .client-scripts {
+    color: #e67e23 !important;
+  }
+
+  .server-scripts {
+    color: #b96ad9 !important;
+  }
+
+  table {
+    margin: 1.5rem 0;
+  }
+
+  .footnotes hr {
+    display: none;
+  }
+</style>

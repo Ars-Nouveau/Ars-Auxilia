@@ -1,0 +1,21 @@
+{
+  "name": "Vengeful Curse",
+  "category": "defensive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_additions:retaliate",
+        "ars_elemental:life_link",
+        "ars_nouveau:hex",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:wither",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Vengeful spell to inscribe in reactive armor, curses the attacker to wither, weakening against magic and sharing the wearer's pain."
+    }
+  ]
+}

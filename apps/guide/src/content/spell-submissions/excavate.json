@@ -1,0 +1,23 @@
+{
+  "name": "Excavate",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:break",
+        "ars_nouveau:extract",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Mining spell that clears a massive area and places the drops into inventory. Recommended to carry a Jar of Voiding set to convert basic blocks."
+    }
+  ]
+}

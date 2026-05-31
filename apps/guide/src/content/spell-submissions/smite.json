@@ -1,0 +1,22 @@
+{
+  "name": "Smite",
+  "category": "aggressive",
+  "author": "Lava",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "arsomega:overhead",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_elemental:propagator_arc",
+        "ars_nouveau:split",
+        "ars_nouveau:launch",
+        "ars_nouveau:lightning"
+      ],
+      "description": "Smites a large area with lightning and takes blocks to heaven.\r\nIt looks cooler than expected, trust me."
+    }
+  ]
+}

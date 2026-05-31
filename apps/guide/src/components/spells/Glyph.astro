@@ -1,0 +1,68 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import {
+  getCanonicalGlyph,
+  getGlyphRenderUrl,
+  getNamespace,
+  getPath,
+  type GlyphAsset,
+} from "@ars/addon-builder";
+import { toTitleCase } from "../../utils/text";
+
+type ExportedGlyph = GlyphAsset & {
+  localizationKey: string;
+};
+
+interface Props {
+  glyph: string;
+  classes?: string;
+  size?: number;
+}
+
+const { glyph, classes = "me-1", size = 25 } = Astro.props;
+
+const canonicalGlyph = getCanonicalGlyph(glyph);
+const glyphEntry = canonicalGlyph
+  ? (await getCollection("glyphs")).find((entry) => entry.id === canonicalGlyph)
+  : undefined;
+const exportedGlyph = glyphEntry?.data as ExportedGlyph | undefined;
+const langEntry = exportedGlyph
+  ? await getEntry("lang", exportedGlyph.localizationKey)
+  : undefined;
+
+const fallbackTitle = toTitleCase(canonicalGlyph ?? glyph);
+const title =
+  (langEntry?.data.value as string | undefined) ??
+  toTitleCase(canonicalGlyph ? getPath(canonicalGlyph) : glyph);
+const tooltipTitle = canonicalGlyph
+  ? `${toTitleCase(getNamespace(canonicalGlyph))} – ${title}`
+  : title;
+const imgSrc = exportedGlyph ? getGlyphRenderUrl(exportedGlyph) : undefined;
+---
+
+{
+  imgSrc
+    ? (
+      <img
+        data-bs-toggle="tooltip"
+        data-bs-title={tooltipTitle}
+        data-bs-placement="bottom"
+        class:list={[classes, 'glyph']}
+        src={imgSrc}
+        alt={`${canonicalGlyph ?? glyph} glyph`}
+        title={tooltipTitle}
+        width={size}
+        height={size}
+        loading="lazy"
+      />
+    )
+    : <span class:list={[classes, 'h6', 'glyph-text']}>{fallbackTitle}</span>
+}
+
+<script>
+  import { Tooltip } from 'bootstrap';
+
+  document
+    .querySelectorAll('[data-bs-toggle="tooltip"]')
+    .forEach(tooltipTriggerEl => Tooltip.getOrCreateInstance(tooltipTriggerEl));
+</script>

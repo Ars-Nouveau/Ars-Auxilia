@@ -1,0 +1,14 @@
+---
+interface Props {
+  entries: [string, unknown][];
+}
+
+const { entries } = Astro.props;
+---
+
+{entries.length > 0 && (
+  <details class="book-page-block__fallback">
+    <summary>Additional data</summary>
+    <pre><code>{JSON.stringify(Object.fromEntries(entries), null, 2)}</code></pre>
+  </details>
+)}

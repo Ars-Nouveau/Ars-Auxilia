@@ -1,0 +1,17 @@
+{
+  "name": "Return to Sender",
+  "category": "automation",
+  "author": "Xacris",
+  "versions": ["1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:rune",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:pickup"
+      ],
+      "description": "This spell will place a rune that will teleport any items or XP orbs near it to the player that cast it when it is triggered. Can be used to remotely send things to you across vast distances"
+    }
+  ]
+}

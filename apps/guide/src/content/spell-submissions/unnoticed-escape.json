@@ -1,0 +1,21 @@
+{
+  "name": "Unnoticed Escape",
+  "category": "support",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:summon_decoy",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:blink",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:invisibility",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "You teleport forward, becoming invisible and leaving behind a decoy to suffer the consequences."
+    }
+  ]
+}

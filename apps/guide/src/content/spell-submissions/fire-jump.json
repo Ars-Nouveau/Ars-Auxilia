@@ -1,0 +1,23 @@
+{
+  "name": "Fire Jump",
+  "category": "support",
+  "author": "Clement446",
+  "versions": ["1.20.1", "1.19.2", "1.18.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_elemental:life_link",
+        "ars_elemental:propagator_homing",
+        "ars_nouveau:ignite",
+        "ars_nouveau:flare",
+        "ars_nouveau:heal",
+        "ars_nouveau:reset",
+        "ars_nouveau:blink"
+      ],
+      "description": "This spell is based on the \"collapsing stars\" base.\nTweak and adjust the augments as wished.\nThe **FIRE FOCUS** or the **KINDLING THREAD** are required for this spell to work.\nWhen using the kindling thread, you can remove the \"Ignite\" glyph."
+    }
+  ]
+}

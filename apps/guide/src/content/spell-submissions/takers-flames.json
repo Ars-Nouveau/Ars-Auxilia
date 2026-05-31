@@ -1,0 +1,22 @@
+{
+  "name": "Takers Flames",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "not_enough_glyphs:trail",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:burst",
+        "ars_nouveau:aoe",
+        "ars_elemental:life_link",
+        "ars_nouveau:ignite",
+        "ars_nouveau:flare",
+        "ars_nouveau:heal",
+        "ars_nouveau:launch"
+      ],
+      "description": "Launches a projectile that ignites and launches foes into the air, healing you in the process\r\nCan be cast multiple time for more damage as it bypasses iframes.\r\nRequires either the T3 kindling thread or the fire focus."
+    }
+  ]
+}

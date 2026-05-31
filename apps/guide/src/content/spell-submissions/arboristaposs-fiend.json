@@ -1,0 +1,21 @@
+{
+  "name": "Arborist&apos;s Fiend",
+  "category": "utility",
+  "author": "WaveClaw",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:place_block",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:fell",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pickup"
+      ],
+      "description": "While holding a sapling in your first inventory slot, cast to quickly grown and fell a forest of trees like the magical lumberjack you were always meant to be."
+    }
+  ]
+}

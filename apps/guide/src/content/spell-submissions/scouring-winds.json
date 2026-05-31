@@ -1,0 +1,24 @@
+{
+  "name": "Scouring Winds",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "toomanyglyphs:ray",
+        "ars_nouveau:launch",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:delay",
+        "ars_nouveau:gravity",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:linger",
+        "ars_nouveau:dampen",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:wind_shear"
+      ],
+      "description": "Lift your enemy into the air and hold them there, while stinging winds shred them to pieces.  Requires both an Air and Earth focus, or a Silt focus.",
+      "style": {}
+    }
+  ]
+}

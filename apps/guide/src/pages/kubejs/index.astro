@@ -1,0 +1,10 @@
+---
+import { getCollectionVersions } from "../../utils/versions";
+
+const availableVersions = await getCollectionVersions("kubejs");
+const latestVersion = availableVersions.at(-1) ?? "1.21.1";
+const target = `/${latestVersion}/kubejs/`;
+---
+
+<meta http-equiv="refresh" content={`0;url=${target}`} />
+<a href={target}>Continue</a>

@@ -1,0 +1,24 @@
+---
+import BookRecipeIngredient from "../BookRecipeIngredient.astro";
+import {
+  asRecipeRecord,
+  asRecipeRecordArray,
+  type BookRecipeRecord,
+} from "../../../utils/book-recipes";
+
+interface Props {
+  recipe: BookRecipeRecord;
+}
+
+const { recipe } = Astro.props;
+const ingredients = asRecipeRecordArray(recipe.ingredients);
+const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
+---
+
+<div class="book-recipe__flow">
+  <div class="book-recipe-ingredients" aria-label="Ingredients">
+    {ingredients.map(ingredient => <BookRecipeIngredient ingredient={ingredient} />)}
+  </div>
+  <span class="book-recipe__arrow" aria-hidden="true">→</span>
+  <BookRecipeIngredient ingredient={result} label="Result" />
+</div>

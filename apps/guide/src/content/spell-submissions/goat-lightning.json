@@ -1,0 +1,23 @@
+{
+  "name": "GOAT Lightning",
+  "category": "aggressive",
+  "author": "Xacris",
+  "versions": ["1.16.5", "1.18.2", "1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:linger",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:lightning"
+      ],
+      "description": "The original flashy lingering lightning spell of doom! Not the highest damage, but certainly sends a message"
+    }
+  ]
+}

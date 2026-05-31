@@ -1,0 +1,22 @@
+{
+  "name": "Aggressive Wall",
+  "category": "aggressive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:leap",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "With the help of Focus of Block Shaping, you summon a wall of mageblocks and throw it hard forward, knocking down those it hits."
+    }
+  ]
+}

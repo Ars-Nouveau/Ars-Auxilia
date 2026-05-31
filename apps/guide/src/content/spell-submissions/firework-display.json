@@ -1,0 +1,23 @@
+{
+  "name": "Firework Display",
+  "category": "fun",
+  "author": "Xacris",
+  "versions": ["1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:wall",
+        "ars_nouveau:aoe",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:firework",
+        "ars_nouveau:amplify",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Conjures a wall that will shoot fireworks into the sky! They fly higher than vanilla fireworks can, makes for an impressive display"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "Elevated Crops",
+  "category": "automation",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:place_block",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:grow",
+        "ars_nouveau:break",
+        "ars_nouveau:pickup",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "Spell to transcribe in a spell turret, with an inventory with a plant that grows multiple blocks, such as bamboo or kelp. It will plant, grow and harvest the plant in a single instance. With kelp you will need a pickup auxiliary system but can increase growth for more gain per interaction."
+    }
+  ]
+}

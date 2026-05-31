@@ -1,0 +1,23 @@
+{
+  "name": "Fog Of War",
+  "category": "aggressive",
+  "author": "Lava",
+  "versions": ["1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:aoe",
+        "ars_nouveau:wall",
+        "ars_nouveau:aoe",
+        "ars_nouveau:harm",
+        "ars_nouveau:extend_time",
+        "ars_elemental:envenom",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Summons a deadly \"fog\" where the projectile lands."
+    }
+  ]
+}

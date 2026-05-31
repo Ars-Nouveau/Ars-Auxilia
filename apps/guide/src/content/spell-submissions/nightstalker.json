@@ -1,0 +1,23 @@
+{
+  "name": "Nightstalker",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:light",
+        "ars_nouveau:amplify",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Grant long duration night vision to yourself. Replace Self with Touch to grant to another player."
+    }
+  ]
+}

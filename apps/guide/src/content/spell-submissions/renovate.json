@@ -1,0 +1,18 @@
+{
+  "name": "Renovate",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:exchange",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Replace a plane of blocks with blocks from your hotbar. Useful for replacing sections of walls/floors with a specific block. Can add additional AoEs for larger sections."
+    }
+  ]
+}

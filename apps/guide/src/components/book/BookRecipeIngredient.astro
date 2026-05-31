@@ -1,0 +1,36 @@
+---
+import BookIcon from "./BookIcon.astro";
+
+interface Props {
+  ingredient?: Record<string, unknown>;
+  label?: string;
+}
+
+const { ingredient, label } = Astro.props;
+const item =
+  typeof ingredient?.item === "string"
+    ? ingredient.item
+    : typeof ingredient?.id === "string"
+      ? ingredient.id
+      : undefined;
+const tag = typeof ingredient?.tag === "string" ? ingredient.tag : undefined;
+const iconUrl =
+  typeof ingredient?.iconUrl === "string" ? ingredient.iconUrl : undefined;
+const count =
+  typeof ingredient?.count === "number" && ingredient.count > 1
+    ? ingredient.count
+    : undefined;
+---
+
+<span class="book-recipe-ingredient" title={item ?? tag ?? label}>
+  {item ? (
+    <>
+      <BookIcon icon={item} iconUrl={iconUrl} />
+      {count && <span class="book-recipe-ingredient__count">{count}</span>}
+    </>
+  ) : tag ? (
+    <span class="book-recipe-ingredient__tag" data-bs-toggle="tooltip" data-bs-title={tag} data-bs-placement="bottom">#</span>
+  ) : (
+    <span class="book-recipe-ingredient__empty" aria-label={label ?? 'Empty recipe slot'}></span>
+  )}
+</span>

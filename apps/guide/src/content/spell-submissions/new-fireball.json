@@ -1,0 +1,23 @@
+{
+  "name": "New Fireball",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:flare",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:reset",
+        "ars_nouveau:explosion"
+      ],
+      "description": "A \"new\" version of the Fireball spell.\nIt uses the \"reset\" glyph to include the \"Explode\" glyph without causing much destruction."
+    }
+  ]
+}

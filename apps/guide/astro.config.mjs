@@ -1,0 +1,89 @@
+import { defineConfig, envField, sessionDrivers } from "astro/config";
+import cloudflare from "@astrojs/cloudflare";
+import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
+import svelte from "@astrojs/svelte";
+import sitemap from "@astrojs/sitemap";
+import robotsTxt from "astro-robots-txt";
+import expressiveCode from "astro-expressive-code";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+import pagefind from "astro-pagefind";
+import compressor from "astro-compressor";
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
+import { visit } from "unist-util-visit";
+import astroMetaTags from "astro-meta-tags";
+
+const addHeaderLinks = () => {
+  return (tree) => {
+    visit(tree, "element", (node) => {
+      if (
+        ["h2", "h3", "h4", "h5"].includes(node.tagName) &&
+        node.properties.id
+      ) {
+        node.children.push({
+          type: "element",
+          tagName: "a",
+          properties: {
+            class: "anchor",
+            "aria-hidden": true,
+            href: "#" + node.properties.id,
+            "data-pagefind-ignore": "all",
+            "aria-label": `${node.properties.id} permalink`,
+          },
+          children: [{ type: "text", value: "#" }],
+        });
+      }
+    });
+  };
+};
+
+export default defineConfig({
+  output: "static",
+  session: {
+    driver: sessionDrivers.lruCache(),
+  },
+  adapter: cloudflare({
+    prerenderEnvironment: "node",
+    imageService: {
+      build: "compile",
+      runtime: "passthrough",
+    },
+  }),
+  publicDir: "assets",
+  outDir: "dist",
+  site: "https://ars.guide",
+  integrations: [
+    expressiveCode({
+      plugins: [pluginLineNumbers()],
+      themes: ["poimandres", "material-theme-lighter"],
+      themeCssSelector(theme) {
+        return `[data-bs-theme="${theme.type}"]`;
+      },
+    }),
+    mdx(),
+    react(),
+    svelte(),
+    pagefind(),
+    sitemap(),
+    robotsTxt(),
+    compressor(),
+    astroMetaTags(),
+  ],
+  env: {
+    schema: {
+      BETTER_AUTH_SECRET: envField.string({ context: "server", access: "secret" }),
+      BETTER_AUTH_URL: envField.string({ context: "server", access: "public", default: "http://localhost:4321" }),
+      DISCORD_CLIENT_ID: envField.string({ context: "server", access: "secret" }),
+      DISCORD_CLIENT_SECRET: envField.string({ context: "server", access: "secret" }),
+      GITHUB_APP_ID: envField.string({ context: "server", access: "secret" }),
+      GITHUB_APP_INSTALLATION_ID: envField.string({ context: "server", access: "secret", optional: true }),
+      GITHUB_APP_PRIVATE_KEY: envField.string({ context: "server", access: "secret" }),
+      GITHUB_OWNER: envField.string({ context: "server", access: "public", default: "Jarva" }),
+      GITHUB_REPO: envField.string({ context: "server", access: "public", default: "Ars.Guide" }),
+      GITHUB_BASE_BRANCH: envField.string({ context: "server", access: "public", default: "main" }),
+    },
+  },
+  markdown: {
+    rehypePlugins: [rehypeHeadingIds, addHeaderLinks],
+  },
+});

@@ -1,0 +1,23 @@
+{
+  "name": "Tunnel",
+  "category": "utility",
+  "author": "Darkfira",
+  "versions": ["1.16.5", "1.18.2", "1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:break",
+        "ars_nouveau:amplify",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Tier 2 Mining spell. Creates a 3x3 Tunnel and picks it up. Replace pierce with Extract if required. Perfect for speeding along your diamond mining especially paired with a Jar of Voiding!"
+    }
+  ]
+}

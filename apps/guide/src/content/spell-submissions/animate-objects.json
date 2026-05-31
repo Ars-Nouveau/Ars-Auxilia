@@ -1,0 +1,17 @@
+{
+  "name": "Animate Objects",
+  "category": "support",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:animate_block",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Turn a chunk of terrain into an army of followers."
+    }
+  ]
+}

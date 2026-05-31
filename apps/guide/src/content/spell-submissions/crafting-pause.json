@@ -1,0 +1,22 @@
+{
+  "name": "Crafting Pause",
+  "category": "utility",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:craft",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:dampen",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "You summon a small barrier around you while working at a crafting table to prevent interruptions in the heat of battle."
+    }
+  ]
+}

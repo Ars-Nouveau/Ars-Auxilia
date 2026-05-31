@@ -1,0 +1,23 @@
+{
+  "name": "Illuminated Prospecting",
+  "category": "utility",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:light",
+        "ars_nouveau:break",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Launch a projectile that will voraciously excavate the earth in its path while illuminating it."
+    }
+  ]
+}

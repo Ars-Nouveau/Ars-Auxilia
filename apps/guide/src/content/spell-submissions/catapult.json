@@ -1,0 +1,23 @@
+{
+  "name": "Catapult",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_elemental:conjure_terrain",
+        "ars_nouveau:amplify",
+        "ars_nouveau:leap",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:break",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Summon a block of stone to hurl at an enemy."
+    }
+  ]
+}

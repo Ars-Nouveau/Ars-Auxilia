@@ -1,0 +1,58 @@
+---
+import type { BookPageRecipeData } from "../../utils/book-pages";
+import {
+  getRecipeSourceCost,
+  getRecipeTypeLabel,
+  isRecipeRecord,
+} from "../../utils/book-recipes";
+import BookCraftingShapedRecipe from "./recipe-types/BookCraftingShapedRecipe.astro";
+import BookCraftingShapelessRecipe from "./recipe-types/BookCraftingShapelessRecipe.astro";
+import BookEnchantingApparatusRecipe from "./recipe-types/BookEnchantingApparatusRecipe.astro";
+import BookEnchantmentRecipe from "./recipe-types/BookEnchantmentRecipe.astro";
+import BookGlyphRecipe from "./recipe-types/BookGlyphRecipe.astro";
+import BookImbuementRecipe from "./recipe-types/BookImbuementRecipe.astro";
+import BookUnsupportedRecipe from "./recipe-types/BookUnsupportedRecipe.astro";
+
+interface Props {
+  recipe: BookPageRecipeData;
+}
+
+const { recipe: recipeRef } = Astro.props;
+const recipe = isRecipeRecord(recipeRef.recipe) ? recipeRef.recipe : undefined;
+const type = typeof recipe?.type === "string" ? recipe.type : undefined;
+const typeLabel = getRecipeTypeLabel(type) ?? "Recipe";
+const sourceCost = recipe ? getRecipeSourceCost(recipe) : undefined;
+
+const labelOverrides: Record<string, string> = {
+  glyph: "Scribe's Table",
+};
+
+const label =
+  typeLabel in labelOverrides ? labelOverrides[typeLabel] : typeLabel;
+---
+
+<article class="book-recipe">
+  <header class="book-recipe__header">
+    <h3>{label}</h3>
+  </header>
+
+  {!recipe ? (
+    <p>Recipe data not found.</p>
+  ) : type === 'minecraft:crafting_shaped' ? (
+    <BookCraftingShapedRecipe recipe={recipe} />
+  ) : type === 'minecraft:crafting_shapeless' ? (
+    <BookCraftingShapelessRecipe recipe={recipe} />
+  ) : type === 'ars_nouveau:imbuement' ? (
+    <BookImbuementRecipe recipe={recipe} />
+  ) : type === 'ars_nouveau:enchanting_apparatus' ? (
+    <BookEnchantingApparatusRecipe recipe={recipe} />
+  ) : type === 'ars_nouveau:enchantment' ? (
+    <BookEnchantmentRecipe recipe={recipe} recipeId={recipeRef.id} />
+  ) : type === 'ars_nouveau:glyph' ? (
+    <BookGlyphRecipe recipe={recipe} />
+  ) : (
+    <BookUnsupportedRecipe recipe={recipe} type={type} />
+  )}
+
+  {sourceCost != null && <p class="book-recipe__source">Source: {sourceCost.toLocaleString()}</p>}
+</article>

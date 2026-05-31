@@ -1,0 +1,37 @@
+[
+  {
+    "id": "aggressive",
+    "class": "combat",
+    "text": "Aggressive"
+  },
+  {
+    "id": "defensive",
+    "class": "combat",
+    "text": "Defensive"
+  },
+  {
+    "id": "support",
+    "class": "combat",
+    "text": "Support"
+  },
+  {
+    "id": "exploration",
+    "class": "other",
+    "text": "Exploration"
+  },
+  {
+    "id": "utility",
+    "class": "other",
+    "text": "Utility"
+  },
+  {
+    "id": "automation",
+    "class": "other",
+    "text": "Automation"
+  },
+  {
+    "id": "fun",
+    "class": "other",
+    "text": "Fun"
+  }
+]

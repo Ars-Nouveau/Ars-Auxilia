@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import {
+  getEntryHref,
+  getFirstEntry,
+  getPublicSlug,
+  getVersionFromEntry,
+} from "../../utils/sidebar";
+import {
+  getCollectionVersions,
+  type Version,
+  type VersionedCollection,
+} from "../../utils/versions";
+
+interface Props {
+  version: Version;
+  collection: VersionedCollection;
+  slug: string;
+}
+
+const { version, collection, slug } = Astro.props;
+const availableVersions = await getCollectionVersions(collection);
+const versionOptions = await Promise.all(
+  availableVersions.map(async (item) => {
+    const entries = await getCollection(
+      collection,
+      (entry) => getVersionFromEntry(entry) === item,
+    );
+    const exactEntry = entries.find((entry) => getPublicSlug(entry) === slug);
+    const fallbackEntry = exactEntry ?? (await getFirstEntry(collection, item));
+
+    return {
+      version: item,
+      href: fallbackEntry
+        ? getEntryHref(fallbackEntry)
+        : `/${item}/${collection}/`,
+    };
+  }),
+);
+---
+
+<label class="visually-hidden" for="versionSelect">Version</label>
+<select id="versionSelect" class="form-select form-select-sm version-select" aria-label="Select version">
+  {versionOptions.map(item => (
+    <option value={item.href} selected={item.version === version}>
+      {item.version}
+    </option>
+  ))}
+</select>
+
+<script>
+  const versionSelect = document.getElementById('versionSelect') as HTMLSelectElement | null;
+
+  versionSelect?.addEventListener('change', () => {
+    window.location.href = versionSelect.value;
+  });
+</script>

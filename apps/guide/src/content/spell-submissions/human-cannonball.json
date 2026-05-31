@@ -1,0 +1,23 @@
+{
+  "name": "Human Cannonball",
+  "category": "defensive",
+  "author": "Darkfira",
+  "versions": ["1.16.5", "1.18.2", "1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:launch",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:delay",
+        "ars_nouveau:gust",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:explosion"
+      ],
+      "description": "Send Melee attackers flying in a fun way!"
+    }
+  ]
+}

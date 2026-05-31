@@ -1,0 +1,20 @@
+{
+  "name": "Frozen Onslaught",
+  "category": "support",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:harm",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:freeze",
+        "ars_nouveau:animate_block"
+      ],
+      "description": "Channeling through the Focus of Block Shaping you condense the water around the target, taking the form of a horde of ice that will overwhelm it."
+    }
+  ]
+}

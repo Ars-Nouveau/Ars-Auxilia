@@ -1,0 +1,23 @@
+{
+  "name": "Zeus Volley",
+  "category": "aggressive",
+  "author": "Lava",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "arsomega:overhead",
+        "toomanyglyphs:chaining",
+        "ars_elemental:propagator_arc",
+        "ars_nouveau:lightning",
+        "ars_elemental:propagator_arc",
+        "ars_nouveau:lightning",
+        "ars_elemental:propagator_arc",
+        "ars_nouveau:lightning",
+        "ars_elemental:propagator_arc",
+        "ars_nouveau:lightning"
+      ],
+      "description": "Shoots a straight line of lightning in front of the caster."
+    }
+  ]
+}

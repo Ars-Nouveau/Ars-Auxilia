@@ -1,0 +1,24 @@
+{
+  "name": "Glassmaker",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.20.1", "1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_elemental:conjure_terrain",
+        "ars_nouveau:crush",
+        "ars_nouveau:smelt",
+        "ars_nouveau:break",
+        "ars_nouveau:extract",
+        "ars_nouveau:pickup"
+      ],
+      "description": "Creates, then collects, a sphere of glass blocks.  Works best if used while airborne.  Requires a Block Shaper focus.",
+      "style": {}
+    }
+  ]
+}

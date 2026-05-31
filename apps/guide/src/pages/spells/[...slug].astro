@@ -1,0 +1,92 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { slug as slugify } from "github-slugger";
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import Submission from "../../components/spells/Submission.astro";
+import { getCategories } from "../../utils/spell-data/categories";
+import { getSubmissionsFromCategory } from "../../utils/spell-data/category";
+import type { Submission as TSubmission } from "../../utils/spell-data/spells";
+import { getHeadings, getPublicSlug, getSidebar } from "../../utils/sidebar";
+import { toTitleCase } from "../../utils/text";
+
+interface ContentProps {
+  kind: "content";
+  entry: CollectionEntry<"spells">;
+}
+
+interface SubmissionProps {
+  kind: "submission";
+  submission: TSubmission;
+}
+
+type Props = ContentProps | SubmissionProps;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = [];
+
+  const entries = await getCollection("spells");
+  for (const entry of entries) {
+    const slug = getPublicSlug(entry);
+    if (!slug) continue;
+
+    paths.push({
+      params: { slug },
+      props: { kind: "content", entry },
+    });
+  }
+
+  for (const category of await getCategories()) {
+    const submissions = await getSubmissionsFromCategory(category.id);
+    for (const submission of submissions) {
+      paths.push({
+        params: {
+          slug: `${category.class}/${category.id}/${slugify(submission.name)}`,
+        },
+        props: { kind: "submission", submission },
+      });
+    }
+  }
+
+  return paths;
+};
+
+const { slug } = Astro.params;
+const props = Astro.props as unknown as Props;
+const sidebar = await getSidebar("spells", slug as string);
+---
+{
+  props.kind === 'content'
+    ? await (async () => {
+        const { Content, headings } = await render(props.entry);
+        const formattedHeadings = getHeadings(headings);
+        return (
+          <DocsLayout
+            editPath={`/content/${props.entry.collection}/${props.entry.id}`}
+            collection={props.entry.collection}
+            slug={slug as string}
+            headings={formattedHeadings}
+            sidebar={sidebar}
+            title={props.entry.data.title}
+            description={props.entry.data.description}
+            path={`spells/${slug}`}
+          >
+            <Content />
+          </DocsLayout>
+        );
+      })()
+    : (
+      <DocsLayout
+        collection="spells"
+        slug={slug as string}
+        headings={[]}
+        sidebar={sidebar}
+        title={toTitleCase(props.submission.name)}
+        description={props.submission.name}
+        path={`spells/${slug}`}
+        editPath=""
+      >
+        <Submission standalone={true} {...props.submission} />
+      </DocsLayout>
+    )
+}

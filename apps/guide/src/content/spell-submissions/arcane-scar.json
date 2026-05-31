@@ -1,0 +1,23 @@
+{
+  "name": "Arcane Scar",
+  "category": "aggressive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:wither",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:hex",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Marks the target with wicked magic, consuming its life and making it vulnerable to subsequent spells."
+    }
+  ]
+}

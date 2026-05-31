@@ -1,0 +1,23 @@
+{
+  "name": "Bladestorm",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:orbit",
+        "ars_nouveau:aoe",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:cut",
+        "ars_nouveau:delay",
+        "ars_nouveau:cut",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Creates a whirling ring of projectiles that damage anything that comes near."
+    }
+  ]
+}

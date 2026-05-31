@@ -1,0 +1,24 @@
+{
+  "name": "Frozen Blast",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "toomanyglyphs:filter_monster",
+        "ars_nouveau:burst",
+        "ars_nouveau:freeze",
+        "ars_nouveau:cold_snap",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:aoe",
+        "ars_nouveau:snare",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Deal heavy frost damage to a target and any nearby targets, and snare anything that does survive.",
+      "style": {}
+    }
+  ]
+}

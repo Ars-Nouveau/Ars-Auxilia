@@ -1,0 +1,40 @@
+---
+title: "Glyphs"
+description: "Example recipes for Glyphs"
+weight: 810
+---
+
+## Remove a glyph
+
+<span class="badge text-bg-dark server-scripts">server_scripts</span>
+
+```js
+ServerEvents.recipes((event) => {
+  event.remove({ id: "ars_nouveau:glyph_blink", type: "ars_nouveau:glyph" });
+});
+```
+
+## Change a glyph recipe
+
+<span class="badge text-bg-dark server-scripts">server_scripts</span>
+
+```js
+ServerEvents.recipes((event) => {
+  event.remove({ id: "ars_nouveau:glyph_blink", type: "ars_nouveau:glyph" });
+  event
+    .custom({
+      type: "ars_nouveau:glyph",
+      count: 1,
+      exp: 160,
+      inputItems: [
+        { item: "ars_nouveau:manipulation_essence" },
+        { item: "ars_nouveau:manipulation_essence" },
+        { tag: "forge:ender_pearls" },
+        { tag: "forge:ender_pearls" },
+        { tag: "forge:ender_pearls" },
+      ],
+      output: "ars_nouveau:glyph_blink",
+    })
+    .id("ars_nouveau:glyph_blink");
+});
+```

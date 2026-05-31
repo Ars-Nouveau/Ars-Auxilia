@@ -1,0 +1,23 @@
+{
+  "name": "Surface Seek",
+  "category": "exploration",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:break",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "arsomega:propagate_self",
+        "ars_nouveau:launch"
+      ],
+      "description": "By aiming precisely at one&apos;s ceiling, the spell will bore a tunnel through the stone, simultaneously elevating the caster for a swift exit from the depths. In the hands of a more skilled caster, the blocks can be rendered intangible rather than shattered to prevent creating holes in the world."
+    }
+  ]
+}

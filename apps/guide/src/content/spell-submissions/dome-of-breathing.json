@@ -1,0 +1,21 @@
+{
+  "name": "Dome of Breathing",
+  "category": "utility",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:evaporate"
+      ],
+      "description": "It evaporates all the liquid around, allowing you to breathe and move."
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Harm Cannon",
+  "category": "aggressive",
+  "author": "Lava",
+  "versions": ["1.20.1", "1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "arsomega:overhead",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "toomanyglyphs:chaining",
+        "ars_elemental:propagator_homing",
+        "ars_nouveau:hex",
+        "ars_nouveau:harm",
+        "ars_nouveau:amplify",
+        "ars_nouveau:heal"
+      ],
+      "description": "Tier 3 Thread of kindling required. Does massive damage wherever the caster aims."
+    }
+  ]
+}

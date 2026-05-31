@@ -1,0 +1,23 @@
+{
+  "name": "Collapsing Stars",
+  "category": "aggressive",
+  "author": "Clement446",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:sensitive",
+        "ars_elemental:propagator_homing",
+        "ars_nouveau:ignite",
+        "ars_nouveau:flare",
+        "ars_nouveau:amplify",
+        "ars_nouveau:heal"
+      ],
+      "description": "Creates a swarm of projectiles around the enemy, dealing heavy Fire damage with the \"Hellfire\" effect. ⚠Requires either the Kindling Thread at tier three, or the Fire Focus, depending on the Ars Elemental version ⚠"
+    }
+  ]
+}

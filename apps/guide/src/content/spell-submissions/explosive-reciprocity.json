@@ -1,0 +1,23 @@
+{
+  "name": "Explosive Reciprocity",
+  "category": "defensive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:self",
+        "ars_nouveau:explosion",
+        "ars_nouveau:dampen",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "A spell meant to be inscribed on reactive armor, it releases an explosion around its wearer upon taking damage, pushing and lacerating enemies around it, without devastating the terrain."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+---
+title: "Containment Jars"
+description: "A list of tweaks for Containment Jars"
+weight: 810
+---
+
+## Prevent Spellbooks From Entering Jars
+
+<span class="badge text-bg-dark server-scripts">server_scripts</span>
+
+```js
+ServerEvents.tags("item", (event) => {
+  event
+    .get("ars_nouveau:interact_jar_blacklist")
+    .add([/ars_nouveau:.*_spell_book/]);
+});
+```

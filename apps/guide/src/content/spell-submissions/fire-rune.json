@@ -1,0 +1,18 @@
+{
+  "name": "Fire Rune",
+  "category": "defensive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:rune",
+        "ars_nouveau:hex",
+        "ars_nouveau:ignite",
+        "ars_nouveau:flare"
+      ],
+      "description": "Place a defensive rune on a wall or floor that will trigger when an enemy touches it. Use directly in combat as a damage dealing spell or use Runic Chalk to make permanent and place a source jar nearby to make an effective base defense."
+    }
+  ]
+}

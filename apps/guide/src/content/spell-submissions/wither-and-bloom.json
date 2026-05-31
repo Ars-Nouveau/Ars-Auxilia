@@ -1,0 +1,23 @@
+{
+  "name": "Wither and Bloom",
+  "category": "aggressive",
+  "author": "MuteTiefling",
+  "versions": ["1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "toomanyglyphs:chaining",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:harm",
+        "ars_elemental:envenom",
+        "ars_elemental:envenom",
+        "ars_elemental:poison_spores",
+        "ars_trinkets:amplify_3"
+      ],
+      "description": "Used on an Enchanter's Sword with a Focus of Earth and Geomancer's Armor with Spores I applied."
+    }
+  ]
+}

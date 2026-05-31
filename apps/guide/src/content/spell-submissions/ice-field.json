@@ -1,0 +1,22 @@
+{
+  "name": "Ice Field",
+  "category": "defensive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:freeze",
+        "ars_elemental:spike",
+        "ars_nouveau:snare",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time"
+      ],
+      "description": "Create an area of damaging spikes that snares enemies for a moderate duration."
+    }
+  ]
+}

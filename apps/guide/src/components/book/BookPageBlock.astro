@@ -1,0 +1,44 @@
+---
+import BookFallbackData from "./BookFallbackData.astro";
+import BookItems from "./BookItems.astro";
+import BookPageMeta from "./BookPageMeta.astro";
+import BookRecipes from "./BookRecipes.astro";
+import BookRelations from "./BookRelations.astro";
+import {
+  asString,
+  getBookItems,
+  getBookRecipes,
+  getRelatedValues,
+  getUnknownEntries,
+  type BookPageBlockData,
+} from "../../utils/book-pages";
+
+interface Props {
+  page: BookPageBlockData;
+  index: number;
+  hrefByBookId: Map<string, string>;
+  langByKey: Map<string, string>;
+}
+
+const { page, index, hrefByBookId, langByKey } = Astro.props;
+const recipes = getBookRecipes(page);
+const items = getBookItems(page);
+const unknown = getUnknownEntries(page);
+const related = getRelatedValues(page.related);
+const title = asString(page.title);
+const description = asString(page.description);
+const icon = asString(page.icon);
+const iconUrl = asString(page.iconUrl);
+const entityType = asString(page.entity_type);
+const tier = typeof page.tier === "number" ? page.tier : undefined;
+---
+
+<section class="book-page-block">
+  {title && index > 0 && <h2>{title}</h2>}
+  <BookPageMeta icon={icon} iconUrl={iconUrl} tier={tier} entityType={entityType} />
+  <BookItems items={items} />
+  <BookRecipes recipes={recipes} />
+  {description && <p>{description}</p>}
+  <BookRelations relations={related} hrefByBookId={hrefByBookId} langByKey={langByKey} />
+  <BookFallbackData entries={unknown} />
+</section>

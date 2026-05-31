@@ -1,0 +1,23 @@
+{
+  "name": "Prismatic Barrage",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:wall",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:leap",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Fire volleys of blocks at enemies that disappear after a short time. Set spell color to rainbow. Requires Focus of Block Shaping."
+    }
+  ]
+}

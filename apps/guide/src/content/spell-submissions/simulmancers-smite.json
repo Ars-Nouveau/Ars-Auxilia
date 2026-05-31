@@ -1,0 +1,23 @@
+{
+  "name": "Simulmancers Smite",
+  "category": "aggressive",
+  "author": "Frantastic",
+  "versions": ["1.21.1", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:summon_decoy",
+        "ars_nouveau:orbit",
+        "ars_nouveau:summon_decoy",
+        "ars_nouveau:orbit",
+        "ars_nouveau:linger",
+        "ars_nouveau:orbit",
+        "ars_nouveau:summon_decoy",
+        "ars_nouveau:lightning"
+      ],
+      "description": "Intended to be cast with a split spell arrow on a crossbow with multishot. \r\n\r\nConjures a lightning storm fueled by the act of creating and destroying your own simulacra. Something to be said about hubris here, but I&apos;m too busy staring at the pretty lights to care.",
+      "style": {}
+    }
+  ]
+}

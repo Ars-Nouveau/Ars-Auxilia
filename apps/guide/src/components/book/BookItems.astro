@@ -1,0 +1,26 @@
+---
+import BookIcon from "./BookIcon.astro";
+import type { BookPageItemData } from "../../utils/book-pages";
+
+interface Props {
+  items: BookPageItemData[];
+}
+
+const { items } = Astro.props;
+---
+
+{items.length > 0 && (
+  <ul class="book-items" aria-label="Items">
+    {items.map(item => (
+      <li class="book-items__item">
+        <BookIcon icon={item.item} iconUrl={item.iconUrl} />
+      </li>
+    ))}
+  </ul>
+)}
+
+<style>
+  .book-items {
+    list-style-type: none;
+  }
+</style>

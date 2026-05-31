@@ -1,0 +1,23 @@
+{
+  "name": "Black Hole",
+  "category": "defensive",
+  "author": "Lyrellion",
+  "versions": ["1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:gravity",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "Create a singularity that pulls entities towards it in a large area. Set color to (1, 1, 1) to make it nearly invisible. Requires Earth Focus."
+    }
+  ]
+}

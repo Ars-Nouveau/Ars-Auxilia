@@ -1,0 +1,15 @@
+---
+import type { BookRecipeRecord } from "../../../utils/book-recipes";
+
+interface Props {
+  recipe: BookRecipeRecord;
+  type?: string;
+}
+
+const { recipe, type } = Astro.props;
+---
+
+<details class="book-page-block__fallback">
+  <summary>Unsupported recipe type: {type ?? 'unknown'}</summary>
+  <pre><code>{JSON.stringify(recipe, null, 2)}</code></pre>
+</details>

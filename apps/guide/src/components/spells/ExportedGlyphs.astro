@@ -1,0 +1,154 @@
+---
+import { getCollection } from "astro:content";
+import { slug } from "github-slugger";
+import {
+  getGlyphRenderUrl,
+  getNamespace,
+  getPath,
+  type GlyphAsset,
+} from "@ars/addon-builder";
+
+type ExportedGlyph = GlyphAsset & {
+  typeName: Component;
+  typeIndex: number;
+  classes: string[];
+  spellSchools: SpellSchool[];
+  defaults: Defaults;
+  name: string;
+  localizationKey: string;
+};
+
+type Component = {
+  translate: string;
+};
+
+type SpellSchool = {
+  id: string;
+  subschools: string[];
+};
+
+type Defaults = {
+  starter: boolean;
+  perSpellLimit: number;
+  augments: Augments;
+  invalidCombinations: string[];
+  defaultConfig: Configs;
+  tier: number;
+  cost: number;
+  enabled: boolean;
+};
+
+type Augments = {
+  compatible: string[];
+  descriptions: { [id: string]: Component };
+  costs: { [id: string]: number };
+  limits: { [id: string]: number };
+};
+
+type Configs = {
+  baseDamage?: number;
+  ampDamage?: number;
+  baseDuration?: number;
+  ampDuration?: number;
+};
+
+const glyphEntries = await getCollection("glyphs");
+const exportedGlyphs = Object.fromEntries(
+  glyphEntries.map((entry) => [entry.id, entry.data as ExportedGlyph]),
+);
+
+const langEntries = await getCollection("lang");
+const lang = Object.fromEntries(
+  langEntries.map((entry) => [entry.id, entry.data.value as string]),
+);
+
+const augmentDescriptions = new Map(
+  Object.entries(lang)
+    .filter(([key]) => key.includes(".augment_desc."))
+    .map(([key, value]) => [key.replace(/^([^.]*.){2}/, ""), value]),
+);
+
+const img = (size: number, glyph: ExportedGlyph) => {
+  return `<img style="margin-right:0.75rem;width:${size}rem;height:${size}rem;image-rendering:pixelated;image-rendering:-moz-crisp-edges;image-rendering:crisp-edges;" src="${getGlyphRenderUrl(glyph)}" alt="${lang[glyph.localizationKey] ?? glyph.name} glyph" loading="lazy" />`;
+};
+---
+<Fragment>
+{Object.values(exportedGlyphs).toSorted((a, b) => (lang[a.localizationKey] ?? a.name).localeCompare(lang[b.localizationKey] ?? b.name)).map(glyph => { return { 'glyph': glyph, 'slug': slug(lang[glyph.localizationKey] ?? glyph.name) } }).map(({ glyph, slug }) =>
+        <Fragment>
+            <h2 id={slug}>
+                <Fragment set:html={img(1.75, glyph)}/>
+                {lang[glyph.localizationKey]}
+                <a class="anchor" aria-hidden="true" data-pagefind-ignore="all" aria-label={`${slug} permalink`} href={`#${slug}`}>#</a>
+            </h2>
+
+            <p>
+                {lang[`${getNamespace(glyph.registryName)}.glyph_desc.${getPath(glyph.registryName)}`]}
+            </p>
+
+            {glyph.defaults.invalidCombinations.length > 0 && <Fragment>
+                <h3 id={(`${slug}/invalid`)}>
+                    Invalid Combinations
+                    <a class="anchor" aria-hidden="true" data-pagefind-ignore="all" aria-label={`${slug}/invalid permalink`} href={`#${slug}/invalid`}>#</a>
+                </h3>
+                <ul>
+                    {glyph.defaults.invalidCombinations.map(combo => exportedGlyphs[combo]).filter((combo): combo is ExportedGlyph => Boolean(combo)).map(combo => <li>
+                        <Fragment set:html={img(1.33, combo)} />
+                        <span style="font-size: 1.33rem;">
+                            {lang[combo.localizationKey]}
+                        </span>
+                            </li>)}
+                    </ul>
+                </Fragment>}
+
+            {glyph.defaults.augments.compatible.length > 0 && <Fragment>
+                <h3 id={`${slug}/augments`}>
+                    Augments
+                    <a class="anchor" aria-hidden="true" data-pagefind-ignore="all" aria-label={`${slug}/augments permalink`} href={`#${slug}/augments`}>#</a>
+                </h3>
+                <ul>
+                    {glyph.defaults.augments.compatible.map(augment => exportedGlyphs[augment]).filter((augment): augment is ExportedGlyph => Boolean(augment)).map(augment => <li>
+                        <Fragment set:html={img(1.33, augment)} />
+                        <span style="font-size: 1.33rem; font-weight:bold">
+                            {lang[augment.localizationKey]}
+                        </span>
+                        {glyph.defaults.augments.limits[augment.registryName] != null && <span style="margin-left: 0.5rem;">Max {glyph.defaults.augments.limits[augment.registryName]}</span>}
+                        {glyph.defaults.augments.costs[augment.registryName] != null && <span style="margin-left: 0.5rem;">Costs {glyph.defaults.augments.costs[augment.registryName]}</span>}
+                        <p>
+                            {augmentDescriptions.get(`${getPath(glyph.registryName)}_${getPath(augment.registryName)}`)}
+                        </p>
+                    </li>)}
+                </ul>
+            </Fragment>}
+
+            <h3 id={`${slug}/details`}>
+                Details
+                <a class="anchor" aria-hidden="true" data-pagefind-ignore="all" aria-label={`${slug}/details permalink`} href={`#${slug}/details`}>#</a>
+            </h3>
+
+            <p style="margin-bottom: 0rem;"><b>Type</b>: {lang[glyph.typeName.translate]}</p>
+            <p style="margin-bottom: 0rem;"><b>Tier</b>: {glyph.defaults.tier}</p>
+            <p style="margin-bottom: 0rem;"><b>Cost</b>: {glyph.defaults.cost}</p>
+            {glyph.defaults.perSpellLimit != 2147483647 && <p style="margin-bottom: 0rem;"><b>Limit Per Spell</b>: {glyph.defaults.perSpellLimit}</p>}
+            <p style="margin-bottom: 0rem;"><b>Schools</b>: {glyph.spellSchools.length > 0 ? <ol>{glyph.spellSchools.map(s => <li>{lang[`ars_nouveau.school.${s.id}`]}</li>)}</ol> : "None"}</p>
+            <p style="margin-bottom: 0rem;"><b>Enabled</b>: {glyph.defaults.enabled}</p>
+            {(() => {
+                const cfg = glyph.defaults.defaultConfig;
+                if (!cfg) return null;
+                const items: any[] = [];
+                if (cfg.baseDamage != null) items.push(<li>Base Damage: {cfg.baseDamage}</li>);
+                if (cfg.ampDamage != null) items.push(<li>Boost for each Amp: {cfg.ampDamage}</li>);
+                if (cfg.baseDuration != null) items.push(<li>Base Effect Duration: {cfg.baseDuration}s</li>);
+                if (cfg.ampDuration != null) items.push(<li>Extend Time Duration Increase: {cfg.ampDuration}s</li>);
+                if (!items.length) return null;
+                return (
+                    <Fragment>
+                        <p style="margin-bottom: 0rem;"><b>Default Config</b>:</p>
+                        <ul style="margin-top:0;margin-bottom:0;padding-left:1.25rem;">{items}</ul>
+                    </Fragment>
+                );
+            })()}
+            <p style="margin-bottom: 0rem;"><b>ID</b>: {glyph.registryName}</p>
+            <p style="margin-bottom: 0rem;"><b>Classes</b>: <ol>{glyph.classes.map(c => <li>{c}</li>)}</ol></p>
+        </Fragment>
+    )}
+</Fragment>

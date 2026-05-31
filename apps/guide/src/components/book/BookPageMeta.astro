@@ -1,0 +1,22 @@
+---
+import BookEntity from "./BookEntity.astro";
+import BookIcon from "./BookIcon.astro";
+
+interface Props {
+  icon?: string;
+  iconUrl?: string;
+  tier?: number;
+  entityType?: string;
+}
+
+const { icon, iconUrl, tier, entityType } = Astro.props;
+const hasMeta = icon || typeof tier === "number" || entityType;
+---
+
+{hasMeta && (
+  <dl class="book-page-block__meta">
+    {icon && <><dt></dt><dd><BookIcon icon={icon} iconUrl={iconUrl} /></dd></>}
+    {typeof tier === 'number' && <><dt>Tier</dt><dd>{tier}</dd></>}
+    {entityType && <><dt></dt><dd><BookEntity entity={entityType} /></dd></>}
+  </dl>
+)}

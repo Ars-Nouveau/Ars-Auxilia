@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import { getLatestVersion } from "../../utils/versions";
+import { getPublicSlug } from "../../utils/sidebar";
+
+export async function getStaticPaths() {
+  const latestVersion = await getLatestVersion();
+  const entries = await getCollection("docs", (entry) =>
+    entry.filePath?.includes(`/docs/${latestVersion}/`),
+  );
+
+  return entries
+    .map((entry) => getPublicSlug(entry))
+    .filter((slug) => slug)
+    .map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const latestVersion = await getLatestVersion();
+const target = `/${latestVersion}/docs/${slug}/`;
+---
+
+<meta http-equiv="refresh" content={`0;url=${target}`} />
+<a href={target}>Continue</a>

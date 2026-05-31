@@ -1,0 +1,16 @@
+# Copy to .dev.vars for local Cloudflare Worker development.
+# Set production secrets with `pnpm --filter @ars/guide exec wrangler secret put <NAME>`.
+
+BETTER_AUTH_SECRET="replace-with-at-least-32-random-characters"
+BETTER_AUTH_URL="http://localhost:4321"
+DISCORD_CLIENT_ID=""
+DISCORD_CLIENT_SECRET=""
+# GitHub App client ID is preferred by GitHub for JWT `iss`; the numeric app ID also works.
+GITHUB_APP_ID=""
+# Numeric installation id. If blank, the app logs an installation URL during submission.
+GITHUB_APP_INSTALLATION_ID=""
+# Paste the GitHub App private key PEM with escaped newlines in your real .dev.vars file.
+GITHUB_APP_PRIVATE_KEY="replace-with-github-app-private-key-pem"
+GITHUB_OWNER="Jarva"
+GITHUB_REPO="Ars.Guide"
+GITHUB_BASE_BRANCH="main"

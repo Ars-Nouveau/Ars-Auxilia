@@ -1,0 +1,22 @@
+{
+  "1.16.5": {
+    "docs": true,
+    "kubejs": false
+  },
+  "1.18.2": {
+    "docs": true,
+    "kubejs": false
+  },
+  "1.19.2": {
+    "docs": true,
+    "kubejs": false
+  },
+  "1.20.1": {
+    "docs": true,
+    "kubejs": true
+  },
+  "1.21.1": {
+    "docs": true,
+    "kubejs": true
+  }
+}

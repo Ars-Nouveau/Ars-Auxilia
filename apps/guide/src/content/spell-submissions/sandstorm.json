@@ -1,0 +1,22 @@
+{
+  "name": "Sandstorm",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_elemental:arc_projectile",
+        "ars_nouveau:wall",
+        "ars_nouveau:sensitive",
+        "ars_elemental:propagator_homing",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_nouveau:split",
+        "ars_elemental:conjure_terrain",
+        "ars_nouveau:crush"
+      ],
+      "description": "Fires volleys of sand in the direction you face, burying enemies. Requires Focus of Block Shaping."
+    }
+  ]
+}

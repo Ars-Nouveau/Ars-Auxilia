@@ -1,0 +1,23 @@
+{
+  "name": "Ice Platform",
+  "category": "utility",
+  "author": "Lupitot",
+  "versions": ["1.18.2", "1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:freeze",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "Create a 4x4 ice platform that works in the air and on the ground. Can be used to save himself when you fall"
+    }
+  ]
+}

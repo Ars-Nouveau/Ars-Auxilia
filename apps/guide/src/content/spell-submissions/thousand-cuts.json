@@ -1,0 +1,24 @@
+{
+  "name": "Thousand Cuts",
+  "category": "aggressive",
+  "author": "Lyrellion",
+  "versions": ["1.20.1", "1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:orbit",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:cut",
+        "ars_nouveau:delay",
+        "ars_nouveau:cut"
+      ],
+      "description": "Creates a deadly region of whirling damaging projectiles. Works best when utilizing iframe skips in 1.20.1",
+      "style": {}
+    }
+  ]
+}

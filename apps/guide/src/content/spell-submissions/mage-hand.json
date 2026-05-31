@@ -1,0 +1,22 @@
+{
+  "name": "Mage Hand",
+  "category": "utility",
+  "author": "Xacris",
+  "versions": ["1.19.2", "1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:dispel",
+        "ars_nouveau:interact",
+        "ars_nouveau:redstone_signal",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:duration_down",
+        "ars_nouveau:pickup",
+        "ars_nouveau:aoe"
+      ],
+      "description": "A multi-purpose spell that can dispel, interact with buttons/levers and whatever else you need, activate redstone, and pickup items"
+    }
+  ]
+}

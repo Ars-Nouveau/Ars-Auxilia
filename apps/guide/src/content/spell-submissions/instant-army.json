@@ -1,0 +1,23 @@
+{
+  "name": "Instant Army",
+  "category": "support",
+  "author": "ence",
+  "versions": ["1.19.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:touch",
+        "ars_nouveau:wall",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:accelerate",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:extend_time",
+        "ars_nouveau:phantom_block",
+        "ars_nouveau:animate_block"
+      ],
+      "description": "Call forth a horde of soldiers to fight for you, or to just make getting to you challenging."
+    }
+  ]
+}

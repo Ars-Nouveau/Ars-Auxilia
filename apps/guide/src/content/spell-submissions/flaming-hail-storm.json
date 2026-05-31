@@ -1,0 +1,23 @@
+{
+  "name": "Flaming Hail Storm",
+  "category": "aggressive",
+  "author": "Wizard0209",
+  "versions": ["1.21.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:wall",
+        "ars_elemental:propagator_homing",
+        "ars_nouveau:snare",
+        "ars_nouveau:cold_snap",
+        "ars_nouveau:aoe",
+        "ars_nouveau:amplify",
+        "ars_nouveau:lightning",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "Traps the target before having them erupt in a fountain of ice from all sides, which is set ablaze by constant lightning strikes for the duration of the spell. &#x26A0; Do not cast at close range under any circumstances &#x26A0;"
+    }
+  ]
+}

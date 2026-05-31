@@ -1,0 +1,23 @@
+{
+  "name": "Electrifying Water",
+  "category": "aggressive",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:conjure_water",
+        "ars_nouveau:delay",
+        "ars_nouveau:evaporate",
+        "ars_nouveau:reset",
+        "ars_nouveau:lightning",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify"
+      ],
+      "description": "With this spell you will briefly envelop the target in water, exposing it to the power of lightning."
+    }
+  ]
+}

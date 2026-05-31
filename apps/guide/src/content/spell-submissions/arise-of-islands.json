@@ -1,0 +1,23 @@
+{
+  "name": "Arise of Islands",
+  "category": "fun",
+  "author": "Danicus",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:launch",
+        "ars_nouveau:amplify",
+        "ars_nouveau:amplify",
+        "ars_nouveau:delay",
+        "ars_nouveau:snare"
+      ],
+      "description": "Islands will rise where you choose when casting this spell, but you must have the Focus of Block Shaping to contain them in the air."
+    }
+  ]
+}

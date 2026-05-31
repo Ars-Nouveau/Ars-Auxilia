@@ -1,0 +1,23 @@
+{
+  "name": "Smite of the Traveller",
+  "category": "aggressive",
+  "author": "Courier of the Blackstone Armory",
+  "versions": ["1.18.2"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:pierce",
+        "toomanyglyphs:chaining",
+        "ars_nouveau:linger",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:aoe",
+        "ars_elemental:propagator_arc",
+        "arsomega:fireball",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe"
+      ],
+      "description": "Causes a rain of highly volatile and highly flammable projectiles\r\nbe sure to be clear of the blast zone, and cast from a distance for the sake of your safety"
+    }
+  ]
+}

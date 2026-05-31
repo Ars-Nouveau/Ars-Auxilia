@@ -1,0 +1,24 @@
+{
+  "name": "Simple Mining",
+  "category": "utility",
+  "author": "Pan Et Rosa",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:break",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:aoe",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:pierce",
+        "ars_nouveau:extract",
+        "ars_nouveau:pickup"
+      ],
+      "description": "A simple, inexpensive and highly effective spell for mining. Best used on a wand, allowing for another glyph slot which can be used to accelerate the projectile or expand the mined area. Testing in the Nether with an extended Scrying ritual produced over 2 stacks of ancient debris in 15 minutes, as well as several stacks of quartz ore and modded ores. Use with jar of voiding to replenish mana by deleting bulk blocks."
+    }
+  ]
+}

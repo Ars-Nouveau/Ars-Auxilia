@@ -1,0 +1,37 @@
+---
+import { getEntityRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
+import { toTitleCase } from "../../utils/text";
+
+interface Props {
+  entity: string;
+}
+
+const { entity } = Astro.props;
+const namespace = getNamespace(entity, "minecraft");
+const path = getPath(entity);
+const src = getEntityRenderUrl(entity);
+const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
+---
+
+<span class="book-entity d-inline-flex align-items-center gap-2">
+  <img
+    data-bs-toggle="tooltip"
+    data-bs-title={tooltipTitle}
+    data-bs-placement="bottom"
+    class:list={["book-entity__image", 'glyph']}
+    src={src}
+    alt={`${entity} render`}
+    title={tooltipTitle}
+    width={128}
+    height={128}
+    loading="lazy"
+  />
+</span>
+
+<script>
+  import { Tooltip } from 'bootstrap';
+
+  document
+    .querySelectorAll('[data-bs-toggle="tooltip"]')
+    .forEach(tooltipTriggerEl => Tooltip.getOrCreateInstance(tooltipTriggerEl));
+</script>

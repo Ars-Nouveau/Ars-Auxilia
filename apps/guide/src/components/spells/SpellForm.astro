@@ -1,0 +1,118 @@
+---
+import { getCollection } from "astro:content";
+import {
+  getGlyphRenderUrl,
+  getNamespace,
+  type GlyphAsset,
+} from "@ars/addon-builder";
+import { getMapText } from "../../utils/spell-form";
+import { getAddonMap } from "../../utils/spell-data/addon-collection";
+import { getCategories } from "../../utils/spell-data/categories";
+import { deriveAddonsFromGlyphs } from "../../utils/spell-submissions/schema";
+import { toTitleCase } from "../../utils/text";
+import { getVersions } from "../../utils/versions";
+
+type ExportedGlyph = GlyphAsset & {
+  localizationKey: string;
+  name: string;
+};
+
+export const prerender = false;
+
+const glyphEntries = await getCollection("glyphs");
+const langEntries = await getCollection("lang");
+const addonTextMap = await getAddonMap();
+const categoryOptions = (await getCategories()).map((category) => ({
+  value: category.id,
+  text: category.text,
+  class: category.class,
+}));
+const versionOptions = (await getVersions()).map((value) => ({ value }));
+const lang = Object.fromEntries(
+  langEntries.map((entry) => [entry.id, entry.data.value as string]),
+);
+const getAddonText = getMapText(addonTextMap);
+
+const glyphOptions = glyphEntries
+  .map((entry) => {
+    const glyph = entry.data as ExportedGlyph;
+    const label =
+      lang[glyph.localizationKey] ?? glyph.name ?? toTitleCase(entry.id);
+    const namespace = getNamespace(entry.id);
+
+    return {
+      value: entry.id,
+      text: label,
+      namespace,
+      registryName: glyph.registryName,
+      image: getGlyphRenderUrl(glyph),
+    };
+  })
+  .toSorted((a, b) => a.text.localeCompare(b.text));
+
+const addonLabels = Object.fromEntries(
+  Array.from(new Set(glyphOptions.map((option) => option.value)))
+    .map((value) => deriveAddonsFromGlyphs([value]))
+    .flat()
+    .map((addon) => [addon, getAddonText(addon) || toTitleCase(addon)]),
+);
+---
+
+<div
+    id="spellSubmitApp"
+    data-glyph-options={JSON.stringify(glyphOptions)}
+    data-addon-labels={JSON.stringify(addonLabels)}
+    data-category-options={JSON.stringify(categoryOptions)}
+    data-version-options={JSON.stringify(versionOptions)}
+>
+    <div class="d-flex gap-2 align-items-center mb-3">
+        <button type="button" class="btn btn-primary" id="discordSignInBtn">Sign in with Discord</button>
+        <button type="button" class="btn btn-outline-secondary d-none" id="discordSignOutBtn">Sign out</button>
+        <span id="discordUserLabel" class="text-body-secondary"></span>
+    </div>
+
+    <form id="spellForm" style="max-width: 650px" novalidate autocomplete="off" method="post" action="/api/submit">
+        <div class="mb-3">
+            <label for="spell" class="form-label">Spell Name</label>
+            <input name="spell" required pattern="[A-z0-9 '\u2019\-:]+" type="text" class="form-control" id="spell" />
+        </div>
+        <button type="button" class="btn btn-secondary mb-3" id="importClipboardBtn">
+            Import from Clipboard
+        </button>
+        <div class="mb-3">
+            <label for="glyphs" class="form-label">Glyphs</label>
+            <input name="glyphs" required class="form-control" id="glyphs" />
+        </div>
+        <div class="mb-3">
+            <label for="derivedAddons" class="form-label">Derived Addons</label>
+            <div id="derivedAddons" class="d-flex flex-wrap gap-1"></div>
+        </div>
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input name="category" required class="form-control" id="category" />
+        </div>
+        <div class="mb-3">
+            <label for="versions" class="form-label">Versions</label>
+            <input name="versions" required class="form-control" id="versions" />
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" required class="form-control" id="description" placeholder="Describe what the spell does and any caveats." rows="5"></textarea>
+        </div>
+        <input type="hidden" name="style" id="style" />
+        <input type="hidden" name="spell_color" id="spell_color" />
+        <input type="hidden" name="spell_sound" id="spell_sound" />
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Submit</button>
+            <button type="button" class="btn btn-outline-secondary" id="clearFormBtn">Clear</button>
+        </div>
+    </form>
+
+    <div id="submitResult" class="alert mt-3 d-none" role="status"></div>
+</div>
+
+<script>
+    import { initSpellForm } from './spell-form-client';
+
+    initSpellForm();
+</script>

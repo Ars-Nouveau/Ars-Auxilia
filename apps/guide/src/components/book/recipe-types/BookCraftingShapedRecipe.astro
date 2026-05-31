@@ -1,0 +1,35 @@
+---
+import BookRecipeIngredient from "../BookRecipeIngredient.astro";
+import {
+  asRecipeRecord,
+  asStringArray,
+  type BookRecipeRecord,
+} from "../../../utils/book-recipes";
+
+interface Props {
+  recipe: BookRecipeRecord;
+}
+
+const { recipe } = Astro.props;
+const pattern = asStringArray(recipe.pattern);
+const key = asRecipeRecord(recipe.key) ?? {};
+const cells =
+  pattern.length > 0
+    ? pattern.flatMap((row) =>
+        row
+          .padEnd(3, " ")
+          .slice(0, 3)
+          .split("")
+          .map((char) => asRecipeRecord(key[char])),
+      )
+    : [];
+const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
+---
+
+<div class="book-recipe__flow">
+  <div class="book-recipe-grid" aria-label="Crafting grid">
+    {cells.map((ingredient, index) => <BookRecipeIngredient ingredient={ingredient} label={`Slot ${index + 1}`} />)}
+  </div>
+  <span class="book-recipe__arrow" aria-hidden="true">→</span>
+  <BookRecipeIngredient ingredient={result} label="Result" />
+</div>

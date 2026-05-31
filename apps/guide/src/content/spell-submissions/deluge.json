@@ -1,0 +1,17 @@
+{
+  "name": "Deluge",
+  "category": "utility",
+  "author": "Lyrellion",
+  "versions": ["1.20.1"],
+  "spells": [
+    {
+      "glyphs": [
+        "ars_nouveau:projectile",
+        "ars_nouveau:burst",
+        "ars_nouveau:sensitive",
+        "ars_nouveau:conjure_water"
+      ],
+      "description": "Create Water in a large area. Add AOE glyphs after the Sensitive glyph to increase the volume."
+    }
+  ]
+}

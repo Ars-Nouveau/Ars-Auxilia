@@ -1,0 +1,29 @@
+---
+import { getRelationLabel } from "../../utils/book-pages";
+
+interface Props {
+  relations: string[];
+  hrefByBookId: Map<string, string>;
+  langByKey: Map<string, string>;
+}
+
+const { relations, hrefByBookId, langByKey } = Astro.props;
+---
+
+{relations.length > 0 && (
+  <div class="book-page-block__related">
+    <h3>Related</h3>
+    <ul>
+      {relations.map(relation => {
+        const href = hrefByBookId.get(relation);
+        const { label } = getRelationLabel(relation, langByKey);
+
+        return (
+          <li>
+            {href ? <a href={href}>{label}</a> : <span>{label}</span>}
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+)}

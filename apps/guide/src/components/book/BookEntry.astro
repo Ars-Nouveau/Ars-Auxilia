@@ -1,0 +1,195 @@
+---
+import { getCollection } from "astro:content";
+import BookPageBlock from "./BookPageBlock.astro";
+import type { BookPageEntry } from "../../utils/book";
+import { getBookHref, isBookPage } from "../../utils/book";
+import { mergeDescriptionOnlyPages } from "../../utils/book-pages";
+
+interface Props {
+  entry: BookPageEntry;
+}
+
+const { entry } = Astro.props;
+const [allBookEntries, langEntries] = await Promise.all([
+  getCollection("book"),
+  getCollection("lang"),
+]);
+const hrefByBookId = new Map(
+  allBookEntries
+    .filter(isBookPage)
+    .map((item) => [item.data.id, getBookHref(item)]),
+);
+const langByKey = new Map(
+  langEntries.map((item) => [item.id, item.data.value as string]),
+);
+const pages = mergeDescriptionOnlyPages(entry.data.pages);
+---
+
+<div class="book-entry">
+  {pages.map((page, index) => (
+    <BookPageBlock
+      page={page}
+      index={index}
+      hrefByBookId={hrefByBookId}
+      langByKey={langByKey}
+    />
+  ))}
+</div>
+
+<style is:global>
+  .book-page-block {
+    /* border-top: 1px solid var(--bs-border-color); */
+    margin: 1.5rem 0;
+  }
+
+  .book-page-block:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .book-page-block__meta {
+    display: grid;
+    gap: 0.25rem 1rem;
+    grid-template-columns: max-content 1fr;
+  }
+
+  .book-page-block__meta dt {
+    font-weight: 700;
+  }
+
+  .book-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 0 0 1rem;
+    padding: 0;
+  }
+
+  .book-items__item {
+    align-items: center;
+    display: flex;
+  }
+
+  .book-items .book-icon__image,
+  .book-recipe-ingredient .book-icon__image {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .book-entity__image {
+    height: 12rem;
+    object-fit: contain;
+    width: 12rem;
+  }
+
+  .book-recipes {
+    display: grid;
+    gap: 1rem;
+    margin: 1rem 0rem;
+  }
+
+  .book-recipe {
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.75rem;
+    padding: 1rem;
+  }
+
+  .book-recipe__header {
+    align-items: baseline;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .book-recipe__header h3 {
+    margin: 0;
+    text-transform: capitalize;
+  }
+
+  .book-recipe__flow {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .book-recipe__flow--stacked {
+    align-items: flex-start;
+  }
+
+  .book-recipe-grid {
+    display: grid;
+    gap: 0.25rem;
+    grid-template-columns: repeat(3, 3rem);
+  }
+
+  .book-recipe-grid--apparatus {
+    gap: 1rem;
+    grid-template-columns: repeat(3, 3.5rem);
+  }
+
+  .book-recipe-ingredients {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .book-recipe-ingredient {
+    align-items: center;
+    background: var(--bs-tertiary-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.5rem;
+    display: inline-flex;
+    height: 3.5rem;
+    justify-content: center;
+    min-width: 3.5rem;
+    padding: 0.25rem;
+    position: relative;
+  }
+
+  .book-recipe-ingredient__count {
+    bottom: 0.1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    position: absolute;
+    right: 0.25rem;
+    text-shadow: 0 1px 2px var(--bs-body-bg);
+  }
+
+  .book-recipe-ingredient__empty {
+    display: block;
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .book-recipe-ingredient__tag {
+    font-family: var(--bs-font-monospace);
+    font-weight: 700;
+  }
+
+  .book-recipe-labeled-item {
+    display: grid;
+    gap: 0.25rem;
+    justify-items: center;
+  }
+
+  .book-recipe__arrow {
+    font-size: 1.5rem;
+  }
+
+  .book-recipe__source {
+    color: var(--bs-secondary-color);
+    margin: 1rem 0 0;
+  }
+
+  .book-page-block__fallback pre {
+    margin-top: 1rem;
+  }
+
+  .book-relation-key {
+    font-size: 0.85em;
+  }
+</style>

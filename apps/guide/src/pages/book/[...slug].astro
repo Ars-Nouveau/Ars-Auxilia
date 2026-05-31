@@ -1,0 +1,105 @@
+---
+import DocsLayout from "../../layouts/DocsLayout.astro";
+import BookEntry from "../../components/book/BookEntry.astro";
+import {
+  getBookCategories,
+  getBookCategoryEntries,
+  getBookHref,
+  getBookEntries,
+  getBookSidebar,
+  type BookCategoryEntry,
+  type BookPageEntry,
+} from "../../utils/book";
+import type { ParentHeading } from "../../utils/sidebar";
+
+interface Props {
+  entry?: BookPageEntry;
+  category?: BookCategoryEntry;
+  entries?: BookPageEntry[];
+}
+
+export async function getStaticPaths() {
+  const [entries, categories] = await Promise.all([
+    getBookEntries(),
+    getBookCategories(),
+  ]);
+  const entryPaths = entries.map((entry) => ({
+    params: { slug: entry.data.slug },
+    props: { entry },
+  }));
+  const categoryPaths = await Promise.all(
+    categories
+      .filter((category) => category.data.parents.length > 0)
+      .map(async (category) => ({
+        params: { slug: category.data.slug },
+        props: {
+          category,
+          entries: await getBookCategoryEntries(category.data.id),
+        },
+      })),
+  );
+
+  return [...entryPaths, ...categoryPaths];
+}
+
+const { entry, category, entries: categoryEntries = [] } = Astro.props;
+if (!entry && !category) {
+  throw new Error("Book page is missing an entry or category.");
+}
+
+const isCategoryPage = category != null;
+const slug = category?.data.slug ?? entry!.data.slug;
+const sidebar = await getBookSidebar(slug);
+const description = isCategoryPage
+  ? `Generated Ars Nouveau book entries in ${category.data.title}.`
+  : (entry!.data.pages.find((page) => typeof page.description === "string")
+      ?.description as string | undefined);
+const title = category?.data.title ?? entry!.data.title;
+const headings: ParentHeading[] = isCategoryPage
+  ? categoryEntries.map((categoryEntry) => ({
+      entry: {
+        depth: 1,
+        slug: categoryEntry.data.entrySlug,
+        text: categoryEntry.data.title,
+      },
+      children: [],
+    }))
+  : [];
+---
+
+<DocsLayout
+  collection="book"
+  slug={slug}
+  sidebar={sidebar}
+  title={title}
+  description={description ?? ''}
+  path={`book/${slug}`}
+  headings={headings}
+>
+  {isCategoryPage ? (
+    <div class="book-category-page">
+      {categoryEntries.length > 0 ? categoryEntries.map(categoryEntry => (
+        <article class="book-category-entry" id={categoryEntry.data.entrySlug}>
+          <h2>
+            <a href={getBookHref(categoryEntry)}>{categoryEntry.data.title}</a>
+          </h2>
+          <BookEntry entry={categoryEntry} />
+        </article>
+      )) : <p>No entries found in this category.</p>}
+    </div>
+  ) : (
+    <BookEntry entry={entry!} />
+  )}
+</DocsLayout>
+
+<style>
+  .book-category-entry {
+    border-top: 1px solid var(--bs-border-color);
+    padding: 2rem 0;
+  }
+
+  .book-category-entry:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+</style>
