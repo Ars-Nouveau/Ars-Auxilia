@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro-preload/components";
 import { getItemRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
 import { toTitleCase } from "../../utils/text";
 
@@ -15,12 +16,12 @@ const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
 ---
 
 <span class="book-icon d-inline-flex align-items-center gap-2">
-  <img
+  <Image
     data-bs-toggle="tooltip"
     data-bs-title={tooltipTitle}
     data-bs-placement="bottom"
     class:list={["book-icon__image", 'glyph']}
-    src={src}
+    url={src}
     alt={`${icon} icon`}
     title={tooltipTitle}
     width={128}

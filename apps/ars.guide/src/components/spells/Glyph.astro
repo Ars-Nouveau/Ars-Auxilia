@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro-preload/components";
 import { getCollection, getEntry } from "astro:content";
 import {
   getCanonicalGlyph,
@@ -43,12 +44,12 @@ const imgSrc = exportedGlyph ? getGlyphRenderUrl(exportedGlyph) : undefined;
 {
   imgSrc
     ? (
-      <img
+      <Image
         data-bs-toggle="tooltip"
         data-bs-title={tooltipTitle}
         data-bs-placement="bottom"
         class:list={[classes, 'glyph']}
-        src={imgSrc}
+        url={imgSrc}
         alt={`${canonicalGlyph ?? glyph} glyph`}
         title={tooltipTitle}
         width={size}

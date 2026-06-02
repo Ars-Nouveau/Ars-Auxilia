@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro-preload/components";
 import { getCollection } from "astro:content";
 import { slug } from "github-slugger";
 import {
@@ -68,15 +69,12 @@ const augmentDescriptions = new Map(
     .map(([key, value]) => [key.replace(/^([^.]*.){2}/, ""), value]),
 );
 
-const img = (size: number, glyph: ExportedGlyph) => {
-  return `<img style="margin-right:0.75rem;width:${size}rem;height:${size}rem;image-rendering:pixelated;image-rendering:-moz-crisp-edges;image-rendering:crisp-edges;" src="${getGlyphRenderUrl(glyph)}" alt="${lang[glyph.localizationKey] ?? glyph.name} glyph" loading="lazy" />`;
-};
 ---
 <Fragment>
 {Object.values(exportedGlyphs).toSorted((a, b) => (lang[a.localizationKey] ?? a.name).localeCompare(lang[b.localizationKey] ?? b.name)).map(glyph => { return { 'glyph': glyph, 'slug': slug(lang[glyph.localizationKey] ?? glyph.name) } }).map(({ glyph, slug }) =>
         <Fragment>
             <h2 id={slug}>
-                <Fragment set:html={img(1.75, glyph)}/>
+                <Image style="margin-right:0.75rem;width:1.75rem;height:1.75rem;image-rendering:pixelated;image-rendering:crisp-edges;" url={getGlyphRenderUrl(glyph)} alt={`${lang[glyph.localizationKey] ?? glyph.name} glyph`} loading="lazy" />
                 {lang[glyph.localizationKey]}
                 <a class="anchor" aria-hidden="true" data-pagefind-ignore="all" aria-label={`${slug} permalink`} href={`#${slug}`}>#</a>
             </h2>
@@ -92,7 +90,7 @@ const img = (size: number, glyph: ExportedGlyph) => {
                 </h3>
                 <ul>
                     {glyph.defaults.invalidCombinations.map(combo => exportedGlyphs[combo]).filter((combo): combo is ExportedGlyph => Boolean(combo)).map(combo => <li>
-                        <Fragment set:html={img(1.33, combo)} />
+                        <Image style="margin-right:0.75rem;width:1.33rem;height:1.33rem;image-rendering:pixelated;image-rendering:crisp-edges;" url={getGlyphRenderUrl(combo)} alt={`${lang[combo.localizationKey] ?? combo.name} glyph`} loading="lazy" />
                         <span style="font-size: 1.33rem;">
                             {lang[combo.localizationKey]}
                         </span>
@@ -107,7 +105,7 @@ const img = (size: number, glyph: ExportedGlyph) => {
                 </h3>
                 <ul>
                     {glyph.defaults.augments.compatible.map(augment => exportedGlyphs[augment]).filter((augment): augment is ExportedGlyph => Boolean(augment)).map(augment => <li>
-                        <Fragment set:html={img(1.33, augment)} />
+                        <Image style="margin-right:0.75rem;width:1.33rem;height:1.33rem;image-rendering:pixelated;image-rendering:crisp-edges;" url={getGlyphRenderUrl(augment)} alt={`${lang[augment.localizationKey] ?? augment.name} glyph`} loading="lazy" />
                         <span style="font-size: 1.33rem; font-weight:bold">
                             {lang[augment.localizationKey]}
                         </span>

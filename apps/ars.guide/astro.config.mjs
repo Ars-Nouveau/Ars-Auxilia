@@ -13,6 +13,8 @@ import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import { visit } from "unist-util-visit";
 import astroMetaTags from "astro-meta-tags";
 
+import preload from "astro-preload";
+
 const addHeaderLinks = () => {
   return (tree) => {
     visit(tree, "element", (node) => {
@@ -52,23 +54,13 @@ export default defineConfig({
   publicDir: "assets",
   outDir: "dist",
   site: "https://ars.guide",
-  integrations: [
-    expressiveCode({
-      plugins: [pluginLineNumbers()],
-      themes: ["poimandres", "material-theme-lighter"],
-      themeCssSelector(theme) {
-        return `[data-bs-theme="${theme.type}"]`;
-      },
-    }),
-    mdx(),
-    react(),
-    svelte(),
-    pagefind(),
-    sitemap(),
-    robotsTxt(),
-    compressor(),
-    astroMetaTags(),
-  ],
+  integrations: [expressiveCode({
+    plugins: [pluginLineNumbers()],
+    themes: ["poimandres", "material-theme-lighter"],
+    themeCssSelector(theme) {
+      return `[data-bs-theme="${theme.type}"]`;
+    },
+  }), mdx(), react(), svelte(), pagefind(), sitemap(), robotsTxt(), compressor(), astroMetaTags(), preload()],
   env: {
     schema: {
       BETTER_AUTH_SECRET: envField.string({ context: "server", access: "secret" }),

@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro-preload/components";
 import { getEntityRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
 import { toTitleCase } from "../../utils/text";
 
@@ -14,12 +15,12 @@ const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
 ---
 
 <span class="book-entity d-inline-flex align-items-center gap-2">
-  <img
+  <Image
     data-bs-toggle="tooltip"
     data-bs-title={tooltipTitle}
     data-bs-placement="bottom"
     class:list={["book-entity__image", 'glyph']}
-    src={src}
+    url={src}
     alt={`${entity} render`}
     title={tooltipTitle}
     width={128}
