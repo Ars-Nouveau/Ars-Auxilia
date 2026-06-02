@@ -22,14 +22,14 @@ const count =
     : undefined;
 ---
 
-<span class="book-recipe-ingredient" title={item ?? tag ?? label}>
+<span class="book-recipe-ingredient" title={item ?? tag ?? label} {...tag ? {"data-bs-toggle": "tooltip", "data-bs-title": tag, "data-bs-placement": "bottom"} : {}}>
   {item ? (
     <>
       <BookIcon icon={item} iconUrl={iconUrl} />
       {count && <span class="book-recipe-ingredient__count">{count}</span>}
     </>
   ) : tag ? (
-    <span class="book-recipe-ingredient__tag" data-bs-toggle="tooltip" data-bs-title={tag} data-bs-placement="bottom">#</span>
+    <span class="book-recipe-ingredient__tag">#</span>
   ) : (
     <span class="book-recipe-ingredient__empty" aria-label={label ?? 'Empty recipe slot'}></span>
   )}

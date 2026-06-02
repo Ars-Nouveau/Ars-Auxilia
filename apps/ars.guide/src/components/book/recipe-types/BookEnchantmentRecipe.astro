@@ -1,8 +1,11 @@
 ---
+import { Image } from "astro:assets";
+import { getItemRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
 import {
   asRecipeRecordArray,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
+import { toTitleCase } from "../../../utils/text";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
 
 interface Props {
@@ -10,20 +13,59 @@ interface Props {
   recipeId: string;
 }
 
-const { recipe, recipeId } = Astro.props;
+const { recipe } = Astro.props;
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const enchantment =
   typeof recipe.enchantment === "string" ? recipe.enchantment : undefined;
 const level = typeof recipe.level === "number" ? recipe.level : undefined;
 const resultLabel = enchantment
-  ? `${enchantment}${level ? ` ${level}` : ""}`
-  : recipeId;
+  ? `${toTitleCase(getNamespace(enchantment, "minecraft"))} – ${toTitleCase(getPath(enchantment))}${level ? ` ${level}` : ""}`
+  : undefined;
+const apparatusCells = [
+  pedestalItems[0],
+  pedestalItems[1],
+  pedestalItems[2],
+  pedestalItems[3],
+  undefined,
+  pedestalItems[4],
+  pedestalItems[5],
+  pedestalItems[6],
+  pedestalItems[7],
+];
 ---
 
-<div class="book-recipe__flow book-recipe__flow--stacked">
-  <div class="book-recipe-ingredients" aria-label="Pedestal items">
-    {pedestalItems.map(ingredient => <BookRecipeIngredient ingredient={ingredient} />)}
+<div class="book-recipe__flow">
+  <div class="book-recipe-grid book-recipe-grid--apparatus" aria-label="Enchanting apparatus grid">
+    {apparatusCells.map((ingredient, index) => (
+      index === 4 ? (
+        <span class="book-recipe-ingredient book-recipe-ingredient--slot" title="Item to be Enchanted" data-bs-toggle="tooltip" data-bs-title="Item to be Enchanted" data-bs-placement="bottom">
+          <span class="book-recipe-ingredient__slot-icon" aria-label="Item to be Enchanted">?</span>
+        </span>
+      ) : (
+        <BookRecipeIngredient
+          ingredient={ingredient}
+          label={`Pedestal ${index < 4 ? index + 1 : index}`}
+        />
+      )
+    ))}
   </div>
-  <span class="book-recipe__arrow" aria-hidden="true">→</span>
-  <code>{resultLabel}</code>
+  {resultLabel && (
+    <>
+      <span class="book-recipe__arrow" aria-hidden="true">→</span>
+      <span class="book-recipe-ingredient" title={resultLabel}>
+        <Image
+          data-bs-toggle="tooltip"
+          data-bs-title={resultLabel}
+          data-bs-placement="bottom"
+          class="book-icon__image glyph"
+          src={getItemRenderUrl("minecraft:enchanted_book")!}
+          alt="Enchanted Book"
+          title={resultLabel}
+          width={128}
+          height={128}
+          loading="lazy"
+        />
+      </span>
+    </>
+  )}
 </div>

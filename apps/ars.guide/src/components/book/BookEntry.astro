@@ -109,6 +109,11 @@ const pages = mergeDescriptionOnlyPages(entry.data.pages);
     text-transform: capitalize;
   }
 
+  .book-recipe__output-label {
+    color: var(--bs-secondary-color);
+    text-transform: capitalize;
+  }
+
   .book-recipe__flow {
     align-items: center;
     display: flex;
@@ -163,6 +168,16 @@ const pages = mergeDescriptionOnlyPages(entry.data.pages);
     display: block;
     height: 3rem;
     width: 3rem;
+  }
+
+  .book-recipe-ingredient--slot {
+    border-style: dashed;
+  }
+
+  .book-recipe-ingredient__slot-icon {
+    color: var(--bs-secondary-color);
+    font-size: 1.25rem;
+    font-weight: 700;
   }
 
   .book-recipe-ingredient__tag {

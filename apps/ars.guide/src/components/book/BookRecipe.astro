@@ -1,10 +1,12 @@
 ---
 import type { BookPageRecipeData } from "../../utils/book-pages";
 import {
+  getRecipeResult,
   getRecipeSourceCost,
   getRecipeTypeLabel,
   isRecipeRecord,
 } from "../../utils/book-recipes";
+import { toTitleCase } from "../../utils/text";
 import BookCraftingShapedRecipe from "./recipe-types/BookCraftingShapedRecipe.astro";
 import BookCraftingShapelessRecipe from "./recipe-types/BookCraftingShapelessRecipe.astro";
 import BookEnchantingApparatusRecipe from "./recipe-types/BookEnchantingApparatusRecipe.astro";
@@ -25,28 +27,49 @@ const sourceCost = recipe ? getRecipeSourceCost(recipe) : undefined;
 
 const labelOverrides: Record<string, string> = {
   glyph: "Scribe's Table",
+  enchantment: "Enchanting Apparatus",
+  "reactive enchantment": "Enchanting Apparatus",
+  "spell write": "Enchanting Apparatus",
+  prestidigitation: "Enchanting Apparatus",
+  "book upgrade": "Crafting Shapeless",
 };
 
 const label =
   typeLabel in labelOverrides ? labelOverrides[typeLabel] : typeLabel;
+
+const resultRecord = recipe ? getRecipeResult(recipe) : undefined;
+const resultItem =
+  typeof resultRecord?.item === "string" ? resultRecord.item
+  : typeof resultRecord?.id === "string" ? resultRecord.id
+  : undefined;
+const enchantment = typeof recipe?.enchantment === "string" ? recipe.enchantment : undefined;
+const enchantmentLevel = typeof recipe?.level === "number" ? recipe.level : undefined;
+const outputLabel = resultItem
+  ? toTitleCase(resultItem)
+  : enchantment
+    ? `${toTitleCase(enchantment)}${enchantmentLevel ? ` ${enchantmentLevel}` : ""}`
+    : recipeRef.id
+      ? toTitleCase(recipeRef.id)
+      : undefined;
 ---
 
 <article class="book-recipe">
   <header class="book-recipe__header">
-    <h3>{label}</h3>
+    <h3>{outputLabel ?? label}</h3>
+    {outputLabel && <span class="book-recipe__output-label">{label}</span>}
   </header>
 
   {!recipe ? (
     <p>Recipe data not found.</p>
   ) : type === 'minecraft:crafting_shaped' ? (
     <BookCraftingShapedRecipe recipe={recipe} />
-  ) : type === 'minecraft:crafting_shapeless' ? (
+  ) : type === 'minecraft:crafting_shapeless' || type === 'ars_nouveau:book_upgrade' ? (
     <BookCraftingShapelessRecipe recipe={recipe} />
   ) : type === 'ars_nouveau:imbuement' ? (
     <BookImbuementRecipe recipe={recipe} />
   ) : type === 'ars_nouveau:enchanting_apparatus' ? (
     <BookEnchantingApparatusRecipe recipe={recipe} />
-  ) : type === 'ars_nouveau:enchantment' ? (
+  ) : type === 'ars_nouveau:enchantment' || type === 'ars_nouveau:reactive_enchantment' || type === 'ars_nouveau:spell_write' || type === 'ars_nouveau:prestidigitation' ? (
     <BookEnchantmentRecipe recipe={recipe} recipeId={recipeRef.id} />
   ) : type === 'ars_nouveau:glyph' ? (
     <BookGlyphRecipe recipe={recipe} />
