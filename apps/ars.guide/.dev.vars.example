@@ -12,5 +12,5 @@ GITHUB_APP_INSTALLATION_ID=""
 # Paste the GitHub App private key PEM with escaped newlines in your real .dev.vars file.
 GITHUB_APP_PRIVATE_KEY="replace-with-github-app-private-key-pem"
 GITHUB_OWNER="Jarva"
-GITHUB_REPO="Ars.Guide"
+GITHUB_REPO="Ars-Auxilia"
 GITHUB_BASE_BRANCH="main"

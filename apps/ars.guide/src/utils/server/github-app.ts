@@ -52,7 +52,7 @@ const getShortTimestamp = () =>
 
 const getTarget = (env: GuideEnv) => ({
   owner: env.GITHUB_OWNER || "Jarva",
-  repo: env.GITHUB_REPO || "Ars.Guide",
+  repo: env.GITHUB_REPO || "Ars-Auxilia",
   baseBranch: env.GITHUB_BASE_BRANCH || "main",
 });
 
@@ -104,7 +104,7 @@ const getUniqueSubmissionPath = async ({
   repo: string;
   baseBranch: string;
 }) => {
-  const defaultPath = `apps/guide/src/content/spell-submissions/${slug}.json`;
+  const defaultPath = `apps/ars.guide/src/content/spell-submissions/${slug}.json`;
   const exists = await contentExists({
     octokit,
     owner,
@@ -114,7 +114,7 @@ const getUniqueSubmissionPath = async ({
   });
 
   if (!exists) return defaultPath;
-  return `apps/guide/src/content/spell-submissions/${slug}-${timestamp}.json`;
+  return `apps/ars.guide/src/content/spell-submissions/${slug}-${timestamp}.json`;
 };
 
 export const createSpellSubmissionPullRequest = async ({

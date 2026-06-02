@@ -79,7 +79,7 @@ export default defineConfig({
       GITHUB_APP_INSTALLATION_ID: envField.string({ context: "server", access: "secret", optional: true }),
       GITHUB_APP_PRIVATE_KEY: envField.string({ context: "server", access: "secret" }),
       GITHUB_OWNER: envField.string({ context: "server", access: "public", default: "Jarva" }),
-      GITHUB_REPO: envField.string({ context: "server", access: "public", default: "Ars.Guide" }),
+      GITHUB_REPO: envField.string({ context: "server", access: "public", default: "Ars-Auxilia" }),
       GITHUB_BASE_BRANCH: envField.string({ context: "server", access: "public", default: "main" }),
     },
   },
