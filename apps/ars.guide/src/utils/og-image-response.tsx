@@ -138,17 +138,6 @@ const CoverOgImage = ({ assets }: { assets: OgAssets }) => (
     <div
       style={{
         display: "flex",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "1200px",
-        height: "20px",
-        backgroundColor: "#00ff00",
-      }}
-    />
-    <div
-      style={{
-        display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
