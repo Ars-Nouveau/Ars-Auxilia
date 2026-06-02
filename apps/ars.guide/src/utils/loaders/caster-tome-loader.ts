@@ -1,13 +1,13 @@
 import type { Loader } from "astro/loaders";
+import { getEnv } from "../server/env";
+import { createGitHubApp } from "../server/github-app";
 
 const JS_DELIVR_URL =
   "https://cdn.jsdelivr.net/gh/baileyholl/ars-nouveau@main/";
-const TOME_DIRECTORY_URL =
-  "https://api.github.com/repos/baileyholl/Ars-Nouveau/contents/src/generated/resources/data/ars_nouveau/recipe/tomes/";
-
-interface TomeListEntry {
-  path: string;
-}
+const TOME_OWNER = "baileyholl";
+const TOME_REPO = "Ars-Nouveau";
+const TOME_PATH =
+  "src/generated/resources/data/ars_nouveau/recipe/tomes";
 
 export interface CasterTome {
   type: string;
@@ -34,29 +34,22 @@ const getTomeId = (path: string) =>
     ?.replace(/\.json$/, "") ?? path;
 
 const fetchTomeList = async () => {
-  const response = await fetch(TOME_DIRECTORY_URL, {
-    headers: {
-      Accept: "application/vnd.github.text-match+json",
-    },
+  const env = getEnv();
+  const app = createGitHubApp(env);
+
+  const { data } = await app.octokit.rest.repos.getContent({
+    owner: TOME_OWNER,
+    repo: TOME_REPO,
+    path: TOME_PATH,
   });
 
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch caster tome list: ${response.status} ${response.statusText}`,
-    );
-  }
-
-  const body = await response.json();
-
-  if (!Array.isArray(body)) {
+  if (!Array.isArray(data)) {
     throw new Error(
       "Failed to fetch caster tome list: GitHub API response was not an array.",
     );
   }
 
-  return (body as TomeListEntry[]).filter((tome) =>
-    tome.path.endsWith(".json"),
-  );
+  return data.filter((entry) => entry.path.endsWith(".json"));
 };
 
 const fetchTome = async (path: string) => {

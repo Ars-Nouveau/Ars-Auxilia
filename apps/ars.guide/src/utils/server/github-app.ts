@@ -19,7 +19,7 @@ const base64Encode = (input: string) => {
   return btoa(binary);
 };
 
-const createGitHubApp = (env: GuideEnv) =>
+export const createGitHubApp = (env: GuideEnv) =>
   new App({
     appId: requireEnv(env, "GITHUB_APP_ID"),
     privateKey: requireEnv(env, "GITHUB_APP_PRIVATE_KEY"),
