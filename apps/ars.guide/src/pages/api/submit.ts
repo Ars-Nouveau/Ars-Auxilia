@@ -9,11 +9,11 @@ import {
 import { getEnv } from "../../utils/server/env";
 import { createSpellSubmissionPullRequest } from "../../utils/server/github-app";
 import { getCategoryIds } from "../../utils/spell-data/categories";
-import { getVersions } from "../../utils/versions";
 import {
   createSpellSubmissionFile,
   readSpellSubmissionFormData,
 } from "../../utils/spell-submissions/schema";
+import { getVersions } from "../../utils/versions";
 
 export const prerender = false;
 

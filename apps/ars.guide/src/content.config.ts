@@ -1,10 +1,10 @@
 import { defineCollection } from "astro:content";
 import { glob } from "astro/loaders";
 import { z } from "zod";
+import { bookLoader } from "./utils/loaders/book-loader";
+import { casterTomeLoader } from "./utils/loaders/caster-tome-loader";
 import { glyphLoader } from "./utils/loaders/glyph-loader";
 import { langLoader } from "./utils/loaders/lang-loader";
-import { casterTomeLoader } from "./utils/loaders/caster-tome-loader";
-import { bookLoader } from "./utils/loaders/book-loader";
 import { spellSubmissionContentSchema } from "./utils/spell-submissions/schema";
 
 const spellAddonSchema = z.record(

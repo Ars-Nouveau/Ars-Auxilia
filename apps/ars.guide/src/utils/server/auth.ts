@@ -10,7 +10,11 @@ export const createAuth = (env: GuideEnv) =>
     appName: "Ars Guide",
     baseURL: env.BETTER_AUTH_URL,
     secret: env.BETTER_AUTH_SECRET,
-    trustedOrigins: [env.BETTER_AUTH_URL, "http://localhost:4321", "http://localhost:8787"],
+    trustedOrigins: [
+      env.BETTER_AUTH_URL,
+      "http://localhost:4321",
+      "http://localhost:8787",
+    ],
     socialProviders: {
       discord: {
         clientId: env.DISCORD_CLIENT_ID,

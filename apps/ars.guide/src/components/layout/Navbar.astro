@@ -1,17 +1,17 @@
 ---
-import { siteName } from "../../utils/constants";
 import {
-  IconX,
-  IconSearch,
-  IconMoon,
-  IconSun,
-  IconMenu,
   IconDotsVertical,
+  IconMenu,
+  IconMoon,
+  IconSearch,
+  IconSun,
+  IconX,
 } from "@tabler/icons-react";
+import { siteName } from "../../utils/constants";
 import { NavItems, SocialItems } from "../../utils/nav-links";
 import type { Sidebar as SidebarType } from "../../utils/sidebar";
-import Sidebar from "../navigation/Sidebar.astro";
 import StarbuncleRun from "../mascot/StarbuncleRun.svelte";
+import Sidebar from "../navigation/Sidebar.astro";
 
 interface Props {
   active?: string;

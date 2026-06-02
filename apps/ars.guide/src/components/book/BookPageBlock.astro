@@ -1,17 +1,17 @@
 ---
+import {
+  asString,
+  type BookPageBlockData,
+  getBookItems,
+  getBookRecipes,
+  getRelatedValues,
+  getUnknownEntries,
+} from "../../utils/book-pages";
 import BookFallbackData from "./BookFallbackData.astro";
 import BookItems from "./BookItems.astro";
 import BookPageMeta from "./BookPageMeta.astro";
 import BookRecipes from "./BookRecipes.astro";
 import BookRelations from "./BookRelations.astro";
-import {
-  asString,
-  getBookItems,
-  getBookRecipes,
-  getRelatedValues,
-  getUnknownEntries,
-  type BookPageBlockData,
-} from "../../utils/book-pages";
 
 interface Props {
   page: BookPageBlockData;

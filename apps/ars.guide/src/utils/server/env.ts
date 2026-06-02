@@ -6,9 +6,9 @@ import {
   GITHUB_APP_ID,
   GITHUB_APP_INSTALLATION_ID,
   GITHUB_APP_PRIVATE_KEY,
+  GITHUB_BASE_BRANCH,
   GITHUB_OWNER,
   GITHUB_REPO,
-  GITHUB_BASE_BRANCH,
 } from "astro:env/server";
 
 export type GuideEnv = {

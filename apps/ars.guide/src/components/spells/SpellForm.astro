@@ -1,13 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import {
+  type GlyphAsset,
   getGlyphRenderUrl,
   getNamespace,
-  type GlyphAsset,
 } from "@ars/addon-builder";
-import { getMapText } from "../../utils/spell-form";
 import { getAddonMap } from "../../utils/spell-data/addon-collection";
 import { getCategories } from "../../utils/spell-data/categories";
+import { getMapText } from "../../utils/spell-form";
 import { deriveAddonsFromGlyphs } from "../../utils/spell-submissions/schema";
 import { toTitleCase } from "../../utils/text";
 import { getVersions } from "../../utils/versions";

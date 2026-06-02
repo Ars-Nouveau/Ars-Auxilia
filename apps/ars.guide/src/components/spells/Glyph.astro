@@ -1,13 +1,13 @@
 ---
-import { Image } from "astro-preload/components";
 import { getCollection, getEntry } from "astro:content";
 import {
+  type GlyphAsset,
   getCanonicalGlyph,
   getGlyphRenderUrl,
   getNamespace,
   getPath,
-  type GlyphAsset,
 } from "@ars/addon-builder";
+import { Image } from "astro-preload/components";
 import { toTitleCase } from "../../utils/text";
 
 type ExportedGlyph = GlyphAsset & {

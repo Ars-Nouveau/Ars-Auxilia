@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import type { ParentSection, Sidebar, SidebarEntry } from "./sidebar";
 
 export type BookCollectionEntry = CollectionEntry<"book">;

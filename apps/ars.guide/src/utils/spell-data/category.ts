@@ -1,7 +1,7 @@
 import { getCollection } from "astro:content";
-import type { Category } from "./categories";
-import type { Version } from "../versions";
 import { deriveAddonsFromSpells } from "../spell-submissions/schema";
+import type { Version } from "../versions";
+import type { Category } from "./categories";
 import type { Submission } from "./spells";
 
 export const getSpellSubmissions = async () => {

@@ -287,7 +287,9 @@ const getImage = async (page: OgPage, assets: OgAssets) => {
       const iconDataUri = page.iconUrl
         ? await fetchIconDataUri(page.iconUrl)
         : null;
-      return <ContentOgImage page={page} assets={assets} iconDataUri={iconDataUri} />;
+      return (
+        <ContentOgImage page={page} assets={assets} iconDataUri={iconDataUri} />
+      );
     }
     default: {
       const _exhaustive: never = page;

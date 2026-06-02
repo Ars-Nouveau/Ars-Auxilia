@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import BookPageBlock from "./BookPageBlock.astro";
 import type { BookPageEntry } from "../../utils/book";
 import { getBookHref, isBookPage } from "../../utils/book";
 import { mergeDescriptionOnlyPages } from "../../utils/book-pages";
+import BookPageBlock from "./BookPageBlock.astro";
 
 interface Props {
   entry: BookPageEntry;

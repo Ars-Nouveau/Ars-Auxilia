@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import { slug } from "github-slugger";
 import { IconCircleFilled } from "@tabler/icons-react";
-import Glyphs from "./Glyphs.astro";
+import { slug } from "github-slugger";
 import type { CasterTome } from "../../utils/loaders/caster-tome-loader";
+import Glyphs from "./Glyphs.astro";
 
 const tomes = (await getCollection("casterTomes"))
   .map((entry) => entry.data as CasterTome)

@@ -1,15 +1,15 @@
 ---
 import { getCollection } from "astro:content";
-import { getMapText } from "../../utils/spell-form";
-import { getAddonMap } from "../../utils/spell-data/addon-collection";
-import type { Submission } from "../../utils/spell-data/spells";
-import Glyphs from "./Glyphs.astro";
 import { slug } from "github-slugger";
-import { toTitleCase } from "../../utils/text";
+import { getAddonMap } from "../../utils/spell-data/addon-collection";
 import {
   exportCompressedSpell,
   type GlyphRegistryNames,
 } from "../../utils/spell-data/spell-parser";
+import type { Submission } from "../../utils/spell-data/spells";
+import { getMapText } from "../../utils/spell-form";
+import { toTitleCase } from "../../utils/text";
+import Glyphs from "./Glyphs.astro";
 
 type Props = Submission & {
   standalone: boolean;

@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import { getLatestVersion } from "../../utils/versions";
 import { getPublicSlug } from "../../utils/sidebar";
+import { getLatestVersion } from "../../utils/versions";
 
 export async function getStaticPaths() {
   const latestVersion = await getLatestVersion();

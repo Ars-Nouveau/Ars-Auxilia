@@ -1,17 +1,17 @@
 ---
 import { getCollection, render } from "astro:content";
-import { getVersionedPath } from "../../../utils/path";
 import DocsLayout from "../../../layouts/DocsLayout.astro";
+import { getOgPath } from "../../../utils/og";
+import { getVersionedPath } from "../../../utils/path";
 import {
+  type GenericCollectionEntry,
+  getEditPath,
+  getHeadings,
   getPublicSlug,
   getSidebar,
-  getHeadings,
   getVersionFromEntry,
-  getEditPath,
-  type GenericCollectionEntry,
 } from "../../../utils/sidebar";
 import { isVersion, versionedCollections } from "../../../utils/versions";
-import { getOgPath } from "../../../utils/og";
 
 interface Props {
   entry: GenericCollectionEntry;

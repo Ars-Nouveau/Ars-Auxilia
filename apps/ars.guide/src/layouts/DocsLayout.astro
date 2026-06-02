@@ -1,22 +1,22 @@
 ---
-import { IconPencil, IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import BaseLayout from "./BaseLayout.astro";
-import { editLink } from "../utils/constants";
-import Sidebar from "../components/navigation/Sidebar.astro";
-import {
-  getPreviousEntry,
-  getNextEntry,
-  type Sidebar as TSidebar,
-  type ParentHeading,
-} from "../utils/sidebar";
-import Heading from "../components/navigation/Heading.astro";
+import { IconArrowLeft, IconArrowRight, IconPencil } from "@tabler/icons-react";
 import Seo from "../components/layout/Seo.astro";
+import Heading from "../components/navigation/Heading.astro";
+import Sidebar from "../components/navigation/Sidebar.astro";
 import VersionSelect from "../components/navigation/VersionSelect.astro";
+import { editLink } from "../utils/constants";
+import {
+  getNextEntry,
+  getPreviousEntry,
+  type ParentHeading,
+  type Sidebar as TSidebar,
+} from "../utils/sidebar";
 import {
   getLatestVersion,
   isVersionedCollection,
   type Version,
 } from "../utils/versions";
+import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   sidebar: TSidebar;

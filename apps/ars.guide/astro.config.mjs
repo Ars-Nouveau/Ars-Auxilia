@@ -1,19 +1,18 @@
-import { defineConfig, envField, sessionDrivers } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
+import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
-import svelte from "@astrojs/svelte";
 import sitemap from "@astrojs/sitemap";
-import robotsTxt from "astro-robots-txt";
-import expressiveCode from "astro-expressive-code";
+import svelte from "@astrojs/svelte";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
-import pagefind from "astro-pagefind";
-import compressor from "astro-compressor";
-import { rehypeHeadingIds } from "@astrojs/markdown-remark";
-import { visit } from "unist-util-visit";
+import playformCompress from "@playform/compress";
+import { defineConfig, envField, sessionDrivers } from "astro/config";
+import expressiveCode from "astro-expressive-code";
 import astroMetaTags from "astro-meta-tags";
-
+import pagefind from "astro-pagefind";
 import preload from "astro-preload";
+import robotsTxt from "astro-robots-txt";
+import { visit } from "unist-util-visit";
 
 const addHeaderLinks = () => {
   return (tree) => {
@@ -54,25 +53,68 @@ export default defineConfig({
   publicDir: "assets",
   outDir: "dist",
   site: "https://ars.guide",
-  integrations: [expressiveCode({
-    plugins: [pluginLineNumbers()],
-    themes: ["poimandres", "material-theme-lighter"],
-    themeCssSelector(theme) {
-      return `[data-bs-theme="${theme.type}"]`;
-    },
-  }), mdx(), react(), svelte(), pagefind(), sitemap(), robotsTxt(), compressor(), astroMetaTags(), preload()],
+  integrations: [
+    expressiveCode({
+      plugins: [pluginLineNumbers()],
+      themes: ["poimandres", "material-theme-lighter"],
+      themeCssSelector(theme) {
+        return `[data-bs-theme="${theme.type}"]`;
+      },
+    }),
+    mdx(),
+    react(),
+    svelte(),
+    pagefind(),
+    sitemap(),
+    robotsTxt(),
+    astroMetaTags(),
+    preload(),
+    playformCompress(),
+  ],
   env: {
     schema: {
-      BETTER_AUTH_SECRET: envField.string({ context: "server", access: "secret" }),
-      BETTER_AUTH_URL: envField.string({ context: "server", access: "public", default: "http://localhost:4321" }),
-      DISCORD_CLIENT_ID: envField.string({ context: "server", access: "secret" }),
-      DISCORD_CLIENT_SECRET: envField.string({ context: "server", access: "secret" }),
+      BETTER_AUTH_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      BETTER_AUTH_URL: envField.string({
+        context: "server",
+        access: "public",
+        default: "http://localhost:4321",
+      }),
+      DISCORD_CLIENT_ID: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      DISCORD_CLIENT_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+      }),
       GITHUB_APP_ID: envField.string({ context: "server", access: "secret" }),
-      GITHUB_APP_INSTALLATION_ID: envField.string({ context: "server", access: "secret", optional: true }),
-      GITHUB_APP_PRIVATE_KEY: envField.string({ context: "server", access: "secret" }),
-      GITHUB_OWNER: envField.string({ context: "server", access: "public", default: "Jarva" }),
-      GITHUB_REPO: envField.string({ context: "server", access: "public", default: "Ars-Auxilia" }),
-      GITHUB_BASE_BRANCH: envField.string({ context: "server", access: "public", default: "main" }),
+      GITHUB_APP_INSTALLATION_ID: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      GITHUB_APP_PRIVATE_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      GITHUB_OWNER: envField.string({
+        context: "server",
+        access: "public",
+        default: "Jarva",
+      }),
+      GITHUB_REPO: envField.string({
+        context: "server",
+        access: "public",
+        default: "Ars-Auxilia",
+      }),
+      GITHUB_BASE_BRANCH: envField.string({
+        context: "server",
+        access: "public",
+        default: "main",
+      }),
     },
   },
   markdown: {

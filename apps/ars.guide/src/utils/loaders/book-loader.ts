@@ -4,11 +4,11 @@ import {
   getItemRenderUrl,
   getNamespace,
   getPath,
-  stripGlyphPrefix,
   type ItemRenderExtension,
+  stripGlyphPrefix,
 } from "@ars/addon-builder";
 import type { Loader } from "astro/loaders";
-import { fromBuffer, type Entry, type ZipFile } from "yauzl";
+import { type Entry, fromBuffer, type ZipFile } from "yauzl";
 
 const WIKI_PATH_MARKER = "/output/wiki/";
 const DATA_RECIPE_PATH_PATTERN = /\/output\/data\/([^/]+)\/recipe\/(.+)\.json$/;

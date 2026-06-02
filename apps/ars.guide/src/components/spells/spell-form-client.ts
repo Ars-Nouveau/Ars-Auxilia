@@ -1,15 +1,15 @@
-import TomSelect from "tom-select";
-import { createAuthClient } from "better-auth/client";
 import { getCanonicalGlyph } from "@ars/addon-builder";
+import { createAuthClient } from "better-auth/client";
+import TomSelect from "tom-select";
+import {
+  parseCompressedSpell,
+  parseJsonSpell,
+} from "../../utils/spell-data/spell-parser";
+import type { SpellColor, SpellSound } from "../../utils/spell-data/spells";
 import {
   createSpellSubmissionFormSchema,
   deriveAddonsFromGlyphs,
 } from "../../utils/spell-submissions/schema";
-import {
-  parseJsonSpell,
-  parseCompressedSpell,
-} from "../../utils/spell-data/spell-parser";
-import type { SpellColor, SpellSound } from "../../utils/spell-data/spells";
 
 type GlyphOption = {
   value: string;

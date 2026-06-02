@@ -1,9 +1,9 @@
+import { type CollectionEntry, getCollection } from "astro:content";
 import type { MarkdownHeading } from "astro";
-import { getCollection, type CollectionEntry } from "astro:content";
 import "core-js/es/array/to-sorted";
 import {
-  isVersionSegment,
   isVersionedCollection,
+  isVersionSegment,
   type Version,
   type VersionedCollection,
 } from "./versions";

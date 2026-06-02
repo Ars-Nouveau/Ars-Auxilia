@@ -1,7 +1,7 @@
 <script lang="ts">
-import { onMount } from "svelte";
 import { createTimeline, engine, type Timeline } from "animejs";
 import { Tooltip } from "bootstrap";
+import { onMount } from "svelte";
 
 const StateTypes = {
   FORWARDS: "FORWARDS",

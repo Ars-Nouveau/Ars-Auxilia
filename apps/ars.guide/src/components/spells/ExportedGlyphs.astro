@@ -1,13 +1,13 @@
 ---
-import { Image } from "astro-preload/components";
 import { getCollection } from "astro:content";
-import { slug } from "github-slugger";
 import {
+  type GlyphAsset,
   getGlyphRenderUrl,
   getNamespace,
   getPath,
-  type GlyphAsset,
 } from "@ars/addon-builder";
+import { Image } from "astro-preload/components";
+import { slug } from "github-slugger";
 
 type ExportedGlyph = GlyphAsset & {
   typeName: Component;
@@ -68,7 +68,6 @@ const augmentDescriptions = new Map(
     .filter(([key]) => key.includes(".augment_desc."))
     .map(([key, value]) => [key.replace(/^([^.]*.){2}/, ""), value]),
 );
-
 ---
 <Fragment>
 {Object.values(exportedGlyphs).toSorted((a, b) => (lang[a.localizationKey] ?? a.name).localeCompare(lang[b.localizationKey] ?? b.name)).map(glyph => { return { 'glyph': glyph, 'slug': slug(lang[glyph.localizationKey] ?? glyph.name) } }).map(({ glyph, slug }) =>
