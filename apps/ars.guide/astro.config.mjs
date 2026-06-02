@@ -10,7 +10,6 @@ import { defineConfig, envField, sessionDrivers } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import astroMetaTags from "astro-meta-tags";
 import pagefind from "astro-pagefind";
-// import preload from "astro-preload";
 import robotsTxt from "astro-robots-txt";
 import { visit } from "unist-util-visit";
 
@@ -68,7 +67,6 @@ export default defineConfig({
     sitemap(),
     robotsTxt(),
     astroMetaTags(),
-    // preload(),
     playformCompress(),
   ],
   env: {

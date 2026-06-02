@@ -83,9 +83,6 @@ importers:
       astro-pagefind:
         specifier: ^2.0.0
         version: 2.0.0(astro@6.4.2(@types/node@25.9.1)(lightningcss@1.32.0)(rollup@4.61.0)(sass@1.100.0)(terser@5.46.1)(yaml@2.9.0))
-      astro-preload:
-        specifier: ^1.1.2
-        version: 1.1.2
       astro-robots-txt:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1719,9 +1716,6 @@ packages:
     resolution: {integrity: sha512-i270YlJ/8aX/eRkvtuAPANSk+WK1uyp9DEj/TuuWem4pA0xBUGQk7agNFdu71nRxtH0j7TZxee2qwQRlrfZa1g==}
     peerDependencies:
       astro: ^2.0.4 || ^3 || ^4 || ^5 || ^6
-
-  astro-preload@1.1.2:
-    resolution: {integrity: sha512-96UHdATRp/K8iVysylYu0V5QMD3FXBqqj2+cUwHOmc0/+lstY5Xnb+A5UgmecbrfHpwMws5SQaOYZ1c63cQu/A==}
 
   astro-robots-txt@1.0.0:
     resolution: {integrity: sha512-6JQSLid4gMhoWjOm85UHLkgrw0+hHIjnJVIUqxjU2D6feKlVyYukMNYjH44ZDZBK1P8hNxd33PgWlHzCASvedA==}
@@ -5149,8 +5143,6 @@ snapshots:
       astro: 6.4.2(@types/node@25.9.1)(lightningcss@1.32.0)(rollup@4.61.0)(sass@1.100.0)(terser@5.46.1)(yaml@2.9.0)
       pagefind: 1.5.2
       sirv: 3.0.2
-
-  astro-preload@1.1.2: {}
 
   astro-robots-txt@1.0.0:
     dependencies:

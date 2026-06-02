@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import {
   type GlyphAsset,
@@ -6,7 +7,6 @@ import {
   getNamespace,
   getPath,
 } from "@ars/addon-builder";
-import { Image } from "astro-preload/components";
 import { slug } from "github-slugger";
 
 type ExportedGlyph = GlyphAsset & {
@@ -73,7 +73,7 @@ const augmentDescriptions = new Map(
 {Object.values(exportedGlyphs).toSorted((a, b) => (lang[a.localizationKey] ?? a.name).localeCompare(lang[b.localizationKey] ?? b.name)).map(glyph => { return { 'glyph': glyph, 'slug': slug(lang[glyph.localizationKey] ?? glyph.name) } }).map(({ glyph, slug }) =>
         <Fragment>
             <h2 id={slug}>
-                <Image style="margin-right:0.75rem;width:1.75rem;height:1.75rem;image-rendering:pixelated;image-rendering:crisp-edges;" url={getGlyphRenderUrl(glyph)} alt={`${lang[glyph.localizationKey] ?? glyph.name} glyph`} loading="lazy" />
+                <Image style="margin-right:0.75rem;width:1.75rem;height:1.75rem;image-rendering:pixelated;image-rendering:crisp-edges;" src={getGlyphRenderUrl(glyph)} alt={`${lang[glyph.localizationKey] ?? glyph.name} glyph`} width={28} height={28} loading="lazy" />
                 {lang[glyph.localizationKey]}
                 <a class="anchor" aria-hidden="true" data-pagefind-ignore="all" aria-label={`${slug} permalink`} href={`#${slug}`}>#</a>
             </h2>
@@ -89,7 +89,7 @@ const augmentDescriptions = new Map(
                 </h3>
                 <ul>
                     {glyph.defaults.invalidCombinations.map(combo => exportedGlyphs[combo]).filter((combo): combo is ExportedGlyph => Boolean(combo)).map(combo => <li>
-                        <Image style="margin-right:0.75rem;width:1.33rem;height:1.33rem;image-rendering:pixelated;image-rendering:crisp-edges;" url={getGlyphRenderUrl(combo)} alt={`${lang[combo.localizationKey] ?? combo.name} glyph`} loading="lazy" />
+                        <Image style="margin-right:0.75rem;width:1.33rem;height:1.33rem;image-rendering:pixelated;image-rendering:crisp-edges;" src={getGlyphRenderUrl(combo)} alt={`${lang[combo.localizationKey] ?? combo.name} glyph`} width={21} height={21} loading="lazy" />
                         <span style="font-size: 1.33rem;">
                             {lang[combo.localizationKey]}
                         </span>
@@ -104,7 +104,7 @@ const augmentDescriptions = new Map(
                 </h3>
                 <ul>
                     {glyph.defaults.augments.compatible.map(augment => exportedGlyphs[augment]).filter((augment): augment is ExportedGlyph => Boolean(augment)).map(augment => <li>
-                        <Image style="margin-right:0.75rem;width:1.33rem;height:1.33rem;image-rendering:pixelated;image-rendering:crisp-edges;" url={getGlyphRenderUrl(augment)} alt={`${lang[augment.localizationKey] ?? augment.name} glyph`} loading="lazy" />
+                        <Image style="margin-right:0.75rem;width:1.33rem;height:1.33rem;image-rendering:pixelated;image-rendering:crisp-edges;" src={getGlyphRenderUrl(augment)} alt={`${lang[augment.localizationKey] ?? augment.name} glyph`} width={21} height={21} loading="lazy" />
                         <span style="font-size: 1.33rem; font-weight:bold">
                             {lang[augment.localizationKey]}
                         </span>

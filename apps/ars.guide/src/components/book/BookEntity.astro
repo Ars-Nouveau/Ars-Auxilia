@@ -1,6 +1,6 @@
 ---
+import { Image } from "astro:assets";
 import { getEntityRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
-import { Image } from "astro-preload/components";
 import { toTitleCase } from "../../utils/text";
 
 interface Props {
@@ -20,7 +20,7 @@ const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
     data-bs-title={tooltipTitle}
     data-bs-placement="bottom"
     class:list={["book-entity__image", 'glyph']}
-    url={src}
+    src={src}
     alt={`${entity} render`}
     title={tooltipTitle}
     width={128}
