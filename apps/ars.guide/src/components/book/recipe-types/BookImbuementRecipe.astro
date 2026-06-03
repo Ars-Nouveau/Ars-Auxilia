@@ -33,6 +33,7 @@ const imbuementCells = [
       <BookRecipeIngredient
         ingredient={ingredient}
         label={index === 4 ? 'Input' : `Pedestal ${index < 4 ? index + 1 : index}`}
+        variant={index === 4 ? 'reagent' : undefined}
       />
     ))}
   </div>

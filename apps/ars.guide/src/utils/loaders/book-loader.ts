@@ -12,6 +12,7 @@ import { type Entry, fromBuffer, type ZipFile } from "yauzl";
 
 const WIKI_PATH_MARKER = "/output/wiki/";
 const DATA_RECIPE_PATH_PATTERN = /\/output\/data\/([^/]+)\/recipe\/(.+)\.json$/;
+const TAG_PATH_PATTERN = /\/output\/tags\/minecraft\/item\/([^/]+)\/(.+)\.json$/;
 
 interface RawBookCategory {
   id: string;
@@ -45,28 +46,41 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 const withRecipeIconUrls = (
   value: unknown,
   renderExtensions: Map<string, ItemRenderExtension>,
+  tagsById: Map<string, string[]>,
 ): unknown => {
   if (Array.isArray(value)) {
-    return value.map((item) => withRecipeIconUrls(item, renderExtensions));
+    return value.map((item) =>
+      withRecipeIconUrls(item, renderExtensions, tagsById),
+    );
   }
 
   if (!isRecord(value)) return value;
 
   const item = typeof value.item === "string" ? value.item : undefined;
   const id = typeof value.id === "string" ? value.id : undefined;
+  const tag = typeof value.tag === "string" ? value.tag : undefined;
   const mapped = Object.fromEntries(
     Object.entries(value).map(([key, child]) => [
       key,
-      withRecipeIconUrls(child, renderExtensions),
+      withRecipeIconUrls(child, renderExtensions, tagsById),
     ]),
   );
   const iconItem = item ?? id;
+
+  const tagItems =
+    tag && !iconItem
+      ? (tagsById.get(tag) ?? []).map((tagItem) => ({
+          item: tagItem,
+          iconUrl: getItemRenderUrl(tagItem, renderExtensions),
+        }))
+      : undefined;
 
   return {
     ...mapped,
     ...(iconItem
       ? { iconUrl: getItemRenderUrl(iconItem, renderExtensions) }
       : {}),
+    ...(tagItems && tagItems.length > 0 ? { tagItems } : {}),
   };
 };
 
@@ -149,6 +163,18 @@ const getRecipeInfo = (pathName: string) => {
   };
 };
 
+const getTagInfo = (pathName: string) => {
+  const match = pathName.match(TAG_PATH_PATTERN);
+  if (!match) return null;
+
+  const [, namespace, tagPath] = match as [string, string, string];
+  return {
+    namespace,
+    tagPath,
+    id: `${namespace}:${tagPath}`,
+  };
+};
+
 const openZip = (buffer: Buffer) =>
   new Promise<ZipFile>((resolve, reject) => {
     fromBuffer(buffer, { lazyEntries: true }, (error, zipFile) => {
@@ -204,7 +230,9 @@ const readZipEntries = async (buffer: Buffer) => {
     zipFile.on("entry", (entry: Entry) => {
       const pathName = entry.fileName;
       const shouldReadContents =
-        getWikiInfo(pathName) !== null || getRecipeInfo(pathName) !== null;
+        getWikiInfo(pathName) !== null ||
+        getRecipeInfo(pathName) !== null ||
+        getTagInfo(pathName) !== null;
 
       if (pathName.endsWith("/") || !shouldReadContents) {
         entries.push({ pathName });
@@ -251,6 +279,25 @@ export function bookLoader() {
       const renderExtensions = getItemRenderExtensions(
         zipEntries.map((entry) => entry.pathName),
       );
+      const tagEntries = zipEntries
+        .map((entry) => ({
+          ...entry,
+          info: getTagInfo(entry.pathName),
+        }))
+        .filter(
+          (
+            entry,
+          ): entry is LoadedZipEntry & {
+            contents: Buffer;
+            info: NonNullable<ReturnType<typeof getTagInfo>>;
+          } => entry.info !== null && entry.contents !== undefined,
+        );
+      const tagsById = new Map(
+        tagEntries.map(({ contents, info }) => [
+          info.id,
+          JSON.parse(textDecoder.decode(contents)) as string[],
+        ]),
+      );
       const recipeEntries = zipEntries
         .map((entry) => ({
           ...entry,
@@ -270,6 +317,7 @@ export function bookLoader() {
           withRecipeIconUrls(
             JSON.parse(textDecoder.decode(contents)),
             renderExtensions,
+            tagsById,
           ),
         ]),
       );

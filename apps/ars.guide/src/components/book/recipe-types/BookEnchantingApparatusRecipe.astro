@@ -33,6 +33,7 @@ const apparatusCells = [
       <BookRecipeIngredient
         ingredient={ingredient}
         label={index === 4 ? 'Reagent' : `Pedestal ${index < 4 ? index + 1 : index}`}
+        variant={index === 4 ? 'reagent' : undefined}
       />
     ))}
   </div>

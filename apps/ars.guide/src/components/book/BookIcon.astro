@@ -6,13 +6,16 @@ import { toTitleCase } from "../../utils/text";
 interface Props {
   icon: string;
   iconUrl?: string;
+  tooltipPrefix?: string;
 }
 
-const { icon, iconUrl } = Astro.props;
+const { icon, iconUrl, tooltipPrefix } = Astro.props;
 const namespace = getNamespace(icon, "minecraft");
 const path = getPath(icon);
 const src = iconUrl ?? getItemRenderUrl(icon)!;
-const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
+const itemTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
+const tooltipTitle = tooltipPrefix ? `${tooltipPrefix}<br><br>${itemTitle}` : itemTitle;
+const useHtml = !!tooltipPrefix;
 ---
 
 <span class="book-icon d-inline-flex align-items-center gap-2">
@@ -20,10 +23,11 @@ const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
     data-bs-toggle="tooltip"
     data-bs-title={tooltipTitle}
     data-bs-placement="bottom"
+    {...useHtml ? { "data-bs-html": "true" } : {}}
     class:list={["book-icon__image", 'glyph']}
     src={src}
     alt={`${icon} icon`}
-    title={tooltipTitle}
+    title={itemTitle}
     width={128}
     height={128}
     loading="lazy"

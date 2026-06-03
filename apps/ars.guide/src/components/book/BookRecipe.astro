@@ -56,7 +56,6 @@ const outputLabel = resultItem
 <article class="book-recipe">
   <header class="book-recipe__header">
     <h3>{outputLabel ?? label}</h3>
-    {outputLabel && <span class="book-recipe__output-label">{label}</span>}
   </header>
 
   {!recipe ? (
@@ -77,5 +76,8 @@ const outputLabel = resultItem
     <BookUnsupportedRecipe recipe={recipe} type={type} />
   )}
 
-  {sourceCost != null && <p class="book-recipe__source">Source: {sourceCost.toLocaleString()}</p>}
+  <footer class="book-recipe__footer">
+    {sourceCost != null && <span class="book-recipe__source">Source: {sourceCost.toLocaleString()}</span>}
+    {outputLabel && <span class="book-recipe__output-label">{label}</span>}
+  </footer>
 </article>

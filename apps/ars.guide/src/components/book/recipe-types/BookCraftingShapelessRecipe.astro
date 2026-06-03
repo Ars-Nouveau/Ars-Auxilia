@@ -12,12 +12,13 @@ interface Props {
 
 const { recipe } = Astro.props;
 const ingredients = asRecipeRecordArray(recipe.ingredients);
+const cells = [...ingredients, ...Array(9 - ingredients.length).fill(undefined)].slice(0, 9);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
 ---
 
 <div class="book-recipe__flow">
-  <div class="book-recipe-ingredients" aria-label="Ingredients">
-    {ingredients.map(ingredient => <BookRecipeIngredient ingredient={ingredient} />)}
+  <div class="book-recipe-grid" aria-label="Crafting grid">
+    {cells.map((ingredient, index) => <BookRecipeIngredient ingredient={ingredient} label={`Slot ${index + 1}`} />)}
   </div>
   <span class="book-recipe__arrow" aria-hidden="true">→</span>
   <BookRecipeIngredient ingredient={result} label="Result" />

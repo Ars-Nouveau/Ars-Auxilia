@@ -4,9 +4,10 @@ import BookIcon from "./BookIcon.astro";
 interface Props {
   ingredient?: Record<string, unknown>;
   label?: string;
+  variant?: string;
 }
 
-const { ingredient, label } = Astro.props;
+const { ingredient, label, variant } = Astro.props;
 const item =
   typeof ingredient?.item === "string"
     ? ingredient.item
@@ -20,17 +21,45 @@ const count =
   typeof ingredient?.count === "number" && ingredient.count > 1
     ? ingredient.count
     : undefined;
+const tagItems = Array.isArray(ingredient?.tagItems)
+  ? (ingredient.tagItems as { item: string; iconUrl?: string }[])
+  : undefined;
+const hasResolvedTag = tagItems && tagItems.length > 0;
 ---
 
-<span class="book-recipe-ingredient" title={item ?? tag ?? label} {...tag ? {"data-bs-toggle": "tooltip", "data-bs-title": tag, "data-bs-placement": "bottom"} : {}}>
+<span class:list={["book-recipe-ingredient", variant && `book-recipe-ingredient--${variant}`]} title={item ?? tag ?? label} {...tag && !hasResolvedTag ? {"data-bs-toggle": "tooltip", "data-bs-title": tag, "data-bs-placement": "bottom"} : {}}>
   {item ? (
     <>
       <BookIcon icon={item} iconUrl={iconUrl} />
       {count && <span class="book-recipe-ingredient__count">{count}</span>}
     </>
+  ) : hasResolvedTag ? (
+    <span class="book-recipe-ingredient__tag-cycle" data-tag-cycle>
+      {tagItems.map((tagItem, i) => (
+        <span class:list={["book-recipe-ingredient__tag-cycle-item", { "book-recipe-ingredient__tag-cycle-item--hidden": i !== 0 }]}>
+          <BookIcon icon={tagItem.item} iconUrl={tagItem.iconUrl} tooltipPrefix={tag} />
+        </span>
+      ))}
+    </span>
   ) : tag ? (
     <span class="book-recipe-ingredient__tag">#</span>
   ) : (
     <span class="book-recipe-ingredient__empty" aria-label={label ?? 'Empty recipe slot'}></span>
   )}
 </span>
+
+<script>
+  const CYCLE_INTERVAL = 1500;
+
+  document.querySelectorAll<HTMLElement>("[data-tag-cycle]").forEach((container) => {
+    const items = container.querySelectorAll<HTMLElement>(".book-recipe-ingredient__tag-cycle-item");
+    if (items.length <= 1) return;
+
+    let current = 0;
+    setInterval(() => {
+      items[current].classList.add("book-recipe-ingredient__tag-cycle-item--hidden");
+      current = (current + 1) % items.length;
+      items[current].classList.remove("book-recipe-ingredient__tag-cycle-item--hidden");
+    }, CYCLE_INTERVAL);
+  });
+</script>
