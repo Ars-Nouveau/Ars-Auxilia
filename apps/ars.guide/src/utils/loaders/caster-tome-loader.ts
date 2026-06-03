@@ -1,6 +1,4 @@
 import type { Loader } from "astro/loaders";
-import { getEnv } from "../server/env";
-import { createGitHubApp } from "../server/github-app";
 
 const JS_DELIVR_URL =
   "https://cdn.jsdelivr.net/gh/baileyholl/ars-nouveau@main/";
@@ -34,14 +32,23 @@ const getTomeId = (path: string) =>
     ?.replace(/\.json$/, "") ?? path;
 
 const fetchTomeList = async () => {
-  const env = getEnv();
-  const app = createGitHubApp(env);
+  const response = await fetch(
+    `https://api.github.com/repos/${TOME_OWNER}/${TOME_REPO}/contents/${TOME_PATH}`,
+    {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "ars-guide",
+      },
+    },
+  );
 
-  const { data } = await app.octokit.rest.repos.getContent({
-    owner: TOME_OWNER,
-    repo: TOME_REPO,
-    path: TOME_PATH,
-  });
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch caster tome list: ${response.status} ${response.statusText}`,
+    );
+  }
+
+  const data = await response.json();
 
   if (!Array.isArray(data)) {
     throw new Error(
@@ -49,7 +56,7 @@ const fetchTomeList = async () => {
     );
   }
 
-  return data.filter((entry) => entry.path.endsWith(".json"));
+  return data.filter((entry: { path: string }) => entry.path.endsWith(".json"));
 };
 
 const fetchTome = async (path: string) => {
