@@ -4,13 +4,14 @@ import BookRecipe from "./BookRecipe.astro";
 
 interface Props {
   recipes: BookPageRecipeData[];
+  langByKey?: Map<string, string>;
 }
 
-const { recipes } = Astro.props;
+const { recipes, langByKey } = Astro.props;
 ---
 
 {recipes.length > 0 && (
     <div class="book-recipes">
-      {recipes.map(recipe => <BookRecipe recipe={recipe} />)}
+      {recipes.map(recipe => <BookRecipe recipe={recipe} langByKey={langByKey} />)}
     </div>
 )}

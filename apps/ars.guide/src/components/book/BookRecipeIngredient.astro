@@ -5,9 +5,10 @@ interface Props {
   ingredient?: Record<string, unknown>;
   label?: string;
   variant?: string;
+  langByKey?: Map<string, string>;
 }
 
-const { ingredient, label, variant } = Astro.props;
+const { ingredient, label, variant, langByKey } = Astro.props;
 const item =
   typeof ingredient?.item === "string"
     ? ingredient.item
@@ -30,14 +31,14 @@ const hasResolvedTag = tagItems && tagItems.length > 0;
 <span class:list={["book-recipe-ingredient", variant && `book-recipe-ingredient--${variant}`]} title={item ?? tag ?? label} {...tag && !hasResolvedTag ? {"data-bs-toggle": "tooltip", "data-bs-title": tag, "data-bs-placement": "bottom"} : {}}>
   {item ? (
     <>
-      <BookIcon icon={item} iconUrl={iconUrl} />
+      <BookIcon icon={item} iconUrl={iconUrl} langByKey={langByKey} />
       {count && <span class="book-recipe-ingredient__count">{count}</span>}
     </>
   ) : hasResolvedTag ? (
     <span class="book-recipe-ingredient__tag-cycle" data-tag-cycle>
       {tagItems.map((tagItem, i) => (
         <span class:list={["book-recipe-ingredient__tag-cycle-item", { "book-recipe-ingredient__tag-cycle-item--hidden": i !== 0 }]}>
-          <BookIcon icon={tagItem.item} iconUrl={tagItem.iconUrl} tooltipPrefix={tag} />
+          <BookIcon icon={tagItem.item} iconUrl={tagItem.iconUrl} tooltipPrefix={tag} langByKey={langByKey} />
         </span>
       ))}
     </span>

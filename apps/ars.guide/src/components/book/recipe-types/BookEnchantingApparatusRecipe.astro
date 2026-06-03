@@ -8,9 +8,10 @@ import BookRecipeIngredient from "../BookRecipeIngredient.astro";
 
 interface Props {
   recipe: BookRecipeRecord;
+  langByKey?: Map<string, string>;
 }
 
-const { recipe } = Astro.props;
+const { recipe, langByKey } = Astro.props;
 const reagent = asRecipeRecord(recipe.reagent);
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
@@ -34,9 +35,10 @@ const apparatusCells = [
         ingredient={ingredient}
         label={index === 4 ? 'Reagent' : `Pedestal ${index < 4 ? index + 1 : index}`}
         variant={index === 4 ? 'reagent' : undefined}
+        langByKey={langByKey}
       />
     ))}
   </div>
   <span class="book-recipe__arrow" aria-hidden="true">→</span>
-  <BookRecipeIngredient ingredient={result} label="Result" />
+  <BookRecipeIngredient ingredient={result} label="Result" langByKey={langByKey} />
 </div>

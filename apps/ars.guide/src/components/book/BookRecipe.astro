@@ -1,12 +1,11 @@
 ---
-import type { BookPageRecipeData } from "../../utils/book-pages";
+import { type BookPageRecipeData, getItemTooltip } from "../../utils/book-pages";
 import {
   getRecipeResult,
   getRecipeSourceCost,
   getRecipeTypeLabel,
   isRecipeRecord,
 } from "../../utils/book-recipes";
-import { toTitleCase } from "../../utils/text";
 import BookCraftingShapedRecipe from "./recipe-types/BookCraftingShapedRecipe.astro";
 import BookCraftingShapelessRecipe from "./recipe-types/BookCraftingShapelessRecipe.astro";
 import BookEnchantingApparatusRecipe from "./recipe-types/BookEnchantingApparatusRecipe.astro";
@@ -17,9 +16,10 @@ import BookUnsupportedRecipe from "./recipe-types/BookUnsupportedRecipe.astro";
 
 interface Props {
   recipe: BookPageRecipeData;
+  langByKey?: Map<string, string>;
 }
 
-const { recipe: recipeRef } = Astro.props;
+const { recipe: recipeRef, langByKey } = Astro.props;
 const recipe = isRecipeRecord(recipeRef.recipe) ? recipeRef.recipe : undefined;
 const type = typeof recipe?.type === "string" ? recipe.type : undefined;
 const typeLabel = getRecipeTypeLabel(type) ?? "Recipe";
@@ -45,11 +45,11 @@ const resultItem =
 const enchantment = typeof recipe?.enchantment === "string" ? recipe.enchantment : undefined;
 const enchantmentLevel = typeof recipe?.level === "number" ? recipe.level : undefined;
 const outputLabel = resultItem
-  ? toTitleCase(resultItem)
+  ? getItemTooltip(resultItem, langByKey)
   : enchantment
-    ? `${toTitleCase(enchantment)}${enchantmentLevel ? ` ${enchantmentLevel}` : ""}`
+    ? `${getItemTooltip(enchantment, langByKey)}${enchantmentLevel ? ` ${enchantmentLevel}` : ""}`
     : recipeRef.id
-      ? toTitleCase(recipeRef.id)
+      ? getItemTooltip(recipeRef.id, langByKey)
       : undefined;
 ---
 
@@ -61,17 +61,17 @@ const outputLabel = resultItem
   {!recipe ? (
     <p>Recipe data not found.</p>
   ) : type === 'minecraft:crafting_shaped' ? (
-    <BookCraftingShapedRecipe recipe={recipe} />
+    <BookCraftingShapedRecipe recipe={recipe} langByKey={langByKey} />
   ) : type === 'minecraft:crafting_shapeless' || type === 'ars_nouveau:book_upgrade' ? (
-    <BookCraftingShapelessRecipe recipe={recipe} />
+    <BookCraftingShapelessRecipe recipe={recipe} langByKey={langByKey} />
   ) : type === 'ars_nouveau:imbuement' ? (
-    <BookImbuementRecipe recipe={recipe} />
+    <BookImbuementRecipe recipe={recipe} langByKey={langByKey} />
   ) : type === 'ars_nouveau:enchanting_apparatus' ? (
-    <BookEnchantingApparatusRecipe recipe={recipe} />
+    <BookEnchantingApparatusRecipe recipe={recipe} langByKey={langByKey} />
   ) : type === 'ars_nouveau:enchantment' || type === 'ars_nouveau:reactive_enchantment' || type === 'ars_nouveau:spell_write' || type === 'ars_nouveau:prestidigitation' ? (
-    <BookEnchantmentRecipe recipe={recipe} recipeId={recipeRef.id} />
+    <BookEnchantmentRecipe recipe={recipe} recipeId={recipeRef.id} langByKey={langByKey} />
   ) : type === 'ars_nouveau:glyph' ? (
-    <BookGlyphRecipe recipe={recipe} />
+    <BookGlyphRecipe recipe={recipe} langByKey={langByKey} />
   ) : (
     <BookUnsupportedRecipe recipe={recipe} type={type} />
   )}

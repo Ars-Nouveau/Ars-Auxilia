@@ -1,3 +1,6 @@
+import { getNamespace, getPath } from "@ars/addon-builder";
+import { toTitleCase } from "./text";
+
 export type BookPageBlockData = Record<string, unknown>;
 
 export interface BookPageItemData {
@@ -112,6 +115,17 @@ export const mergeDescriptionOnlyPages = (pages: BookPageBlockData[]) =>
     acc.push({ ...page });
     return acc;
   }, []);
+
+export const getItemTooltip = (
+  item: string,
+  langByKey?: Map<string, string>,
+): string => {
+  const namespace = getNamespace(item, "minecraft");
+  const path = getPath(item);
+  const langKey = `item.${namespace}.${path}`;
+  const name = langByKey?.get(langKey) ?? toTitleCase(path);
+  return `${toTitleCase(namespace)} – ${name}`;
+};
 
 export const getRelationLanguageKeyCandidates = (relation: string) => {
   const [namespace, path = relation] = relation.split(":");

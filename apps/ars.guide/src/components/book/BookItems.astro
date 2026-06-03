@@ -4,16 +4,17 @@ import BookIcon from "./BookIcon.astro";
 
 interface Props {
   items: BookPageItemData[];
+  langByKey?: Map<string, string>;
 }
 
-const { items } = Astro.props;
+const { items, langByKey } = Astro.props;
 ---
 
 {items.length > 0 && (
   <ul class="book-items" aria-label="Items">
     {items.map(item => (
       <li class="book-items__item">
-        <BookIcon icon={item.item} iconUrl={item.iconUrl} />
+        <BookIcon icon={item.item} iconUrl={item.iconUrl} langByKey={langByKey} />
       </li>
     ))}
   </ul>

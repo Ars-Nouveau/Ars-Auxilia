@@ -8,17 +8,18 @@ import BookRecipeIngredient from "../BookRecipeIngredient.astro";
 
 interface Props {
   recipe: BookRecipeRecord;
+  langByKey?: Map<string, string>;
 }
 
-const { recipe } = Astro.props;
+const { recipe, langByKey } = Astro.props;
 const inputs = asRecipeRecordArray(recipe.inputs);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
 ---
 
 <div class="book-recipe__flow">
   <div class="book-recipe-ingredients" aria-label="Inputs">
-    {inputs.map(ingredient => <BookRecipeIngredient ingredient={ingredient} />)}
+    {inputs.map(ingredient => <BookRecipeIngredient ingredient={ingredient} langByKey={langByKey} />)}
   </div>
   <span class="book-recipe__arrow" aria-hidden="true">→</span>
-  <BookRecipeIngredient ingredient={result} label="Result" />
+  <BookRecipeIngredient ingredient={result} label="Result" langByKey={langByKey} />
 </div>

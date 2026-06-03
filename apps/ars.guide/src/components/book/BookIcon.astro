@@ -1,19 +1,18 @@
 ---
 import { Image } from "astro:assets";
-import { getItemRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
-import { toTitleCase } from "../../utils/text";
+import { getItemRenderUrl } from "@ars/addon-builder";
+import { getItemTooltip } from "../../utils/book-pages";
 
 interface Props {
   icon: string;
   iconUrl?: string;
   tooltipPrefix?: string;
+  langByKey?: Map<string, string>;
 }
 
-const { icon, iconUrl, tooltipPrefix } = Astro.props;
-const namespace = getNamespace(icon, "minecraft");
-const path = getPath(icon);
+const { icon, iconUrl, tooltipPrefix, langByKey } = Astro.props;
 const src = iconUrl ?? getItemRenderUrl(icon)!;
-const itemTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
+const itemTitle = getItemTooltip(icon, langByKey);
 const tooltipTitle = tooltipPrefix ? `${tooltipPrefix}<br><br>${itemTitle}` : itemTitle;
 const useHtml = !!tooltipPrefix;
 ---

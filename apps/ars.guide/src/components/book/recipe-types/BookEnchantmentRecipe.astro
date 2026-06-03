@@ -1,25 +1,26 @@
 ---
 import { Image } from "astro:assets";
-import { getItemRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
+import { getItemRenderUrl } from "@ars/addon-builder";
+import { getItemTooltip } from "../../../utils/book-pages";
 import {
   asRecipeRecordArray,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
-import { toTitleCase } from "../../../utils/text";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
 
 interface Props {
   recipe: BookRecipeRecord;
   recipeId: string;
+  langByKey?: Map<string, string>;
 }
 
-const { recipe } = Astro.props;
+const { recipe, langByKey } = Astro.props;
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const enchantment =
   typeof recipe.enchantment === "string" ? recipe.enchantment : undefined;
 const level = typeof recipe.level === "number" ? recipe.level : undefined;
 const resultLabel = enchantment
-  ? `${toTitleCase(getNamespace(enchantment, "minecraft"))} – ${toTitleCase(getPath(enchantment))}${level ? ` ${level}` : ""}`
+  ? `${getItemTooltip(enchantment, langByKey)}${level ? ` ${level}` : ""}`
   : undefined;
 const apparatusCells = [
   pedestalItems[0],
@@ -45,6 +46,7 @@ const apparatusCells = [
         <BookRecipeIngredient
           ingredient={ingredient}
           label={`Pedestal ${index < 4 ? index + 1 : index}`}
+          langByKey={langByKey}
         />
       )
     ))}

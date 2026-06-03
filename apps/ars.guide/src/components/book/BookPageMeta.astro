@@ -7,16 +7,17 @@ interface Props {
   iconUrl?: string;
   tier?: number;
   entityType?: string;
+  langByKey?: Map<string, string>;
 }
 
-const { icon, iconUrl, tier, entityType } = Astro.props;
+const { icon, iconUrl, tier, entityType, langByKey } = Astro.props;
 const hasMeta = icon || typeof tier === "number" || entityType;
 ---
 
 {hasMeta && (
   <dl class="book-page-block__meta">
-    {icon && <><dt></dt><dd><BookIcon icon={icon} iconUrl={iconUrl} /></dd></>}
+    {icon && <><dt></dt><dd><BookIcon icon={icon} iconUrl={iconUrl} langByKey={langByKey} /></dd></>}
     {typeof tier === 'number' && <><dt>Tier</dt><dd>{tier}</dd></>}
-    {entityType && <><dt></dt><dd><BookEntity entity={entityType} /></dd></>}
+    {entityType && <><dt></dt><dd><BookEntity entity={entityType} langByKey={langByKey} /></dd></>}
   </dl>
 )}

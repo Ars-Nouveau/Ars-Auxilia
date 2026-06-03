@@ -1,17 +1,16 @@
 ---
 import { Image } from "astro:assets";
-import { getEntityRenderUrl, getNamespace, getPath } from "@ars/addon-builder";
-import { toTitleCase } from "../../utils/text";
+import { getEntityRenderUrl } from "@ars/addon-builder";
+import { getItemTooltip } from "../../utils/book-pages";
 
 interface Props {
   entity: string;
+  langByKey?: Map<string, string>;
 }
 
-const { entity } = Astro.props;
-const namespace = getNamespace(entity, "minecraft");
-const path = getPath(entity);
+const { entity, langByKey } = Astro.props;
 const src = getEntityRenderUrl(entity);
-const tooltipTitle = `${toTitleCase(namespace)} – ${toTitleCase(path)}`;
+const tooltipTitle = getItemTooltip(entity, langByKey);
 ---
 
 <span class="book-entity d-inline-flex align-items-center gap-2">
