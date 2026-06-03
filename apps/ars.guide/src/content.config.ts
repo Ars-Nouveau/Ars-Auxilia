@@ -7,10 +7,11 @@ import { glyphLoader } from "./utils/loaders/glyph-loader";
 import { langLoader } from "./utils/loaders/lang-loader";
 import { spellSubmissionContentSchema } from "./utils/spell-submissions/schema";
 
-const spellAddonSchema = z.record(
+const namespaceSchema = z.record(
   z.string(),
   z.object({
     text: z.string(),
+    color: z.string(),
   }),
 );
 
@@ -90,9 +91,12 @@ const spellSubmissions = defineCollection({
   schema: spellSubmissionContentSchema,
 });
 
-const spellAddons = defineCollection({
-  loader: glob({ pattern: "addons.json", base: "./src/content/spell-addons" }),
-  schema: spellAddonSchema,
+const namespaces = defineCollection({
+  loader: glob({
+    pattern: "namespaces.json",
+    base: "./src/content/namespaces",
+  }),
+  schema: namespaceSchema,
 });
 
 const spellCategories = defineCollection({
@@ -130,8 +134,8 @@ export const collections = {
   kubejs,
   spells,
   spellSubmissions,
-  spellAddons,
   spellCategories,
+  namespaces,
   versions,
   glyphs,
   lang,

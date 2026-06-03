@@ -1,8 +1,9 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, getEntry } from "astro:content";
 import type { BookPageEntry } from "../../utils/book";
 import { getBookHref, isBookPage } from "../../utils/book";
 import { mergeDescriptionOnlyPages } from "../../utils/book-pages";
+import { toTitleCase } from "../../utils/text";
 import BookPageBlock from "./BookPageBlock.astro";
 
 interface Props {
@@ -10,9 +11,10 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const [allBookEntries, langEntries] = await Promise.all([
+const [allBookEntries, langEntries, namespacesEntry] = await Promise.all([
   getCollection("book"),
   getCollection("lang"),
+  getEntry("namespaces", "namespaces"),
 ]);
 const hrefByBookId = new Map(
   allBookEntries
@@ -23,9 +25,15 @@ const langByKey = new Map(
   langEntries.map((item) => [item.id, item.data.value as string]),
 );
 const pages = mergeDescriptionOnlyPages(entry.data.pages);
+const namespace = entry.data.namespace;
+
+const namespaceConfig = namespacesEntry?.data[namespace];
+const namespaceText = namespaceConfig?.text ?? toTitleCase(namespace);
+const namespaceBg = namespaceConfig?.color ?? "#6c757d";
 ---
 
 <div class="book-entry">
+  <span class="badge book-entry__namespace" style={`background-color: ${namespaceBg}`}>{namespaceText}</span>
   {pages.map((page, index) => (
     <BookPageBlock
       page={page}
@@ -229,4 +237,5 @@ const pages = mergeDescriptionOnlyPages(entry.data.pages);
   .book-relation-key {
     font-size: 0.85em;
   }
+
 </style>
