@@ -1,5 +1,6 @@
 ---
 import { IconArrowLeft, IconArrowRight, IconPencil } from "@tabler/icons-react";
+import banner from "../../assets/banner.gif";
 import Seo from "../components/layout/Seo.astro";
 import Heading from "../components/navigation/Heading.astro";
 import Sidebar from "../components/navigation/Sidebar.astro";
@@ -74,6 +75,12 @@ const showOlderVersionBanner = showVersionSelect && version !== latestVersion;
                   </div>
                 </nav>
                 <main class="docs-content col-lg-11 col-xl-9" data-pagefind-body>
+                    <div class="docs-banner-callout" data-pagefind-ignore="all">
+                      <a href="https://jarva.bloom.host/" class="docs-banner-link" target="_blank" rel="noopener noreferrer">
+                        <img src={banner.src} alt="Bloom Host" class="docs-banner" />
+                        <span class="docs-banner-text">Use code <strong>Jarva</strong> for 25% off your first invoice</span>
+                      </a>
+                    </div>
                     <div class="docs-title-bar">
                       <h1 data-pagefind-meta="title">{title}</h1>
                       {showVersionSelect && <VersionSelect version={version} collection={collection} slug={slug} />}
@@ -138,6 +145,36 @@ const showOlderVersionBanner = showVersionSelect && version !== latestVersion;
 </BaseLayout>
 
 <style is:global>
+  .docs-banner-callout {
+    margin-top: 1.5rem;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .docs-banner-link {
+    display: block;
+    text-decoration: none;
+  }
+
+  .docs-banner-link:hover {
+    text-decoration: none;
+  }
+
+  .docs-banner {
+    width: 100%;
+  }
+
+  .docs-banner-text {
+    color: var(--bs-secondary-color, #6c757d);
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    background: #101929;
+    border: 1px solid #cc7a1a;
+    border-top: none;
+  }
+
   .docs-title-bar {
     align-items: flex-start;
     display: flex;
