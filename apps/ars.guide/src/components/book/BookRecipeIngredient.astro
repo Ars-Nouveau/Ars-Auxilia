@@ -50,6 +50,8 @@ const hasResolvedTag = tagItems && tagItems.length > 0;
 </span>
 
 <script>
+  import { Tooltip } from "bootstrap";
+
   const CYCLE_INTERVAL = 1500;
 
   document.querySelectorAll<HTMLElement>("[data-tag-cycle]").forEach((container) => {
@@ -58,9 +60,15 @@ const hasResolvedTag = tagItems && tagItems.length > 0;
 
     let current = 0;
     setInterval(() => {
+      const oldEl = items[current].querySelector<HTMLElement>('[data-bs-toggle="tooltip"]');
+      if (oldEl) Tooltip.getInstance(oldEl)?.dispose();
+
       items[current].classList.add("book-recipe-ingredient__tag-cycle-item--hidden");
       current = (current + 1) % items.length;
       items[current].classList.remove("book-recipe-ingredient__tag-cycle-item--hidden");
+
+      const newEl = items[current].querySelector<HTMLElement>('[data-bs-toggle="tooltip"]');
+      if (newEl) new Tooltip(newEl);
     }, CYCLE_INTERVAL);
   });
 </script>
