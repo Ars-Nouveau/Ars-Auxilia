@@ -60,7 +60,8 @@ if (collection === "book") {
     const pinnedIds = new Set(["ars_nouveau", "minecraft"]);
     const filtered = presentIds
       .filter((id) => id in registry)
-      .map((id) => ({ id, ...registry[id], pinned: pinnedIds.has(id) }));
+      .map((id) => ({ id, ...registry[id], pinned: pinnedIds.has(id) }))
+      .sort((a, b) => a.text.localeCompare(b.text));
     namespacesJson = JSON.stringify(filtered);
   }
 }
