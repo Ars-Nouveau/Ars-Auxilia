@@ -186,6 +186,13 @@ export const createSpellSubmissionPullRequest = async ({
       .join("\n"),
   });
 
+  await octokit.rest.issues.addLabels({
+    owner,
+    repo,
+    issue_number: pullRequest.number,
+    labels: ["spell submission"],
+  });
+
   return {
     pullRequestUrl: pullRequest.html_url,
     pullRequestNumber: pullRequest.number,
