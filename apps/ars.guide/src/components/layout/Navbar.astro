@@ -31,24 +31,6 @@ const activeNavItem = NavItems.find((item) => item.collection === active);
         <button id="searchToggleMobile" class="btn btn-link nav-link mx-2 d-lg-none" type="button" aria-label="Search website">
             <IconSearch size={24} />
         </button>
-        {sidebar && <button class="btn btn-link d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavSection" aria-controls="offcanvasNavSection" aria-label="Open section navigation menu">
-            <IconDotsVertical size={24} />
-        </button>}
-        {sidebar && <div class="offcanvas offcanvas-start d-lg-none" id="offcanvasNavSection" tabindex="-1" aria-labelledby="offcanvasNavSectionLabel">
-            <div class="offcanvas-header">
-                <h5 id="offcanvasNavSectionLabel" class="offcanvas-title">{activeNavItem?.label}</h5>
-                <button class="btn btn-link nav-link p-0" type="button" data-bs-dismiss="offcanvas" aria-label="Close">
-                    <IconX size={24} />
-                </button>
-            </div>
-            <div class="offcanvas-body">
-                <aside class="doks-sidebar mt-n3">
-                    <nav id="doks-docs-nav" aria-label="Tertiary navigation">
-                        <Sidebar sidebar={sidebar} />
-                    </nav>
-                </aside>
-            </div>
-        </div>}
         <button class="btn btn-link nav-link mx-2 order-3 d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavMain" aria-controls="offcanvasNavMain">
             <IconMenu size={24} />
         </button>
@@ -64,6 +46,15 @@ const activeNavItem = NavItems.find((item) => item.collection === active);
                     {NavItems.map(item =>
                         <li class="nav-item">
                             <a href={item.link} class={`nav-link${item.collection === active ? ' active' : ''}`}>{item.label}</a>
+                            {item.collection == active && sidebar && (
+                                <div class="d-lg-none ms-3 mt-2">
+                                    <aside class="doks-sidebar">
+                                        <nav id="doks-docs-nav" aria-label="Tertiary navigation">
+                                            <Sidebar sidebar={sidebar} />
+                                        </nav>
+                                    </aside>
+                                </div>
+                            )}
                         </li>
                     )}
                 </ul>
