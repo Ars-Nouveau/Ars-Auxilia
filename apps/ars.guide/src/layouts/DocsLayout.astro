@@ -14,6 +14,7 @@ import {
   type ParentHeading,
   type Sidebar as TSidebar,
 } from "../utils/sidebar";
+import { toTitleCase } from "../utils/text";
 import {
   getLatestVersion,
   isVersionedCollection,
@@ -59,13 +60,13 @@ if (collection === "book") {
   if (presentIds.length > 1) {
     const pinnedIds = new Set(["ars_nouveau", "minecraft"]);
     const filtered = presentIds
-      .filter((id) => projectById.has(id))
+      .filter((id) => !pinnedIds.has(id) || projectById.has(id))
       .map((id) => {
-        const project = projectById.get(id)!;
+        const project = projectById.get(id);
         return {
           id,
-          text: project.display_name,
-          color: project.color,
+          text: project?.display_name ?? toTitleCase(id),
+          color: project?.color ?? "#888888",
           pinned: pinnedIds.has(id),
         };
       })
