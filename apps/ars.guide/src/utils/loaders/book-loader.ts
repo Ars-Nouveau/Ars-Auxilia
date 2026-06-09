@@ -11,7 +11,7 @@ import type { Loader } from "astro/loaders";
 import { type Entry, fromBuffer, type ZipFile } from "yauzl";
 
 const WIKI_PATH_MARKER = "/output/wiki/";
-const DATA_RECIPE_PATH_PATTERN = /\/output\/data\/([^/]+)\/recipe\/(.+)\.json$/;
+const DATA_RECIPE_PATH_PATTERN = /\/output\/recipes\/([^/]+)\/(.+)\.json$/;
 const TAG_PATH_PATTERN = /\/output\/tags\/minecraft\/item\/([^/]+)\/(.+)\.json$/;
 
 interface RawBookCategory {
