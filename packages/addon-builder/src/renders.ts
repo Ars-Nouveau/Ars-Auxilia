@@ -1,6 +1,6 @@
 import { OUTPUT_DIRECTORY } from "./constants";
 import { parseResourceLocation } from "./resource-location";
-import type { ItemRenderExtension, Options } from "./types";
+import type { ItemRenderExtension } from "./types";
 import { getRenderBaseUrl } from "./urls";
 
 const ITEM_RENDER_PATH_PREFIX = `/${OUTPUT_DIRECTORY}/renders/item/`;
@@ -53,18 +53,17 @@ export const getItemRenderExtensions = (paths: string[]) => {
 export const getItemRenderUrl = (
   item: string | undefined,
   renderExtensions?: ReadonlyMap<string, ItemRenderExtension>,
-  options?: Options,
 ) => {
   if (!item) return undefined;
 
   const { namespace, path, key } = parseResourceLocation(item, "minecraft");
   const extension = renderExtensions?.get(key) ?? "png";
 
-  return `${getRenderBaseUrl("item", options)}/${namespace}/${path}.${extension}`;
+  return `${getRenderBaseUrl("item")}/${namespace}/${path}.${extension}`;
 };
 
-export const getEntityRenderUrl = (entity: string, options?: Options) => {
+export const getEntityRenderUrl = (entity: string) => {
   const { namespace, path } = parseResourceLocation(entity, "minecraft");
 
-  return `${getRenderBaseUrl("entity", options)}/${namespace}/${path}.png`;
+  return `${getRenderBaseUrl("entity")}/${namespace}/${path}.png`;
 };

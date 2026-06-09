@@ -1,5 +1,5 @@
 import { parseResourceLocation, stripGlyphPrefix } from "./resource-location";
-import type { GlyphAsset, Options } from "./types";
+import type { GlyphAsset } from "./types";
 import { getRenderBaseUrl } from "./urls";
 
 export const getCanonicalGlyph = (value: string) => {
@@ -10,9 +10,9 @@ export const getCanonicalGlyph = (value: string) => {
   return `${namespace}:${stripGlyphPrefix(path)}`;
 };
 
-export const getGlyphRenderUrl = (glyph: GlyphAsset, options?: Options) => {
+export const getGlyphRenderUrl = (glyph: GlyphAsset) => {
   const { namespace, path } = parseResourceLocation(glyph.registryName);
   const extension = glyph.animated ? "webp" : "png";
 
-  return `${getRenderBaseUrl("item", options)}/${namespace}/${path}.${extension}`;
+  return `${getRenderBaseUrl("item")}/${namespace}/${path}.${extension}`;
 };
