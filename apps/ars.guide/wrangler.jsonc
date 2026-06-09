@@ -8,13 +8,6 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page"
   },
-  "r2_buckets": [
-    {
-      "binding": "GEN_ASSETS",
-      "bucket_name": "ars-guide-assets",
-      "remote": true
-    }
-  ],
   "workers_dev": true,
   "preview_urls": true,
   "observability": {
