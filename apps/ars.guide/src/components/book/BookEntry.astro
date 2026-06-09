@@ -1,8 +1,9 @@
 ---
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import type { BookPageEntry } from "../../utils/book";
 import { getBookHref, isBookPage } from "../../utils/book";
 import { mergeDescriptionOnlyPages } from "../../utils/book-pages";
+import { colorFromString } from "../../utils/color-hash";
 import { toTitleCase } from "../../utils/text";
 import BookPageBlock from "./BookPageBlock.astro";
 
@@ -11,10 +12,10 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const [allBookEntries, langEntries, namespacesEntry] = await Promise.all([
+const [allBookEntries, langEntries, projects] = await Promise.all([
   getCollection("book"),
   getCollection("lang"),
-  getEntry("namespaces", "namespaces"),
+  getCollection("projects"),
 ]);
 const hrefByBookId = new Map(
   allBookEntries
@@ -24,12 +25,13 @@ const hrefByBookId = new Map(
 const langByKey = new Map(
   langEntries.map((item) => [item.id, item.data.value as string]),
 );
+const projectById = new Map(projects.map((p) => [p.id, p.data]));
 const pages = mergeDescriptionOnlyPages(entry.data.pages);
 const namespace = entry.data.namespace;
 
-const namespaceConfig = namespacesEntry?.data[namespace];
-const namespaceText = namespaceConfig?.text ?? toTitleCase(namespace);
-const namespaceBg = namespaceConfig?.color ?? "#6c757d";
+const project = projectById.get(namespace);
+const namespaceText = project?.display_name ?? toTitleCase(namespace);
+const namespaceBg = project?.color ?? colorFromString(namespace);
 ---
 
 <div class="book-entry">

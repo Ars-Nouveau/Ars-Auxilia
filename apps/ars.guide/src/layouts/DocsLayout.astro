@@ -1,5 +1,5 @@
 ---
-import { getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import { IconArrowLeft, IconArrowRight, IconPencil } from "@tabler/icons-react";
 import banner from "../../assets/banner.gif";
 import Seo from "../components/layout/Seo.astro";
@@ -54,13 +54,21 @@ const showOlderVersionBanner = showVersionSelect && version !== latestVersion;
 let namespacesJson: string | undefined;
 if (collection === "book") {
   const presentIds = getBookNamespaces(sidebar);
-  const nsEntry = await getEntry("namespaces", "namespaces");
-  if (nsEntry && presentIds.length > 1) {
-    const registry = nsEntry.data as Record<string, { text: string; color: string }>;
+  const projects = await getCollection("projects");
+  const projectById = new Map(projects.map((p) => [p.id, p.data]));
+  if (presentIds.length > 1) {
     const pinnedIds = new Set(["ars_nouveau", "minecraft"]);
     const filtered = presentIds
-      .filter((id) => id in registry)
-      .map((id) => ({ id, ...registry[id], pinned: pinnedIds.has(id) }))
+      .filter((id) => projectById.has(id))
+      .map((id) => {
+        const project = projectById.get(id)!;
+        return {
+          id,
+          text: project.display_name,
+          color: project.color,
+          pinned: pinnedIds.has(id),
+        };
+      })
       .sort((a, b) => a.text.localeCompare(b.text));
     namespacesJson = JSON.stringify(filtered);
   }

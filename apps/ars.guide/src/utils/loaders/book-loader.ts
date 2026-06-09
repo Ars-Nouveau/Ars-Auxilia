@@ -1,5 +1,4 @@
 import {
-  getArchiveUrl,
   getItemRenderExtensions,
   getItemRenderUrl,
   getNamespace,
@@ -8,7 +7,8 @@ import {
   stripGlyphPrefix,
 } from "@ars/addon-builder";
 import type { Loader } from "astro/loaders";
-import { type Entry, fromBuffer, type ZipFile } from "yauzl";
+import type { Entry } from "yauzl";
+import { fetchZipBuffer, openZip, readEntryContents } from "./zip-cache";
 
 const WIKI_PATH_MARKER = "/output/wiki/";
 const DATA_RECIPE_PATH_PATTERN = /\/output\/recipes\/([^/]+)\/(.+)\.json$/;
@@ -175,35 +175,6 @@ const getTagInfo = (pathName: string) => {
   };
 };
 
-const openZip = (buffer: Buffer) =>
-  new Promise<ZipFile>((resolve, reject) => {
-    fromBuffer(buffer, { lazyEntries: true }, (error, zipFile) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-
-      resolve(zipFile);
-    });
-  });
-
-const readEntryContents = (zipFile: ZipFile, entry: Entry) =>
-  new Promise<Buffer>((resolve, reject) => {
-    zipFile.openReadStream(entry, (error, stream) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-
-      const chunks: Buffer[] = [];
-      stream.on("data", (chunk: Buffer | string) => {
-        chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
-      });
-      stream.once("error", reject);
-      stream.once("end", () => resolve(Buffer.concat(chunks)));
-    });
-  });
-
 const readZipEntries = async (buffer: Buffer) => {
   const zipFile = await openZip(buffer);
   const entries: LoadedZipEntry[] = [];
@@ -252,29 +223,13 @@ const readZipEntries = async (buffer: Buffer) => {
   });
 };
 
-const fetchZip = async () => {
-  const response = await fetch(getArchiveUrl(), {
-    headers: {
-      Accept: "application/zip, application/octet-stream",
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch ArsAddonBuilder zip: ${response.status} ${response.statusText}`,
-    );
-  }
-
-  return Buffer.from(await response.arrayBuffer());
-};
-
 export function bookLoader() {
   return {
     name: "book-loader",
     load: async ({ store, parseData }) => {
       store.clear();
 
-      const zipBuffer = await fetchZip();
+      const zipBuffer = await fetchZipBuffer();
       const zipEntries = await readZipEntries(zipBuffer);
       const renderExtensions = getItemRenderExtensions(
         zipEntries.map((entry) => entry.pathName),

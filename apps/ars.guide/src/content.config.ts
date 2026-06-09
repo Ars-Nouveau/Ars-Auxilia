@@ -5,15 +5,23 @@ import { bookLoader } from "./utils/loaders/book-loader";
 import { casterTomeLoader } from "./utils/loaders/caster-tome-loader";
 import { glyphLoader } from "./utils/loaders/glyph-loader";
 import { langLoader } from "./utils/loaders/lang-loader";
+import { projectLoader } from "./utils/loaders/project-loader";
 import { spellSubmissionContentSchema } from "./utils/spell-submissions/schema";
 
-const namespaceSchema = z.record(
-  z.string(),
-  z.object({
-    text: z.string(),
-    color: z.string(),
-  }),
-);
+const projectSchema = z.object({
+  mod_id: z.string(),
+  display_name: z.string(),
+  color: z.string(),
+  cf_id: z.number(),
+  dependencies: z
+    .array(
+      z.object({
+        cf_id: z.number(),
+        name: z.string(),
+      }),
+    )
+    .default([]),
+});
 
 const spellCategorySchema = z.array(
   z.object({
@@ -91,12 +99,9 @@ const spellSubmissions = defineCollection({
   schema: spellSubmissionContentSchema,
 });
 
-const namespaces = defineCollection({
-  loader: glob({
-    pattern: "namespaces.json",
-    base: "./src/content/namespaces",
-  }),
-  schema: namespaceSchema,
+const projects = defineCollection({
+  loader: projectLoader(),
+  schema: projectSchema,
 });
 
 const spellCategories = defineCollection({
@@ -135,7 +140,7 @@ export const collections = {
   spells,
   spellSubmissions,
   spellCategories,
-  namespaces,
+  projects,
   versions,
   glyphs,
   lang,

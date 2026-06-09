@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "@vercel/og";
-import memoize from "memoize";
+import pMemoize from "p-memoize";
 import sharp from "sharp";
 import { description as siteTagline } from "./constants";
 
@@ -28,9 +28,9 @@ const loadAsset = async (filename: string) => {
   return `data:image/png;base64,${buf.toString("base64")}`;
 };
 
-const getAsset = memoize(loadAsset);
+const getAsset = pMemoize(loadAsset);
 
-const loadAssets = memoize(
+const loadAssets = pMemoize(
   async (): Promise<OgAssets> => ({
     bg: await getAsset("archwood-bg.png"),
     logo: await getAsset("ars-guide-logo.png"),
@@ -277,7 +277,7 @@ const ContentOgImage = ({
 const loadJostFont = async () =>
   await fetch(JOST_EXTRABOLD_URL).then((res) => res.arrayBuffer());
 
-const jostFont = memoize(loadJostFont);
+const jostFont = pMemoize(loadJostFont);
 
 const getImage = async (page: OgPage, assets: OgAssets) => {
   switch (page.style) {
