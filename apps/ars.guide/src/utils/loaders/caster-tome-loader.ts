@@ -1,7 +1,7 @@
 import type { Loader } from "astro/loaders";
 
 const ASSETS_BASE_URL = "https://assets.ars.guide";
-const TOME_MANIFEST_URL = `${ASSETS_BASE_URL}/tome.json`;
+const TOME_MANIFEST_URL = `${ASSETS_BASE_URL}/tomes.json`;
 
 export interface CasterTome {
   type: string;
