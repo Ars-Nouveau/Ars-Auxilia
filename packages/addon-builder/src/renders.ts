@@ -1,7 +1,7 @@
 import { OUTPUT_DIRECTORY } from "./constants";
 import { parseResourceLocation } from "./resource-location";
-import type { ItemRenderExtension } from "./types";
-import { getRenderBaseUrl } from "./urls";
+import type { ItemRenderExtension, ItemRenderLocation } from "./types";
+import { getOutputUrl, getRenderBaseUrl } from "./urls";
 
 const ITEM_RENDER_PATH_PREFIX = `/${OUTPUT_DIRECTORY}/renders/item/`;
 
@@ -52,12 +52,17 @@ export const getItemRenderExtensions = (paths: string[]) => {
 
 export const getItemRenderUrl = (
   item: string | undefined,
-  renderExtensions?: ReadonlyMap<string, ItemRenderExtension>,
+  renderExtensions?: ReadonlyMap<string, ItemRenderLocation>,
 ) => {
   if (!item) return undefined;
 
   const { namespace, path, key } = parseResourceLocation(item, "minecraft");
-  const extension = renderExtensions?.get(key) ?? "png";
+  const renderLocation = renderExtensions?.get(key);
+  if (renderLocation && renderLocation !== "png" && renderLocation !== "webp") {
+    return getOutputUrl(renderLocation);
+  }
+
+  const extension = renderLocation ?? "png";
 
   return `${getRenderBaseUrl("item")}/${namespace}/${path}.${extension}`;
 };

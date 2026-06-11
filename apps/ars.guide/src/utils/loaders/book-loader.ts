@@ -1,18 +1,21 @@
 import {
-  getItemRenderExtensions,
   getItemRenderUrl,
   getNamespace,
   getPath,
-  type ItemRenderExtension,
+  type ItemRenderLocation,
   stripGlyphPrefix,
 } from "@ars/addon-builder";
 import type { Loader } from "astro/loaders";
-import type { Entry } from "yauzl";
-import { fetchZipBuffer, openZip, readEntryContents } from "./zip-cache";
-
-const WIKI_PATH_MARKER = "/output/wiki/";
-const DATA_RECIPE_PATH_PATTERN = /\/output\/recipes\/([^/]+)\/(.+)\.json$/;
-const TAG_PATH_PATTERN = /\/output\/tags\/minecraft\/item\/([^/]+)\/(.+)\.json$/;
+import {
+  type BookManifest,
+  fetchJson,
+  fetchManifestFile,
+  getAssetManifest,
+  mapConcurrent,
+  type RecipeManifest,
+  type RenderManifest,
+  type TagsManifest,
+} from "./asset-manifest";
 
 interface RawBookCategory {
   id: string;
@@ -31,26 +34,68 @@ interface RawBookEntry {
   pages?: Record<string, unknown>[];
 }
 
-interface LoadedZipEntry {
-  pathName: string;
-  contents?: Buffer;
+interface LoadedBookFile<T> {
+  path: string;
+  namespace: string;
+  sourcePath: string;
+  data: T;
 }
 
-const textDecoder = new TextDecoder();
+const BOOK_PATH_PATTERN = /^wiki\/([^/]+)\/(categories|entries)\/(.+)\.json$/;
 
 const slugifyId = (id: string) => stripGlyphPrefix(getPath(id));
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
+const normalizeTagId = (tag: string) => tag.replace(/^#/, "");
+
+const getBookPathInfo = (
+  path: string,
+  expectedKind: "categories" | "entries",
+) => {
+  const match = path.match(BOOK_PATH_PATTERN);
+  if (!match) {
+    throw new Error(`Unexpected book path in manifest: ${path}`);
+  }
+
+  const [, namespace, kind] = match as [string, string, string, string];
+  if (kind !== expectedKind) {
+    throw new Error(`Expected ${expectedKind} book path, got ${path}`);
+  }
+
+  return {
+    namespace,
+    sourcePath: path.replace(/^wiki\//, ""),
+  };
+};
+
+const getItemRenderLocationsFromManifest = (manifest: RenderManifest) =>
+  new Map<string, ItemRenderLocation>(Object.entries(manifest.item ?? {}));
+
+const collectTags = (value: unknown, tags = new Set<string>()) => {
+  if (Array.isArray(value)) {
+    for (const item of value) collectTags(item, tags);
+    return tags;
+  }
+
+  if (!isRecord(value)) return tags;
+
+  const tag = typeof value.tag === "string" ? value.tag : undefined;
+  if (tag) tags.add(normalizeTagId(tag));
+
+  for (const child of Object.values(value)) collectTags(child, tags);
+  return tags;
+};
+
 const withRecipeIconUrls = (
   value: unknown,
-  renderExtensions: Map<string, ItemRenderExtension>,
+  renderLocations: ReadonlyMap<string, ItemRenderLocation>,
   tagsById: Map<string, string[]>,
 ): unknown => {
   if (Array.isArray(value)) {
     return value.map((item) =>
-      withRecipeIconUrls(item, renderExtensions, tagsById),
+      withRecipeIconUrls(item, renderLocations, tagsById),
     );
   }
 
@@ -58,11 +103,12 @@ const withRecipeIconUrls = (
 
   const item = typeof value.item === "string" ? value.item : undefined;
   const id = typeof value.id === "string" ? value.id : undefined;
-  const tag = typeof value.tag === "string" ? value.tag : undefined;
+  const tag =
+    typeof value.tag === "string" ? normalizeTagId(value.tag) : undefined;
   const mapped = Object.fromEntries(
     Object.entries(value).map(([key, child]) => [
       key,
-      withRecipeIconUrls(child, renderExtensions, tagsById),
+      withRecipeIconUrls(child, renderLocations, tagsById),
     ]),
   );
   const iconItem = item ?? id;
@@ -71,14 +117,14 @@ const withRecipeIconUrls = (
     tag && !iconItem
       ? (tagsById.get(tag) ?? []).map((tagItem) => ({
           item: tagItem,
-          iconUrl: getItemRenderUrl(tagItem, renderExtensions),
+          iconUrl: getItemRenderUrl(tagItem, renderLocations),
         }))
       : undefined;
 
   return {
     ...mapped,
     ...(iconItem
-      ? { iconUrl: getItemRenderUrl(iconItem, renderExtensions) }
+      ? { iconUrl: getItemRenderUrl(iconItem, renderLocations) }
       : {}),
     ...(tagItems && tagItems.length > 0 ? { tagItems } : {}),
   };
@@ -92,9 +138,18 @@ const getRecipeKeys = (page: Record<string, unknown>) =>
         Number(a.replace("recipe_", "")) - Number(b.replace("recipe_", "")),
     );
 
+const getRecipeIds = (pages: Record<string, unknown>[]) =>
+  pages.flatMap((page) =>
+    getRecipeKeys(page)
+      .map((key) =>
+        typeof page[key] === "string" ? String(page[key]) : undefined,
+      )
+      .filter((id): id is string => id !== undefined),
+  );
+
 const withPageIconUrls = (
   pages: Record<string, unknown>[],
-  renderExtensions: Map<string, ItemRenderExtension>,
+  renderLocations: ReadonlyMap<string, ItemRenderLocation>,
   recipesById: Map<string, unknown>,
 ) =>
   pages.map((page) => {
@@ -119,7 +174,7 @@ const withPageIconUrls = (
             key,
             {
               ...item,
-              iconUrl: getItemRenderUrl(item.item, renderExtensions),
+              iconUrl: getItemRenderUrl(item.item, renderLocations),
             },
           ];
         }),
@@ -129,98 +184,22 @@ const withPageIconUrls = (
       ...page,
       ...itemEntries,
       ...(recipeData.length > 0 ? { recipeData } : {}),
-      ...(icon ? { iconUrl: getItemRenderUrl(icon, renderExtensions) } : {}),
+      ...(icon ? { iconUrl: getItemRenderUrl(icon, renderLocations) } : {}),
     };
   });
 
-const getWikiInfo = (pathName: string) => {
-  const markerIndex = pathName.indexOf(WIKI_PATH_MARKER);
-  if (markerIndex < 0 || !pathName.endsWith(".json")) return null;
+const fetchKnownJson = async <T>(
+  id: string,
+  manifest: Record<string, string>,
+  kind: string,
+): Promise<[string, T] | undefined> => {
+  const path = manifest[id];
+  if (!path) {
+    console.warn(`Missing ${kind} in manifest: ${id}`);
+    return undefined;
+  }
 
-  const wikiPath = pathName.slice(markerIndex + WIKI_PATH_MARKER.length);
-  const parts = wikiPath.split("/");
-  if (parts.length !== 3) return null;
-
-  const [namespace, kind] = parts;
-  if (kind !== "categories" && kind !== "entries") return null;
-
-  return {
-    namespace,
-    kind,
-    wikiPath,
-  };
-};
-
-const getRecipeInfo = (pathName: string) => {
-  const match = pathName.match(DATA_RECIPE_PATH_PATTERN);
-  if (!match) return null;
-
-  const [, namespace, recipePath] = match as [string, string, string];
-  return {
-    namespace,
-    recipePath,
-    id: `${namespace}:${recipePath}`,
-  };
-};
-
-const getTagInfo = (pathName: string) => {
-  const match = pathName.match(TAG_PATH_PATTERN);
-  if (!match) return null;
-
-  const [, namespace, tagPath] = match as [string, string, string];
-  return {
-    namespace,
-    tagPath,
-    id: `${namespace}:${tagPath}`,
-  };
-};
-
-const readZipEntries = async (buffer: Buffer) => {
-  const zipFile = await openZip(buffer);
-  const entries: LoadedZipEntry[] = [];
-
-  return new Promise<LoadedZipEntry[]>((resolve, reject) => {
-    let settled = false;
-
-    const fail = (error: Error) => {
-      if (settled) return;
-      settled = true;
-      zipFile.close();
-      reject(error);
-    };
-
-    const continueReading = () => zipFile.readEntry();
-
-    zipFile.once("error", fail);
-    zipFile.once("end", () => {
-      if (settled) return;
-      settled = true;
-      resolve(entries);
-    });
-
-    zipFile.on("entry", (entry: Entry) => {
-      const pathName = entry.fileName;
-      const shouldReadContents =
-        getWikiInfo(pathName) !== null ||
-        getRecipeInfo(pathName) !== null ||
-        getTagInfo(pathName) !== null;
-
-      if (pathName.endsWith("/") || !shouldReadContents) {
-        entries.push({ pathName });
-        continueReading();
-        return;
-      }
-
-      readEntryContents(zipFile, entry)
-        .then((contents) => {
-          entries.push({ pathName, contents });
-          continueReading();
-        })
-        .catch(fail);
-    });
-
-    continueReading();
-  });
+  return [id, await fetchJson<T>(path)];
 };
 
 export function bookLoader() {
@@ -229,99 +208,103 @@ export function bookLoader() {
     load: async ({ store, parseData }) => {
       store.clear();
 
-      const zipBuffer = await fetchZipBuffer();
-      const zipEntries = await readZipEntries(zipBuffer);
-      const renderExtensions = getItemRenderExtensions(
-        zipEntries.map((entry) => entry.pathName),
+      const manifest = await getAssetManifest();
+      const [bookManifest, recipeManifest, renderManifest, tagsManifest] =
+        await Promise.all([
+          fetchManifestFile<BookManifest>(manifest.book),
+          fetchManifestFile<RecipeManifest>(manifest.recipes),
+          fetchManifestFile<RenderManifest>(manifest.renders),
+          fetchManifestFile<TagsManifest>(manifest.tags),
+        ]);
+
+      const renderLocations =
+        getItemRenderLocationsFromManifest(renderManifest);
+      const [categoryFiles, entryFiles] = await Promise.all([
+        mapConcurrent(bookManifest.categories, 12, async (path) => {
+          const info = getBookPathInfo(path, "categories");
+          return {
+            path,
+            ...info,
+            data: await fetchJson<RawBookCategory>(path),
+          } satisfies LoadedBookFile<RawBookCategory>;
+        }),
+        mapConcurrent(bookManifest.entries, 12, async (path) => {
+          const info = getBookPathInfo(path, "entries");
+          return {
+            path,
+            ...info,
+            data: await fetchJson<RawBookEntry>(path),
+          } satisfies LoadedBookFile<RawBookEntry>;
+        }),
+      ]);
+
+      const recipeIds = Array.from(
+        new Set(
+          entryFiles.flatMap(({ data }) => getRecipeIds(data.pages ?? [])),
+        ),
       );
-      const tagEntries = zipEntries
-        .map((entry) => ({
-          ...entry,
-          info: getTagInfo(entry.pathName),
-        }))
-        .filter(
-          (
-            entry,
-          ): entry is LoadedZipEntry & {
-            contents: Buffer;
-            info: NonNullable<ReturnType<typeof getTagInfo>>;
-          } => entry.info !== null && entry.contents !== undefined,
-        );
-      const tagsById = new Map(
-        tagEntries.map(({ contents, info }) => [
-          info.id,
-          JSON.parse(textDecoder.decode(contents)) as string[],
-        ]),
-      );
-      const recipeEntries = zipEntries
-        .map((entry) => ({
-          ...entry,
-          info: getRecipeInfo(entry.pathName),
-        }))
-        .filter(
-          (
-            entry,
-          ): entry is LoadedZipEntry & {
-            contents: Buffer;
-            info: NonNullable<ReturnType<typeof getRecipeInfo>>;
-          } => entry.info !== null && entry.contents !== undefined,
-        );
-      const recipesById = new Map(
-        recipeEntries.map(({ contents, info }) => [
-          info.id,
-          withRecipeIconUrls(
-            JSON.parse(textDecoder.decode(contents)),
-            renderExtensions,
-            tagsById,
+      const recipeEntries = (
+        await mapConcurrent(recipeIds, 12, (id) =>
+          fetchKnownJson<unknown>(id, recipeManifest, "recipe"),
+        )
+      ).filter((entry): entry is [string, unknown] => entry !== undefined);
+      const rawRecipesById = new Map(recipeEntries);
+
+      const tagManifest = tagsManifest.item ?? {};
+      const tagIds = Array.from(
+        new Set(
+          recipeEntries.flatMap(([, recipe]) =>
+            Array.from(collectTags(recipe)),
           ),
+        ),
+      );
+      const tagEntries = (
+        await mapConcurrent(tagIds, 12, (id) =>
+          fetchKnownJson<string[]>(id, tagManifest, "item tag"),
+        )
+      ).filter((entry): entry is [string, string[]] => entry !== undefined);
+      const tagsById = new Map(tagEntries);
+      const recipesById = new Map(
+        Array.from(rawRecipesById, ([id, recipe]) => [
+          id,
+          withRecipeIconUrls(recipe, renderLocations, tagsById),
         ]),
       );
-      const wikiEntries = zipEntries
-        .map((entry) => ({
-          ...entry,
-          info: getWikiInfo(entry.pathName),
-        }))
-        .filter(
-          (
-            entry,
-          ): entry is LoadedZipEntry & {
-            contents: Buffer;
-            info: NonNullable<ReturnType<typeof getWikiInfo>>;
-          } => entry.info !== null && entry.contents !== undefined,
-        );
 
-      for (const { contents, info } of wikiEntries) {
-        const raw = JSON.parse(textDecoder.decode(contents)) as
-          | RawBookCategory
-          | RawBookEntry;
-        const namespace = getNamespace(raw.id, info.namespace);
+      for (const {
+        data: category,
+        namespace: defaultNamespace,
+        sourcePath,
+      } of categoryFiles) {
+        const namespace = getNamespace(category.id, defaultNamespace);
+        const slug = slugifyId(category.id);
+        const id = `category/${namespace}/${slug}`;
+        const data = await parseData({
+          id,
+          data: {
+            type: "category",
+            id: category.id,
+            namespace,
+            slug,
+            title: category.title,
+            order: category.order ?? 0,
+            parents: category.parents ?? [],
+            subCategories: category.sub_categories ?? [],
+            sourcePath,
+          },
+        });
 
-        if (info.kind === "categories") {
-          const category = raw as RawBookCategory;
-          const slug = slugifyId(category.id);
-          const id = `category/${namespace}/${slug}`;
-          const data = await parseData({
-            id,
-            data: {
-              type: "category",
-              id: category.id,
-              namespace,
-              slug,
-              title: category.title,
-              order: category.order ?? 0,
-              parents: category.parents ?? [],
-              subCategories: category.sub_categories ?? [],
-              sourcePath: info.wikiPath,
-            },
-          });
+        store.set({ id, data });
+      }
 
-          store.set({ id, data });
-          continue;
-        }
-
-        const bookEntry = raw as RawBookEntry;
+      for (const {
+        data: bookEntry,
+        namespace: defaultNamespace,
+        sourcePath,
+      } of entryFiles) {
+        const namespace = getNamespace(bookEntry.id, defaultNamespace);
         const entrySlug = slugifyId(bookEntry.id);
-        const iconUrl = getItemRenderUrl(bookEntry.icon, renderExtensions);
+        const iconUrl = getItemRenderUrl(bookEntry.icon, renderLocations);
         const categorySlug = slugifyId(bookEntry.category);
         const id = `entry/${namespace}/${entrySlug}`;
         const data = await parseData({
@@ -340,10 +323,10 @@ export function bookLoader() {
             iconUrl,
             pages: withPageIconUrls(
               bookEntry.pages ?? [],
-              renderExtensions,
+              renderLocations,
               recipesById,
             ),
-            sourcePath: info.wikiPath,
+            sourcePath,
           },
         });
 

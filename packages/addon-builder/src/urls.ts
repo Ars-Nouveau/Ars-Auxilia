@@ -13,6 +13,8 @@ export const getArchiveUrl = ({ ref = DEFAULT_REF }: Options = {}) =>
 export const getOutputUrl = (path: string) =>
   `${ASSETS_BASE}/${trimSlashes(path)}`;
 
+export const getAssetManifestUrl = () => getOutputUrl("manifest.json");
+
 export const getLangUrl = (locale = "en_us") =>
   getOutputUrl(`lang/${locale}.json`);
 

@@ -1,12 +1,16 @@
-import { getGlyphsUrl } from "@ars/addon-builder";
 import type { Loader } from "astro/loaders";
+import { fetchManifestFile, getAssetManifest } from "./asset-manifest";
 
 export function glyphLoader() {
   return {
     name: "glyph-loader",
     load: async ({ store, parseData }) => {
-      const res = await fetch(getGlyphsUrl());
-      const body = (await res.json()) as Record<string, ExportedGlyph>;
+      store.clear();
+
+      const manifest = await getAssetManifest();
+      const body = await fetchManifestFile<Record<string, ExportedGlyph>>(
+        manifest.glyphs,
+      );
 
       for (const [key, glyph] of Object.entries(body) as [
         string,
