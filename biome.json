@@ -17,6 +17,9 @@
     "enabled": false
   },
   "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
     "formatter": {
       "quoteStyle": "double"
     }
