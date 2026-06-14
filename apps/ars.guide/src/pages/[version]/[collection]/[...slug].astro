@@ -55,6 +55,7 @@ const formattedHeadings = getHeadings(headings);
   title={entry.data.title}
   description={entry.data.description}
   path={getOgPath(version, entry.collection, slug)}
+  hasContent={!!entry.body?.trim()}
 >
   <Content />
 </DocsLayout>
