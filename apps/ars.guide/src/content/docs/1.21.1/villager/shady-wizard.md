@@ -2,6 +2,7 @@
 title: "Shady Wizard"
 description: "A list of trades offered by the Shady Wizard"
 weight: 810
+aliases: "villager trades, trading"
 ---
 
 2 Trade Per Tier

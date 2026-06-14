@@ -2,6 +2,7 @@
 title: "Entity Tags"
 description: "A list of entity tags for Ars Nouveau"
 weight: 810
+aliases: "datapack, mob tags"
 ---
 
 | Tag                                                                             | Description                                                                                                                 |

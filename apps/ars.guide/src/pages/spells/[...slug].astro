@@ -75,6 +75,7 @@ const sidebar = await getSidebar("spells", slug as string);
             title={props.entry.data.title}
             description={props.entry.data.description}
             path={`spells/${slug}`}
+            aliases={props.entry.data.aliases}
           >
             <Content />
           </DocsLayout>

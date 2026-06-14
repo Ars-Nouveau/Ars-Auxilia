@@ -77,6 +77,7 @@ const schema = z.object({
   description: z.string().default(""),
   weight: z.number().default(0),
   slug: z.string().optional(),
+  aliases: z.string().optional(),
 });
 
 const docs = defineCollection({

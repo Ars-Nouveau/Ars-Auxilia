@@ -2,6 +2,7 @@
 title: "Block Tags"
 description: "A list of block tags for Ars Nouveau"
 weight: 810
+aliases: "datapack, block groups"
 ---
 
 | Tag                                                                             | Description                                                                                                                 |
