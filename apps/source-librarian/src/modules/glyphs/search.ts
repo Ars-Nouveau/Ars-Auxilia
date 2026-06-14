@@ -1,4 +1,4 @@
-import { getGlyphRenderUrl } from "@ars/addon-builder";
+import { getGlyphRenderUrl, getMod, getNamespace } from "@ars/addon-builder";
 import { toTitleCase } from "@ars/types";
 import {
   type APIEmbedField,
@@ -8,8 +8,8 @@ import {
   SlashCommandStringOption,
   type User,
 } from "discord.js";
-import { Discord, Slash, SlashOption } from "discordx";
-import { getGlyphs, getLang, searchGlyphs } from "../../util/glyphs.js";
+import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
+import { getGlyphs, getLang, getProjects, searchGlyphs } from "../../util/glyphs.js";
 import {
   getEphemeral,
   getMention,
@@ -23,8 +23,10 @@ const nameOption = new SlashCommandStringOption()
   .setAutocomplete(true);
 
 @Discord()
+@SlashGroup({ description: "Glyphs", name: "glyph" })
+@SlashGroup("glyph")
 export class GlyphCommand {
-  @Slash({ name: "glyph", description: "Look up details for a glyph" })
+  @Slash({ name: "search", description: "Search for a glyph" })
   async run(
     @SlashOption(nameOption)
     name: string,
@@ -47,9 +49,18 @@ export class GlyphCommand {
       return;
     }
 
-    const lang = await getLang();
+    const [lang, projects] = await Promise.all([getLang(), getProjects()]);
     const typeName = lang[glyph.typeName.translate] ?? glyph.typeName.translate;
     const descKey = glyph.localizationKey.replace("glyph_name", "glyph_desc");
+
+    const namespace = getNamespace(glyph.registryName);
+    const modId = getMod(namespace);
+    const project = projects[modId];
+    const modName = project?.display_name ?? toTitleCase(modId);
+    const modUrl = project
+      ? `https://www.curseforge.com/projects/${project.cf_id}`
+      : undefined;
+
     const description = [
       lang[descKey] ?? descKey
     ];
@@ -118,7 +129,8 @@ export class GlyphCommand {
     }
 
     const embed = new EmbedBuilder({
-      title: `**${typeName}:** ${glyph.name}`,
+      title: `**${typeName}:** ${glyph.name} from ${modName}`,
+      url: modUrl,
       color: 0x231631,
       thumbnail: { url: getGlyphRenderUrl(glyph) },
       fields,

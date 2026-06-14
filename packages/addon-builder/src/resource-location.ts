@@ -28,3 +28,14 @@ export const getPath = (location: string) =>
   parseResourceLocation(location).path;
 
 export const stripGlyphPrefix = (value: string) => value.replace(/^glyph_/, "");
+
+export const getMod = (namespace: string) => {
+  switch (namespace) {
+    case "toomanyglyphs":
+    case "arsomega":
+    case "ars_scalaes":
+      return "not_enough_glyphs";
+    default:
+      return namespace;
+  }
+};

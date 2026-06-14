@@ -18,6 +18,8 @@ export const getAssetManifestUrl = () => getOutputUrl("manifest.json");
 export const getLangUrl = (locale = "en_us") =>
   getOutputUrl(`lang/${locale}.json`);
 
+export const getProjectsUrl = () => getOutputUrl("manifests/projects.json");
+
 export const getGlyphsUrl = () => getOutputUrl("manifests/glyphs.json");
 
 export const getRenderBaseUrl = (kind: RenderKind) =>
