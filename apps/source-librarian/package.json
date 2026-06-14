@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "tsx watch ./src/main.ts",
+    "dev": "tsx watch --import ./src/node/register-hook.ts ./src/main.ts",
+    "deno": "deno run --watch -A ./src/main.ts",
     "env": "varlock typegen"
   },
   "packageManager": "pnpm@10.17.0",

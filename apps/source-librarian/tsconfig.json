@@ -5,6 +5,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "emitDecoratorMetadata": false, // required
-    "experimentalDecorators": true // required
+    "experimentalDecorators": true, // required
+    "skipLibCheck": true
   }
 }

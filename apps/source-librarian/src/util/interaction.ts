@@ -37,6 +37,6 @@ export function getMention(
   target: APIApplicationCommandBasicOption = userTargetOption,
 ) {
   const user = interaction.options.getUser(target.name);
-  if (user) return `<@${user.id}>`;
-  return undefined;
+  if (user) return `<@${user.id}>\n`;
+  return "";
 }
