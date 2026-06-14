@@ -30,7 +30,9 @@ const getCollectionPages = async (): Promise<[string, OgPage][]> => {
     getCollection("spells"),
   ]);
 
-  const entries: GenericCollectionEntry[] = [...docs, ...kubejs, ...spells];
+  const entries: GenericCollectionEntry[] = [...docs, ...kubejs, ...spells].filter(
+    (entry) => entry.data.description?.trim() && entry.body?.trim(),
+  );
 
   return entries.map((entry) => {
     const slug = getPublicSlug(entry);
