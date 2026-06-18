@@ -8,6 +8,7 @@ content:
     label: Pages
     type: collection
     format: json
+    filename: "{fields.slug}.json"
     path: apps/source-librarian/src/content/spellcrafting
     fields:
       - name: name
