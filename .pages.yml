@@ -7,6 +7,7 @@ content:
   - name: spellcrafting
     label: Pages
     type: collection
+    format: json
     path: apps/source-librarian/src/content/spellcrafting
     fields:
       - name: name
