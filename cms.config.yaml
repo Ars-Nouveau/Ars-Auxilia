@@ -1,0 +1,28 @@
+version: 1
+
+site:
+  name: "Ars Auxilia"
+  url: "https://Ars.Guide"
+
+base_branch: main
+
+collections:
+  - name: spellcrafting
+    label: Spellcrafting
+    type: folder
+    folder: "apps/source-librarian/src/content/spellcrafting"
+    format: json
+    create: true
+    slug: "{{fields.name | slug}}"
+    identifier_field: name
+    fields:
+      - { name: name, label: Name, widget: string, required: true }
+      - { name: description, label: Description, widget: string, required: true }
+      - name: links
+        label: Links
+        widget: list
+        min: 1
+        max: 5
+        fields:
+          - { name: url, label: URL, widget: string, required: true }
+          - { name: text, label: Text, widget: string, required: false }
