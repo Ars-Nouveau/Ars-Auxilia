@@ -18,7 +18,7 @@ const client = new Client({
 
 client.on(Events.ClientReady, async () => {
   console.log(
-    `>> Bot started, registering commands ${guildId ? `to guild ${guildId}` : "globally"}`,
+    `>> Bot logged in as ${client.user!.displayName}, registering commands ${guildId ? `to guild ${guildId}` : "globally"}`,
   );
 
   await client.initApplicationCommands(false);
