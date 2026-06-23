@@ -70,8 +70,8 @@ export async function reportAndTimeout(options: {
 }) {
   const { client, message, messages, reason, timeoutMinutes } = options;
 
+  await timeoutMember(message, timeoutMinutes, reason);
   await reportToChannel(client, message, reason);
   await warnViaDM(message, reason, timeoutMinutes);
   await deleteMessages(client, messages);
-  await timeoutMember(message, timeoutMinutes, reason);
 }
