@@ -444,7 +444,16 @@
     padding-right: 0.375rem;
     padding-left: 0.375rem;
   }
-  
+
+  // Show only the icon for the *opposite* of the active theme, so the toggle
+  // depicts the action it performs (Sun while dark, Moon while light). The
+  // active theme is always resolved to a concrete light/dark on <html>, so
+  // "auto" shows the opposite of the current system theme automatically.
+  html[data-bs-theme="dark"] #buttonColorMode [data-bs-theme-value="dark"],
+  html[data-bs-theme="light"] #buttonColorMode [data-bs-theme-value="light"] {
+    display: none;
+  }
+
   @include media-breakpoint-down(lg) {
     #buttonColorMode  {
       margin: 0.5rem 0;
