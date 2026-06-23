@@ -1,0 +1,20 @@
+# Dependencies (reinstalled in-image; host copies are the wrong platform)
+**/node_modules
+
+# Build outputs
+**/dist
+apps/ars.guide/.astro
+
+# VCS / tooling
+.git
+.github
+.claude
+
+# Secrets — provided at runtime via `docker run -e`, never baked into the image
+**/.env
+
+# Local noise
+**/*.log
+**/.DS_Store
+Dockerfile
+**/Dockerfile

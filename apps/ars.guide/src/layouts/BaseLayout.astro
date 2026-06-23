@@ -9,6 +9,18 @@ const { layout, collection, sidebar, namespacesJson } = Astro.props;
 <!DOCTYPE html>
 <html lang={Astro.currentLocale || "en"} data-bs-theme="auto">
   <head>
+    <script is:inline>
+      // Set the color theme before first paint to avoid a flash (FART).
+      (() => {
+        const stored = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = stored || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute(
+          "data-bs-theme",
+          theme === "auto" && prefersDark ? "dark" : theme,
+        );
+      })();
+    </script>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta charset="utf-8" />
     <slot name="head" />
