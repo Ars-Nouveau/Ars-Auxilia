@@ -4,6 +4,8 @@ import { Events, GatewayIntentBits } from "discord.js";
 import { Client } from "discordx";
 import { ENV } from "varlock/env";
 
+const guildId = ENV.BOT_GUILD_ID?.trim();
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -12,11 +14,13 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
   silent: true,
-  botGuilds: ["634618557464051772"]
+  botGuilds: guildId ? [guildId] : []
 });
 
 client.on(Events.ClientReady, async () => {
-  console.log(">> Bot started");
+  console.log(
+    `>> Bot started, registering commands ${guildId ? `to guild ${guildId}` : "globally"}`,
+  );
 
   await client.initApplicationCommands(false);
 });
