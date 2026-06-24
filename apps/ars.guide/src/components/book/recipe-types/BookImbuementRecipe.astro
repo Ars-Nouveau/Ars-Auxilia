@@ -16,16 +16,43 @@ const input = asRecipeRecord(recipe.input);
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
 const imbuementCells = [
-  pedestalItems[0],
-  pedestalItems[1],
-  pedestalItems[2],
-  pedestalItems[3],
+  {},
+  {},
+  {},
+  {},
   input,
-  pedestalItems[4],
-  pedestalItems[5],
-  pedestalItems[6],
-  pedestalItems[7],
+  {},
+  {},
+  {},
+  {},
 ];
+
+switch (recipe.pedestalItems.length) {
+  case 1:
+    imbuementCells[1] = pedestalItems[0];
+    break;
+  case 2:
+    imbuementCells[1] = pedestalItems[0];
+    imbuementCells[7] = pedestalItems[1];
+    break;
+  case 3:
+    imbuementCells[1] = pedestalItems[0];
+    imbuementCells[6] = pedestalItems[1];
+    imbuementCells[8] = pedestalItems[2];
+    break;
+  case 4:
+    imbuementCells[1] = pedestalItems[0];
+    imbuementCells[5] = pedestalItems[1];
+    imbuementCells[7] = pedestalItems[2];
+    imbuementCells[3] = pedestalItems[3];
+    break;
+  default:
+    const cells = [1, 2, 5, 8, 7, 6, 3, 0];
+    for (let i = 0; i < 8; i++) {
+      imbuementCells[cells[i]] = pedestalItems[i];
+    }
+    break;
+}
 ---
 
 <div class="book-recipe__flow">
