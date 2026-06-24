@@ -4,6 +4,7 @@ import { getItemRenderUrl } from "@ars/addon-builder";
 import { getItemTooltip } from "../../../utils/book-pages";
 import {
   asRecipeRecordArray,
+  asPedestalCells,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
@@ -22,17 +23,8 @@ const level = typeof recipe.level === "number" ? recipe.level : undefined;
 const resultLabel = enchantment
   ? `${getItemTooltip(enchantment, langByKey)}${level ? ` ${level}` : ""}`
   : undefined;
-const apparatusCells = [
-  pedestalItems[0],
-  pedestalItems[1],
-  pedestalItems[2],
-  pedestalItems[3],
-  undefined,
-  pedestalItems[4],
-  pedestalItems[5],
-  pedestalItems[6],
-  pedestalItems[7],
-];
+const apparatusCells = asPedestalCells(undefined, pedestalItems);
+
 ---
 
 <div class="book-recipe__flow">

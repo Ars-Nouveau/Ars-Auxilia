@@ -2,6 +2,7 @@
 import {
   asRecipeRecord,
   asRecipeRecordArray,
+  asPedestalItems,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
@@ -15,44 +16,8 @@ const { recipe, langByKey } = Astro.props;
 const input = asRecipeRecord(recipe.input);
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
-const imbuementCells = [
-  {},
-  {},
-  {},
-  {},
-  input,
-  {},
-  {},
-  {},
-  {},
-];
+const imbuementCells = asPedestalItems(result, input);
 
-switch (recipe.pedestalItems.length) {
-  case 1:
-    imbuementCells[1] = pedestalItems[0];
-    break;
-  case 2:
-    imbuementCells[1] = pedestalItems[0];
-    imbuementCells[7] = pedestalItems[1];
-    break;
-  case 3:
-    imbuementCells[1] = pedestalItems[0];
-    imbuementCells[6] = pedestalItems[1];
-    imbuementCells[8] = pedestalItems[2];
-    break;
-  case 4:
-    imbuementCells[1] = pedestalItems[0];
-    imbuementCells[5] = pedestalItems[1];
-    imbuementCells[7] = pedestalItems[2];
-    imbuementCells[3] = pedestalItems[3];
-    break;
-  default:
-    const cells = [1, 2, 5, 8, 7, 6, 3, 0];
-    for (let i = 0; i < 8; i++) {
-      imbuementCells[cells[i]] = pedestalItems[i];
-    }
-    break;
-}
 ---
 
 <div class="book-recipe__flow">

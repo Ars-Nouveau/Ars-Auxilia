@@ -2,6 +2,7 @@
 import {
   asRecipeRecord,
   asRecipeRecordArray,
+  asPedestalCells,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
@@ -15,44 +16,7 @@ const { recipe, langByKey } = Astro.props;
 const reagent = asRecipeRecord(recipe.reagent);
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
-const apparatusCells = [
-  {},
-  {},
-  {},
-  {},
-  reagent,
-  {},
-  {},
-  {},
-  {},
-];
-
-switch (recipe.pedestalItems.length) {
-  case 1:
-    apparatusCells[1] = pedestalItems[0];
-    break;
-  case 2:
-    apparatusCells[1] = pedestalItems[0];
-    apparatusCells[7] = pedestalItems[1];
-    break;
-  case 3:
-    apparatusCells[1] = pedestalItems[0];
-    apparatusCells[6] = pedestalItems[1];
-    apparatusCells[8] = pedestalItems[2];
-    break;
-  case 4:
-    apparatusCells[1] = pedestalItems[0];
-    apparatusCells[5] = pedestalItems[1];
-    apparatusCells[7] = pedestalItems[2];
-    apparatusCells[3] = pedestalItems[3];
-    break;
-  default:
-    const cells = [1, 2, 5, 8, 7, 6, 3, 0];
-    for (let i = 0; i < 8; i++) {
-      apparatusCells[cells[i]] = pedestalItems[i];
-    }
-    break;
-}
+const apparatusCells = asPedestalCells(result, pedestalItems);
 
 ---
 
