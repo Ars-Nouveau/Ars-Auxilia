@@ -32,8 +32,8 @@ export const asPedestalCells = (center: unknown, items: unknown[]): unknown[] =>
     [1, 7],
     [1, 6, 8],
     [1, 5, 7, 3],
-    [0, 1, 2, 6, 8],
-    [0, 1, 2, 6, 7, 8],
+    [1, 2, 8, 6, 0],
+    [1, 2, 8, 7, 6, 0],
   ]
 
   let usedCells = cellIndices[items.length - 1] ?? [1, 2, 5, 8, 7, 6, 3, 0];
