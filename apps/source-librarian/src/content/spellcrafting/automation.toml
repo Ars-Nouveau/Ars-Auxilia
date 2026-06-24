@@ -1,0 +1,45 @@
+name = "Automation"
+
+[[sections]]
+name = "Storage"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1342254215245856768"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/743298050222587982/1455066420814807173"
+text = "Source Jar Filler"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/743298050222587982/1455072709477404677"
+text = "Source Jar Unfiller"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1496806241358319677"
+
+[[sections]]
+name = "Source Generation"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1355377296575434822"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1511030787766747290"
+
+[[sections]]
+name = "Processing"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1357901628040286248"
+text = "Super Smelter"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1440810751257350223"
+text = "Conjure Block Combinations"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1496458078256762890"
+text = "AE2 Automated Apparatus"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1497445638286344222"

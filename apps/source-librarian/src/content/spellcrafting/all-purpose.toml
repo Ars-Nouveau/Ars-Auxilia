@@ -1,0 +1,15 @@
+name = "All-Purpose"
+
+[[sections]]
+description = "Any Version; Any Addons"
+
+[[sections.links]]
+url = "https://ars.guide"
+text = "Ars.Guide"
+
+[[sections.links]]
+url = "https://ars.guide/book/getting_started/spell_casting/"
+text = "Ars.Guide - Spellcrafting"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1398729663127355443"

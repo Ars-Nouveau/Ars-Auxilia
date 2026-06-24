@@ -1,0 +1,19 @@
+name = "Utility"
+
+[[sections]]
+name = "Mining Spells"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1064191444262338571"
+note = "Any Version; Any Addons"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1286253735420493857/1286254423521361921"
+text = "Bedrock Breaker"
+
+[[sections]]
+name = "Reactive Spells"
+
+[[sections.links]]
+url = "https://discord.com/channels/743298050222587978/1337486581522628638"
+note = "Any Version; Any Addons"
