@@ -1,17 +1,20 @@
 import {
   type APIEmbedField,
   type AutocompleteInteraction,
-  channelMention,
   type ChatInputCommandInteraction,
+  channelMention,
   EmbedBuilder,
-  MessageFlags,
-  time,
   TimestampStyles,
+  time,
   type User,
 } from "discord.js";
 import { Discord, Slash, SlashGroup, SlashOption } from "discordx";
 
-import { addonAutocomplete, addons, addonSlashOption } from "../../util/addons.js";
+import {
+  addonAutocomplete,
+  addonSlashOption,
+  addons,
+} from "../../util/addons.js";
 import { getAddonMod } from "../../util/curseforge.js";
 import {
   getEphemeral,
@@ -51,7 +54,9 @@ export class AddonsCommand {
 
     const mod = await getAddonMod(addon.id);
     if (!mod) {
-      await interaction.editReply({ content: "Unable to retrieve addon data." });
+      await interaction.editReply({
+        content: "Unable to retrieve addon data.",
+      });
       return;
     }
 

@@ -1,20 +1,36 @@
-import Keyv from "keyv";
 import type {
   PagefindInstance,
   PagefindResultData,
 } from "../types/pagefind.js";
 
 const BASE_URL = "https://ars.guide";
-const cache = new Keyv<PagefindInstance>({ ttl: 3_600_000 });
+const TTL = 3_600_000;
 
-async function getPagefind(): Promise<PagefindInstance> {
-  const cached = await cache.get("pagefind");
-  if (cached) return cached;
+// The Pagefind instance is a live module with methods, so it can't be stored in
+// a serializing cache (e.g. Keyv) — serialization strips the functions. Memoize
+// the import promise in module scope instead, expiring it after TTL so a fresh
+// index gets imported and re-init'd.
+let pagefind: Promise<PagefindInstance> | undefined;
+let expiresAt = 0;
 
-  const pf: PagefindInstance = await import(`${BASE_URL}/pagefind/pagefind.js`);
-  await pf.init();
-  await cache.set("pagefind", pf);
-  return pf;
+function getPagefind(): Promise<PagefindInstance> {
+  if (!pagefind || Date.now() >= expiresAt) {
+    expiresAt = Date.now() + TTL;
+    pagefind = (async () => {
+      const pf: PagefindInstance = await import(
+        `${BASE_URL}/pagefind/pagefind.js?t=${Date.now()}`
+      );
+      await pf.init();
+      return pf;
+    })().catch((err) => {
+      // Don't cache a failed import; allow the next call to retry.
+      pagefind = undefined;
+      expiresAt = 0;
+      throw err;
+    });
+  }
+
+  return pagefind;
 }
 
 export interface GuideResult {

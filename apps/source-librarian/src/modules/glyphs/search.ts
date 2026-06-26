@@ -91,7 +91,7 @@ export class GlyphCommand {
       });
     }
 
-    const config = defaults.defaultConfig;
+    const config = defaults.defaultConfig ?? {};
     const configLines: string[] = [];
     if (config.baseDamage != null)
       configLines.push(`Base Damage: ${config.baseDamage}`);

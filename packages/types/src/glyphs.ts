@@ -25,7 +25,7 @@ export type Defaults = {
   perSpellLimit: number;
   augments: Augments;
   invalidCombinations: string[];
-  defaultConfig: Configs;
+  defaultConfig?: Configs;
   tier: number;
   cost: number;
   enabled: boolean;
