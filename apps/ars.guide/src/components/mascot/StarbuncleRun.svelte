@@ -183,7 +183,7 @@ onMount(() => {
     }
 </style>
 
-<div class="container-lg fixed-top no-pointer d-none d-lg-block">
+<div class="container-lg fixed-top no-pointer d-none d-xxl-block">
     <div bind:this={wrapper} class="buncle-container pointer" data-bs-toggle="tooltip" data-bs-placement="bottom">
         <div class="buncle-name d-flex flex-column align-items-center">
             <p class="mb-0 text-body-emphasis">{starbuncle.name}</p>

@@ -89,6 +89,14 @@ if (collection === "book") {
         <div class="content">
             <div class="row flex-xl-nowrap">
                 <div class="col-lg-5 col-xl-4 docs-sidebar d-none d-lg-block">
+                    <div class="starbuncle-petition-banner" data-pagefind-ignore="all">
+                      <a href="https://www.makeship.com/petitions/starbuncle" class="starbuncle-petition-link" target="_blank" rel="noopener noreferrer">
+                        <span class="starbuncle-petition-img" role="img" aria-label="Starbuncle Plush"></span>
+                        <span class="starbuncle-petition-text">
+                          <strong>Order a Starbuncle&nbsp;Plush from Makeship!</strong>
+                        </span>
+                      </a>
+                    </div>
                     <nav class="docs-links" aria-label="Main navigation">
                         <Sidebar sidebar={sidebar} collection={collection} namespaces={namespacesJson}>
                     </nav>
@@ -179,6 +187,57 @@ if (collection === "book") {
 </BaseLayout>
 
 <style is:global>
+  .docs-content data {
+    display: none;
+  }
+
+  .starbuncle-petition-banner {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .offcanvas-body .starbuncle-petition-banner {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .starbuncle-petition-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1rem;
+    background: linear-gradient(135deg, #1a0d2e 0%, #2d1060 100%);
+    border: 1px solid #9b59b6;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #f0e6ff;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .starbuncle-petition-link:hover {
+    border-color: #c39bd3;
+    background: linear-gradient(135deg, #221040 0%, #3b1580 100%);
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .starbuncle-petition-img {
+    flex: 0 0 auto;
+    height: 4.5rem;
+    width: 4.5rem;
+    background-image: url("https://assets.ars.guide/renders/item/ars_nouveau/starbuncle_plush.png");
+    background-repeat: no-repeat;
+    background-position: 49% 64%;
+    background-size: 185%;
+    image-rendering: pixelated;
+  }
+
+  .starbuncle-petition-text {
+    flex: 1;
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
   .docs-banner-callout {
     margin-top: 1.5rem;
     overflow: hidden;
