@@ -37,7 +37,7 @@ export const rotatePointAbout = (point: number[], about: number[], degrees: numb
   return [newX, newY];
 }
 
-export const genOffsets = (n) => {
+export const genOffsets = (n: number): number[][] => {
   if (n === 0) {
     return []
   } else if (n === 1) {
