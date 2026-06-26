@@ -14,38 +14,6 @@ export const asStringArray = (value: unknown) =>
     ? value.filter((item): item is string => typeof item === "string")
     : [];
 
-export const asPedestalCells = (center: unknown, items: unknown[]): unknown[] => {
-  const cells = [
-    {},
-    {},
-    {},
-    {},
-    center,
-    {},
-    {},
-    {},
-    {},
-  ];
-
-  const cellIndices = [
-    [1],
-    [1, 7],
-    [1, 6, 8],
-    [1, 5, 7, 3],
-    [1, 2, 8, 6, 0],
-    [1, 2, 8, 7, 6, 0],
-    [1, 2, 5, 7, 6, 3, 0]
-  ]
-
-  let usedCells = cellIndices[items.length - 1] ?? [1, 2, 5, 8, 7, 6, 3, 0];
-
-  for (let i = 0; i < usedCells.length; i++) {
-    cells[usedCells[i]] = items[i];
-  }
-
-  return cells;
-}
-
 export const getRecipeResult = (recipe: BookRecipeRecord) =>
   asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
 
@@ -61,3 +29,29 @@ export const getRecipeTypeLabel = (type: string | undefined) =>
     ?.replace(/^minecraft:/, "")
     .replace(/^ars_nouveau:/, "")
     .replaceAll("_", " ");
+
+export const rotatePointAbout = (point: number[], about: number[], degrees: number) => {
+  let rad = degrees * Math.PI / 180;
+  let newX = Math.cos(rad) * (point[0] - about[0]) - Math.sin(rad) * (point[1] - about[1]) + about[0];
+  let newY = Math.sin(rad) * (point[0] - about[0]) + Math.cos(rad) * (point[1] - about[1]) + about[1];
+  return [newX, newY];
+}
+
+export const genOffsets = (n) => {
+  if (n === 0) {
+    return []
+  } else if (n === 1) {
+    return [[-5, -4]]
+  }
+
+  const degrees = -360 / n;
+  const about = [0, 4];
+  let point = [-6, 4];
+  let offsets = [];
+  for (let i = 0; i < n; i++) {
+    offsets.push(point);
+    point = rotatePointAbout(point, about, degrees);
+  }
+  return offsets;
+};
+

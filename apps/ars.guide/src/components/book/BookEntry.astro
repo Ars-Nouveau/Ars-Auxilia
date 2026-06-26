@@ -135,6 +135,15 @@ const namespaceBg = project?.color ?? colorFromString(namespace);
     gap: 1rem;
   }
 
+  .book-recipe__pedestal_flow {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    height: 16rem;
+    padding-left: 3rem;
+  }
+
   .book-recipe__flow--stacked {
     align-items: flex-start;
   }
@@ -146,7 +155,8 @@ const namespaceBg = project?.color ?? colorFromString(namespace);
   }
 
   .book-recipe-grid--apparatus {
-    gap: 1rem;
+    position: relative;
+    gap: 1.5rem;
     grid-template-columns: repeat(3, 3.5rem);
   }
 
