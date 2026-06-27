@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={["starbuncle-petition-banner", className]} data-pagefind-ignore="all">
+  <a href="https://www.makeship.com/petitions/starbuncle" class="starbuncle-petition-link" target="_blank" rel="noopener noreferrer">
+    <span class="starbuncle-petition-img" role="img" aria-label="Starbuncle Plush"></span>
+    <span class="starbuncle-petition-text">
+      <strong>Order a Starbuncle&nbsp;Plush from Makeship!</strong>
+    </span>
+  </a>
+</div>

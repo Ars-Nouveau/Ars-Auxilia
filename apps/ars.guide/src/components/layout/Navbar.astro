@@ -12,6 +12,7 @@ import { NavItems, SocialItems } from "../../utils/nav-links";
 import type { Sidebar as SidebarType } from "../../utils/sidebar";
 import StarbuncleRun from "../mascot/StarbuncleRun.svelte";
 import Sidebar from "../navigation/Sidebar.astro";
+import StarbuncleBanner from "./StarbuncleBanner.astro";
 
 interface Props {
   active?: string;
@@ -43,16 +44,7 @@ const activeNavItem = NavItems.find((item) => item.collection === active);
                 </button>
             </div>
             <div class="offcanvas-body d-flex flex-column flex-lg-row justify-content-between">
-                {sidebar && (
-                    <div class="starbuncle-petition-banner d-lg-none" data-pagefind-ignore="all">
-                        <a href="https://www.makeship.com/petitions/starbuncle" class="starbuncle-petition-link" target="_blank" rel="noopener noreferrer">
-                            <span class="starbuncle-petition-img" role="img" aria-label="Starbuncle Plush"></span>
-                            <span class="starbuncle-petition-text">
-                                <strong>Order a Starbuncle&nbsp;Plush from Makeship!</strong>
-                            </span>
-                        </a>
-                    </div>
-                )}
+                <StarbuncleBanner class="d-lg-none" />
                 <ul class="navbar-nav flex-grow-1">
                     {NavItems.map(item =>
                         <li class="nav-item">
