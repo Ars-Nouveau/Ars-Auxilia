@@ -4,6 +4,7 @@ import { getItemRenderUrl } from "@ars/addon-builder";
 import { getItemTooltip } from "../../../utils/book-pages";
 import {
   asRecipeRecordArray,
+  genOffsets,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
@@ -22,52 +23,42 @@ const level = typeof recipe.level === "number" ? recipe.level : undefined;
 const resultLabel = enchantment
   ? `${getItemTooltip(enchantment, langByKey)}${level ? ` ${level}` : ""}`
   : undefined;
-const apparatusCells = [
-  pedestalItems[0],
-  pedestalItems[1],
-  pedestalItems[2],
-  pedestalItems[3],
-  undefined,
-  pedestalItems[4],
-  pedestalItems[5],
-  pedestalItems[6],
-  pedestalItems[7],
-];
+const offsets = genOffsets(pedestalItems.length)
+
 ---
 
-<div class="book-recipe__flow">
+<div class="book-recipe__pedestal_flow">
   <div class="book-recipe-grid book-recipe-grid--apparatus" aria-label="Enchanting apparatus grid">
-    {apparatusCells.map((ingredient, index) => (
-      index === 4 ? (
-        <span class="book-recipe-ingredient book-recipe-ingredient--slot book-recipe-ingredient--reagent" title="Item to be Enchanted" data-bs-toggle="tooltip" data-bs-title="Item to be Enchanted" data-bs-placement="bottom">
-          <span class="book-recipe-ingredient__slot-icon" aria-label="Item to be Enchanted">?</span>
-        </span>
-      ) : (
+    <span style={{"position": "relative", "top": "0", "left": "4rem"}} class="book-recipe-ingredient book-recipe-ingredient--slot book-recipe-ingredient--reagent" title="Item to be Enchanted" data-bs-toggle="tooltip" data-bs-title="Item to be Enchanted" data-bs-placement="bottom">
+      <span class="book-recipe-ingredient__slot-icon" aria-label="Item to be Enchanted">?</span>
+    </span>
+    {pedestalItems.map((ingredient, index) => (
+      <span style={{"position": "absolute", "top": `${offsets[index]?.[0] ?? 0}rem`, "left": `${offsets[index]?.[1] ?? 0}rem`}}>
         <BookRecipeIngredient
           ingredient={ingredient}
-          label={`Pedestal ${index < 4 ? index + 1 : index}`}
+          label={`Pedestal ${index}`}
           langByKey={langByKey}
         />
-      )
-    ))}
-  </div>
-  {resultLabel && (
-    <>
-      <span class="book-recipe__arrow" aria-hidden="true">→</span>
-      <span class="book-recipe-ingredient" title={resultLabel}>
-        <Image
-          data-bs-toggle="tooltip"
-          data-bs-title={resultLabel}
-          data-bs-placement="bottom"
-          class="book-icon__image glyph"
-          src={getItemRenderUrl("minecraft:enchanted_book")!}
-          alt="Enchanted Book"
-          title={resultLabel}
-          width={128}
-          height={128}
-          loading="lazy"
-        />
       </span>
-    </>
-  )}
+    ))}
+    {resultLabel && (
+      <>
+        <span class="book-recipe__arrow" style={{"position": "relative", "left": "12rem"}} aria-hidden="true">→</span>
+        <span class="book-recipe-ingredient" title={resultLabel} style={{"position": "relative", "top": "0", "left": "12rem"}}>
+          <Image
+            data-bs-toggle="tooltip"
+            data-bs-title={resultLabel}
+            data-bs-placement="bottom"
+            class="book-icon__image glyph"
+            src={getItemRenderUrl("minecraft:enchanted_book")!}
+            alt="Enchanted Book"
+            title={resultLabel}
+            width={128}
+            height={128}
+            loading="lazy"
+          />
+        </span>
+      </>
+    )}
+  </div>
 </div>
