@@ -31,10 +31,14 @@ export class OptimizationCommand extends InfoCommand {
     {
       name: "ScalableLux (Both) [Curseforge](<https://www.curseforge.com/minecraft/mc-mods/scalablelux>) [Modrinth](<https://modrinth.com/mod/scalablelux>)",
       value: "Replaces the light engine with a faster one, helps especially with chunk generation."
+    },
+    {
+      name: "ModernFix (Both) [Curseforge](<https://www.curseforge.com/minecraft/mc-mods/modernfix>) [Modrinth](<https://modrinth.com/mod/modernfix>)",
+      value: "Various optimizations and bug fixes to vanilla and unmaintained mods."
     }
   ];
 
-  @Slash({ name: "mana", description: "How do I get more mana?" })
+  @Slash({ name: "optimization", description: "How do I make my game run faster?" })
   override async run(
     @SlashOption(userSlashOption)
     user: User | undefined,
