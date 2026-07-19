@@ -2,9 +2,9 @@
 import {
   asRecipeRecord,
   asRecipeRecordArray,
-  genOffsets,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
+import BookPedestalRecipeLayout from "../BookPedestalRecipeLayout.astro";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
 
 interface Props {
@@ -16,32 +16,24 @@ const { recipe, langByKey } = Astro.props;
 const input = asRecipeRecord(recipe.input);
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
-const offsets = genOffsets(pedestalItems.length)
-
 ---
 
-<div class="book-recipe__pedestal_flow">
-  <div class="book-recipe-grid book-recipe-grid--apparatus" aria-label="Imbuement grid">
-    <span style={{"position": "absolute", "top": "0", "left": "4rem"}}>
-      <BookRecipeIngredient
-        ingredient={input}
-        label="Input"
-        variant="reagent"
-        langByKey={langByKey}
-      />
-    </span>
-    {pedestalItems.map((ingredient, index) => (
-      <span style={{"position": "absolute", "top": `${offsets[index]?.[0] ?? 0}rem`, "left": `${offsets[index]?.[1] ?? 0}rem`}}>
-        <BookRecipeIngredient
-          ingredient={ingredient}
-          label=`Pedestal ${index}`
-          langByKey={langByKey}
-        />
-      </span>
-    ))}
-    <span class="book-recipe__arrow" style={{"position": "relative", "left": "16rem"}} aria-hidden="true">→</span>
-    <span style={{"position": "relative", "top": "0", "left": "16rem"}}>
-      <BookRecipeIngredient ingredient={result} label="Result" langByKey={langByKey} />
-    </span>
-  </div>
-</div>
+<BookPedestalRecipeLayout
+  ariaLabel="Imbuement grid"
+  pedestalItems={pedestalItems}
+  langByKey={langByKey}
+>
+  <BookRecipeIngredient
+    slot="center"
+    ingredient={input}
+    label="Input"
+    variant="reagent"
+    langByKey={langByKey}
+  />
+  <BookRecipeIngredient
+    slot="result"
+    ingredient={result}
+    label="Result"
+    langByKey={langByKey}
+  />
+</BookPedestalRecipeLayout>

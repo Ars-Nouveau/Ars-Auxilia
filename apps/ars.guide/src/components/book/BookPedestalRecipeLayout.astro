@@ -1,0 +1,73 @@
+---
+import { genOffsets, type BookRecipeRecord } from "../../utils/book-recipes";
+import BookRecipeIngredient from "./BookRecipeIngredient.astro";
+
+interface Props {
+  ariaLabel: string;
+  pedestalItems: BookRecipeRecord[];
+  langByKey?: Map<string, string>;
+  centerPosition?: "absolute" | "relative";
+  resultOffset?: number;
+  showResult?: boolean;
+}
+
+const {
+  ariaLabel,
+  pedestalItems,
+  langByKey,
+  centerPosition = "absolute",
+  resultOffset = 16,
+  showResult = true,
+} = Astro.props;
+const offsets = genOffsets(pedestalItems.length);
+---
+
+<div class="book-recipe__pedestal_flow">
+  <div
+    class="book-recipe-grid book-recipe-grid--apparatus"
+    aria-label={ariaLabel}
+  >
+    <span style={{ position: centerPosition, top: "0", left: "4rem" }}>
+      <slot name="center" />
+    </span>
+    {
+      pedestalItems.map((ingredient, index) => {
+        const offset = offsets[index] ?? { x: 0, y: 0 };
+
+        return (
+          <span
+            style={{
+              position: "absolute",
+              top: `${offset.y}rem`,
+              left: `${offset.x}rem`,
+            }}
+          >
+            <BookRecipeIngredient
+              ingredient={ingredient}
+              label={`Pedestal ${index}`}
+              langByKey={langByKey}
+            />
+          </span>
+        );
+      })
+    }
+    {
+      showResult && (
+        <>
+          <span
+            class="book-recipe__arrow"
+            style={{ position: "relative", left: `${resultOffset}rem` }}
+            aria-hidden="true"
+          >
+            →
+          </span>
+          <span
+            style={{ position: "relative", top: "0", left: `${resultOffset}rem` }}
+          >
+            <slot name="result" />
+          </span>
+        </>
+      )
+    }
+  </div>
+</div>
