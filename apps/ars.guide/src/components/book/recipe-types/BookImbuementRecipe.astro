@@ -4,6 +4,7 @@ import {
   asRecipeRecordArray,
   type BookRecipeRecord,
 } from "../../../utils/book-recipes";
+import BookPedestalRecipeLayout from "../BookPedestalRecipeLayout.astro";
 import BookRecipeIngredient from "../BookRecipeIngredient.astro";
 
 interface Props {
@@ -15,30 +16,24 @@ const { recipe, langByKey } = Astro.props;
 const input = asRecipeRecord(recipe.input);
 const pedestalItems = asRecipeRecordArray(recipe.pedestalItems);
 const result = asRecipeRecord(recipe.result) ?? asRecipeRecord(recipe.output);
-const imbuementCells = [
-  pedestalItems[0],
-  pedestalItems[1],
-  pedestalItems[2],
-  pedestalItems[3],
-  input,
-  pedestalItems[4],
-  pedestalItems[5],
-  pedestalItems[6],
-  pedestalItems[7],
-];
 ---
 
-<div class="book-recipe__flow">
-  <div class="book-recipe-grid book-recipe-grid--apparatus" aria-label="Imbuement grid">
-    {imbuementCells.map((ingredient, index) => (
-      <BookRecipeIngredient
-        ingredient={ingredient}
-        label={index === 4 ? 'Input' : `Pedestal ${index < 4 ? index + 1 : index}`}
-        variant={index === 4 ? 'reagent' : undefined}
-        langByKey={langByKey}
-      />
-    ))}
-  </div>
-  <span class="book-recipe__arrow" aria-hidden="true">→</span>
-  <BookRecipeIngredient ingredient={result} label="Result" langByKey={langByKey} />
-</div>
+<BookPedestalRecipeLayout
+  ariaLabel="Imbuement grid"
+  pedestalItems={pedestalItems}
+  langByKey={langByKey}
+>
+  <BookRecipeIngredient
+    slot="center"
+    ingredient={input}
+    label="Input"
+    variant="reagent"
+    langByKey={langByKey}
+  />
+  <BookRecipeIngredient
+    slot="result"
+    ingredient={result}
+    label="Result"
+    langByKey={langByKey}
+  />
+</BookPedestalRecipeLayout>
