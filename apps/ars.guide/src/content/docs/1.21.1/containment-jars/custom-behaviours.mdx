@@ -7,30 +7,30 @@ aliases: "containment jar, mob jar, entity jar"
 
 import { IconCheckbox } from "@tabler/icons-react"
 
-| Entity          | Behavior                                                                                                                              | Requires Redstone? |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------| ------------------ |
-| Allays          | Vacuums up nearby items[^1]                                                                                                           |                    |
-| Armadillos      | Periodically produces Armadillo Scutes[^1]                                                                                            |                    |
-| Blazes          | Emits light                                                                                                                           |                    |
-| Breezes         | Fires a Breeze Wind Charge                                                                                                            | <IconCheckbox />   |
-| Cats            | Produces a gift when its owner sleeps nearby. Also emits a redstone signal when owner is online[^1]                                   |                    |
-| Chickens        | Periodically produces Eggs[^1]                                                                                                        |                    |
-| Creepers        | Plays Creeper fuse sound                                                                                                              | <IconCheckbox />   |
-| Decoys          | Pulls all nearby entities toward the jar                                                                                              | <IconCheckbox />   |
-| Elder Guardians | Inflicts Mining Fatigue III onto all nearby players                                                                                   | <IconCheckbox />   |
-| Ender Dragons   | Using a Bottle on the jar produces Dragon's Breath                                                                                    |                    |
-| Frogs           | Consumes nearby Magma Cubes to produce Froglights[^1]                                                                                 |                    |
-| Glow Squids     | Emits light                                                                                                                           |                    |
-| Mooshrooms      | Using a Bucket or Bowl on the jar produces Milk Buckets and Mushroom Stew respectively. Shearing turns them into Cows                 |                    |
-| Pandas          | Periodically produces Slimeballs[^1]                                                                                                  |                    |
-| Piglins         | Vacuums up nearby Gold Ingots and produces Bartering loot[^1]                                                                         |                    |
-| Pufferfish      | Produces a redstone signal when a player is nearby                                                                                    |                    |
-| Sheep           | Can be sheared, periodically eating grass below to regrow their wool[^1]                                                              |                    |
-| Sniffers        | Periodically generates Sniffer loot[^1]                                                                                               |                    |
-| Snow Golems     | Fires a Snowball                                                                                                                      | <IconCheckbox />   |
-| Villagers       | Can be traded with and will restock as usual                                                                                          |                    |
-| Withers         | Breaks blocks in a 3x3x3 volume centered on the jar                                                                                   | <IconCheckbox />   |
-| Default         | Right-click interactions (including with items) are carried through. Plays the mob's idle sound when powered                          | <IconCheckbox />   |
+| Entity          | Behavior                                                                                                                                                                   | Requires Redstone? |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------------ |
+| Allays          | Picks items up in a 11x11x11 area, centered on the jar[^1]                                                                                                                 |                    |
+| Armadillos      | Periodically produces Armadillo Scutes[^1]                                                                                                                                 |                    |
+| Blazes          | Emits light                                                                                                                                                                |                    |
+| Breezes         | Fires a Breeze Wind Charge                                                                                                                                                 | <IconCheckbox />   |
+| Cats            | Produces a gift when its owner sleeps within a 21x21x21 area, centered on the jar. Also emits a redstone signal when its owner is online[^1]                               |                    |
+| Chickens        | Periodically produces Eggs[^1]                                                                                                                                             |                    |
+| Creepers        | Plays the Creeper fuse sound                                                                                                                                               | <IconCheckbox />   |
+| Decoys          | Pulls toward the jar all nearby entities within a 21x21x21 area, centered on the jar                                                                                       | <IconCheckbox />   |
+| Elder Guardians | Inflicts Mining Fatigue III for 6000ticks onto all players within a 50 block radius                                                                                        | <IconCheckbox />   |
+| Ender Dragons   | Using a Bottle on the jar produces Dragon's Breath                                                                                                                         |                    |
+| Frogs           | Consumes Magma Cubes to produce Froglights in a 5x5x5 area, centered on the jar[^1]                                                                                        |                    |
+| Glow Squids     | Emits light                                                                                                                                                                |                    |
+| Mooshrooms      | Using a Bucket or Bowl on the jar produces Milk Buckets and Mushroom Stew respectively. Shearing turns them into Cows                                                      |                    |
+| Pandas          | Periodically produces Slimeballs[^1]                                                                                                                                       |                    |
+| Piglins         | Picks up Gold Ingots to produce Bartering loot in a 7x7x7 area, centered on the jar[^1]                                                                                    |                    |
+| Pufferfish      | Emits a redstone signal when a player is within a 6x6x6 area, centered on the jar                                                                                          |                    |
+| Sheep           | Can be sheared, periodically eating grass below to regrow their wool[^1]                                                                                                   |                    |
+| Sniffers        | Periodically generates Sniffer loot[^1]                                                                                                                                    |                    |
+| Snow Golems     | Fires a Snowball                                                                                                                                                           | <IconCheckbox />   |
+| Villagers       | Can be traded with and will restock as usual                                                                                                                               |                    |
+| Withers         | Breaks blocks in a 3x3x3 volume centered on the jar                                                                                                                        | <IconCheckbox />   |
+| Default         | Right-click interactions (including with items) are carried through. Plays the mob's idle sound when powered                                                               | <IconCheckbox />   |
 
 
 [^1]: Items will attempt to be deposited into directly adjacent inventories.
